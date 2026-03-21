@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
 <title>GetPhysIQ</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -54,6 +54,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .bt-card.sel{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.18);}
 .bt-card-inner{width:100%;height:230px;position:relative;overflow:hidden;background:#000;}
 .bt-card-inner img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.bt-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,.3) 45%,transparent 70%);z-index:2;pointer-events:none;}
 .bt-card-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,11,1) 0%,rgba(7,7,11,.4) 40%,transparent 70%);z-index:2;pointer-events:none;}
 .bt-label{position:absolute;bottom:10px;left:13px;font-size:.88rem;font-weight:700;z-index:3;letter-spacing:.01em;}
 .bt-dot{position:absolute;bottom:10px;right:11px;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:transparent;z-index:3;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:transparent;transition:all .15s;}
@@ -90,7 +91,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .zfig-col{width:50%;position:relative;overflow:hidden;background:#000;}
 .zfig-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .zfig-col::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(7,7,11,.55) 0%,transparent 28%);pointer-events:none;z-index:3;}
-.zone-hl{position:absolute;border-radius:50%;background:radial-gradient(ellipse,rgba(239,68,68,.92) 0%,rgba(239,68,68,.5) 38%,transparent 70%);filter:blur(5px);opacity:0;transition:opacity .22s;pointer-events:none;z-index:4;}
+.zone-hl{position:absolute;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(239,68,68,.98) 0%,rgba(230,40,40,.7) 35%,rgba(200,20,20,.3) 60%,transparent 75%);filter:blur(9px);opacity:0;transition:opacity .3s;pointer-events:none;z-index:4;}
 .zone-hl.on{opacity:1;}
 
 /* ── INTERSTITIAL ── */
@@ -180,7 +181,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .meal-hydration{margin-top:10px;padding:10px 14px;background:rgba(6,182,212,.08);border-radius:10px;border:1px solid rgba(6,182,212,.2);font-size:.8rem;color:var(--cyan);font-weight:600;text-align:center;}
 
 /* ── AUTH ── */
-#authWall{position:fixed;inset:0;background:var(--bg);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
+#authWall{position:fixed;inset:0;background:var(--bg);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
 .auth-logo{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
 .auth-tagline{font-size:.82rem;color:var(--muted);margin-bottom:36px;text-align:center;}
 .auth-tabs{display:flex;background:var(--s1);border-radius:12px;padding:4px;margin-bottom:24px;width:100%;}
@@ -643,48 +644,25 @@ function getHero(variant){
 }
 
 const SCREENS=[
-// 0 — Gender (no hero photo on text screens)
-{t:'ch',b:'About You',tt:'What\'s your\ngender?',sb:'We personalise everything around you',k:'gender',s:true,o:[{v:'male',i:'♂',l:'Male',d:'Male physiology plan'},{v:'female',i:'♀',l:'Female',d:'Female physiology plan'}]},
-// 1 — Age
-{t:'ch',b:'About You',tt:'How old\nare you?',sb:'Age shapes training and recovery',k:'age',s:true,o:[{v:'16-17',i:'🌱',l:'16–17',d:'Teen programme'},{v:'18-24',i:'🔥',l:'18–24',d:'Peak conditioning'},{v:'25-34',i:'⚡',l:'25–34',d:'Performance phase'},{v:'35-44',i:'💪',l:'35–44',d:'Strength focus'},{v:'45-54',i:'🏃',l:'45–54',d:'Smart training'},{v:'55+',i:'🌟',l:'55+',d:'Longevity'}]},
-// 2 — Body build (ZOOMED cards - no hero)
-{t:'bg',b:'Body Profile',tt:'Your current\nbuild?',sb:'Honest baseline — just for you',k:'build',s:true},
-// 3 — Dream physique (no hero)
-{t:'dg',b:'Your Vision',tt:'Dream\nphysique?',sb:'The look you\'re working towards',k:'dreamBuild',s:true},
-// 4 — Goals (5 options, no Flexibility, no hero photo)
-{t:'ch',b:'Your Goals',tt:'Main goals?',sb:'Pick everything that applies',k:'goals',s:false,o:[{v:'lose_fat',i:'🔥',l:'Lose fat & weight',d:'Burn calories, slim down'},{v:'build_muscle',i:'💪',l:'Build muscle',d:'Gain strength and size'},{v:'tone',i:'✨',l:'Get toned',d:'Lean defined look'},{v:'endurance',i:'🏃',l:'Endurance',d:'Stamina and cardio'},{v:'confidence',i:'🌟',l:'Confidence',d:'Mental transformation'}]},
-// 5 — Interstitial (moved here, screen 5)
-{t:'in',ico:'👋',tt:'You\'re not\nalone.',bd:`Millions start exactly where you are. The difference is <strong>a plan built for your body</strong>.<br/><br/>We've helped over 10 million people transform.`,st:[{v:'10M+',l:'Users'},{v:'87%',l:'Hit goal'},{v:'6 wk',l:'Avg results'}],ct:'Build My Plan →'},
-// 6 — Target zones (zoomed photo + shoulders added)
-{t:'zo',b:'Focus Areas',tt:'Target zones?',sb:'Select all areas you want to work on'},
-// 7 — Activity (no hero)
-{t:'ch',b:'Fitness Level',tt:'How active\nare you?',sb:'Honest answers make better plans',k:'activity',s:true,o:[{v:'sedentary',i:'🛋️',l:'Sedentary',d:'Little movement, desk job'},{v:'light',i:'🚶',l:'Light',d:'Walk sometimes'},{v:'moderate',i:'🚴',l:'Moderate',d:'2–3×/week'},{v:'active',i:'⚡',l:'Very active',d:'4–5×/week'},{v:'athlete',i:'🏆',l:'Athlete',d:'Daily training'}]},
-// 8 — Experience (no hero)
-{t:'ch',b:'Experience',tt:'Training\nexperience?',sb:'We match intensity to your level',k:'experience',s:true,o:[{v:'beginner',i:'🌱',l:'Beginner',d:'Never trained seriously'},{v:'some',i:'📚',l:'Some',d:'Tried, inconsistent'},{v:'intermediate',i:'💪',l:'Intermediate',d:'1–2 years'},{v:'advanced',i:'🔥',l:'Advanced',d:'3+ years'}]},
-// 9 — Measures
-{t:'me',b:'Your Stats',tt:'Height\n& Weight',sb:'For your BMI and calorie targets'},
-// 10 — Interstitial 2
-{t:'in',ico:'💡',tt:'Did you\nknow?',bd:`People who set a <strong>specific goal weight</strong> are 3× more likely to succeed.<br/><br/>Your plan maps the exact route.`,st:[{v:'3×',l:'More likely'},{v:'92%',l:'Stick to it'},{v:'21d',l:'Build habit'}],ct:'Continue →'},
-// 11 — Location
-{t:'ch',b:'Your Setup',tt:'Where will\nyou train?',sb:'Pick all that suit you',k:'workoutLocation',s:false,o:[{v:'home',i:'🏠',l:'At Home',d:'No equipment'},{v:'gym',i:'🏋️',l:'Gym',d:'Full access'},{v:'outdoor',i:'🌳',l:'Outdoors',d:'Parks and tracks'},{v:'travel',i:'✈️',l:'On the Go',d:'Travel workouts'}]},
-// 12 — Days/week
-{t:'ch',b:'Schedule',tt:'Days per\nweek?',sb:'Consistency beats intensity',k:'workoutDays',s:true,o:[{v:'2',i:'',l:'2 days',d:'Starter'},{v:'3',i:'',l:'3 days',d:'Steady'},{v:'4',i:'',l:'4 days',d:'Committed'},{v:'5',i:'',l:'5 days',d:'Serious'},{v:'6',i:'',l:'6+ days',d:'Maximum'}]},
-// 13 — Duration
-{t:'ch',b:'Schedule',tt:'Session\nlength?',sb:'Every workout fits your window',k:'workoutDuration',s:true,o:[{v:'15',i:'⏱️',l:'15 min',d:'Quick'},{v:'30',i:'⏱️',l:'30 min',d:'Popular'},{v:'45',i:'⏱️',l:'45 min',d:'Deep'},{v:'60',i:'⏱️',l:'60 min',d:'Full'},{v:'90',i:'⏱️',l:'90+ min',d:'Athlete'}]},
-// 14 — Obstacles
-{t:'ch',b:'Challenges',tt:'What holds\nyou back?',sb:'We build around your obstacles',k:'obstacles',s:false,o:[{v:'time',i:'⏰',l:'No time',d:'Busy schedule'},{v:'motivation',i:'😩',l:'Low motivation',d:'Hard to stay consistent'},{v:'knowledge',i:'❓',l:'Don\'t know how',d:'Unsure what to do'},{v:'energy',i:'😴',l:'Low energy',d:'Feel too tired'},{v:'pain',i:'🤕',l:'Pain',d:'Physical limits'},{v:'equipment',i:'🏋️',l:'No equipment',d:'Limited gear'}]},
-// 15 — Diet
-{t:'ch',b:'Nutrition',tt:'Current\ndiet?',sb:'No judgment — honest data only',k:'diet',s:true,o:[{v:'bad',i:'🍕',l:'Pretty bad',d:'Fast food, sugar'},{v:'average',i:'🍔',l:'Average',d:'Mix of healthy/not'},{v:'ok',i:'🥗',l:'Decent',d:'Mostly clean'},{v:'good',i:'🌿',l:'Very clean',d:'Consistent'}]},
-// 16 — Sleep
-{t:'ch',b:'Recovery',tt:'Daily sleep?',sb:'Your body rebuilds during sleep',k:'sleep',s:true,o:[{v:'lt5',i:'😵',l:'<5 hrs',d:'Sleep debt'},{v:'5-6',i:'😴',l:'5–6 hrs',d:'Below average'},{v:'6-7',i:'😐',l:'6–7 hrs',d:'Getting there'},{v:'7-8',i:'😊',l:'7–8 hrs',d:'Optimal'},{v:'gt8',i:'⭐',l:'8+ hrs',d:'Excellent'}]},
-// 17 — Stress
-{t:'ch',b:'Wellbeing',tt:'Stress level?',sb:'Stress impacts training and recovery',k:'stress',s:true,o:[{v:'low',i:'😌',l:'Low',d:'Calm, balanced'},{v:'medium',i:'😐',l:'Moderate',d:'Some pressure'},{v:'high',i:'😤',l:'High',d:'Often overwhelmed'},{v:'extreme',i:'🤯',l:'Extreme',d:'Constantly stressed'}]},
-// 18 — Motivation
-{t:'ch',b:'Mindset',tt:'Your biggest\n"why"?',sb:'This carries you through hard days',k:'motivation',s:true,o:[{v:'health',i:'❤️',l:'Health',d:'Live longer'},{v:'looks',i:'🪞',l:'Look great',d:'Confidence'},{v:'sport',i:'🏆',l:'Performance',d:'Compete'},{v:'energy',i:'⚡',l:'Energy',d:'Feel alive'},{v:'family',i:'👨‍👩‍👧',l:'Family',d:'Be there'}]},
-// 19 — Calculating
-{t:'ca',ico:'⚙️',tt:'Building your\nplan…',bd:'Analysing your data to create your programme.',ct:'See My Results →'},
-// 20 — Results
-{t:'re'}
+{t:"ch",b:"About You",tt:"What is your\ngender?",sb:"We personalise everything around you",k:"gender",s:true,o:[{v:"male",i:"\u2642",l:"Male",d:"Male physiology plan"},{v:"female",i:"\u2640",l:"Female",d:"Female physiology plan"}]},
+{t:"ch",b:"About You",tt:"How old\nare you?",sb:"Age shapes training and recovery",k:"age",s:true,o:[{v:"16-17",i:"\ud83c\udf31",l:"16\u201317",d:"Teen programme"},{v:"18-24",i:"\ud83d\udd25",l:"18\u201324",d:"Peak conditioning"},{v:"25-34",i:"\u26a1",l:"25\u201334",d:"Performance phase"},{v:"35-44",i:"\ud83d\udcaa",l:"35\u201344",d:"Strength focus"},{v:"45-54",i:"\ud83c\udfc3",l:"45\u201354",d:"Smart training"},{v:"55+",i:"\ud83c\udf1f",l:"55+",d:"Longevity"}]},
+{t:"bg",b:"Body Profile",tt:"Your current\nbuild?",sb:"Honest baseline - just for you",k:"build",s:true},
+{t:"ch",b:"Your Goals",tt:"Main goals?",sb:"Pick everything that applies",k:"goals",s:false,o:[{v:"lose_fat",i:"\ud83d\udd25",l:"Lose fat",d:"Burn calories, slim down"},{v:"build_muscle",i:"\ud83d\udcaa",l:"Build muscle",d:"Gain strength and size"},{v:"tone",i:"\u2728",l:"Get toned",d:"Lean defined look"},{v:"endurance",i:"\ud83c\udfc3",l:"Endurance",d:"Stamina and cardio"},{v:"confidence",i:"\ud83c\udf1f",l:"Confidence",d:"Mental transformation"}]},
+{t:"in",ico:"\ud83d\udc4b",tt:"You are not\nalone.",bd:"Millions start exactly where you are. The difference is <strong>a plan built for your body</strong>.<br><br>We have helped over 10 million people transform.",st:[{v:"10M+",l:"Users"},{v:"87%",l:"Hit goal"},{v:"6 wk",l:"Avg results"}],ct:"Build My Plan"},
+{t:"zo",b:"Focus Areas",tt:"Target zones?",sb:"Select all areas you want to work on"},
+{t:"ch",b:"Fitness Level",tt:"How active\nare you?",sb:"Honest answers make better plans",k:"activity",s:true,o:[{v:"sedentary",i:"\ud83d\udecb\ufe0f",l:"Sedentary",d:"Little movement"},{v:"light",i:"\ud83d\udeb6",l:"Light",d:"Walk sometimes"},{v:"moderate",i:"\ud83d\udeb4",l:"Moderate",d:"2-3x per week"},{v:"active",i:"\u26a1",l:"Very active",d:"4-5x per week"},{v:"athlete",i:"\ud83c\udfc6",l:"Athlete",d:"Daily training"}]},
+{t:"ch",b:"Experience",tt:"Training\nexperience?",sb:"We match intensity to your level",k:"experience",s:true,o:[{v:"beginner",i:"\ud83c\udf31",l:"Beginner",d:"Never trained seriously"},{v:"some",i:"\ud83d\udcda",l:"Some",d:"Tried, inconsistent"},{v:"intermediate",i:"\ud83d\udcaa",l:"Intermediate",d:"1-2 years"},{v:"advanced",i:"\ud83d\udd25",l:"Advanced",d:"3+ years"}]},
+{t:"me",b:"Your Stats",tt:"Height\n& Weight",sb:"For your BMI and calorie targets"},
+{t:"in",ico:"\ud83d\udca1",tt:"Did you\nknow?",bd:"People who set a <strong>specific goal weight</strong> are 3x more likely to succeed.<br><br>Your plan maps the exact route.",st:[{v:"3x",l:"More likely"},{v:"92%",l:"Stick to it"},{v:"21d",l:"Build habit"}],ct:"Continue"},
+{t:"ch",b:"Your Setup",tt:"Where will\nyou train?",sb:"Pick all that suit you",k:"workoutLocation",s:false,o:[{v:"home",i:"\ud83c\udfe0",l:"At Home",d:"No equipment"},{v:"gym",i:"\ud83c\udfcb\ufe0f",l:"Gym",d:"Full access"},{v:"outdoor",i:"\ud83c\udf33",l:"Outdoors",d:"Parks and tracks"},{v:"travel",i:"\u2708\ufe0f",l:"On the Go",d:"Travel workouts"}]},
+{t:"ch",b:"Schedule",tt:"Days per\nweek?",sb:"Consistency beats intensity",k:"workoutDays",s:true,o:[{v:"2",i:"",l:"2 days",d:"Starter"},{v:"3",i:"",l:"3 days",d:"Steady"},{v:"4",i:"",l:"4 days",d:"Committed"},{v:"5",i:"",l:"5 days",d:"Serious"},{v:"6",i:"",l:"6+ days",d:"Maximum"}]},
+{t:"ch",b:"Schedule",tt:"Session\nlength?",sb:"Every workout fits your window",k:"workoutDuration",s:true,o:[{v:"15",i:"\u23f1\ufe0f",l:"15 min",d:"Quick"},{v:"30",i:"\u23f1\ufe0f",l:"30 min",d:"Popular"},{v:"45",i:"\u23f1\ufe0f",l:"45 min",d:"Deep"},{v:"60",i:"\u23f1\ufe0f",l:"60 min",d:"Full"},{v:"90",i:"\u23f1\ufe0f",l:"90+ min",d:"Athlete"}]},
+{t:"ch",b:"Challenges",tt:"What holds\nyou back?",sb:"We build around your obstacles",k:"obstacles",s:false,o:[{v:"time",i:"\u23f0",l:"No time",d:"Busy schedule"},{v:"motivation",i:"\ud83d\ude29",l:"Low motivation",d:"Hard to stay consistent"},{v:"knowledge",i:"\u2753",l:"Do not know how",d:"Unsure what to do"},{v:"energy",i:"\ud83d\ude34",l:"Low energy",d:"Feel too tired"},{v:"pain",i:"\ud83e\udd15",l:"Pain or injuries",d:"Physical limits"},{v:"equipment",i:"\ud83c\udfcb\ufe0f",l:"No equipment",d:"Limited gear"}]},
+{t:"ch",b:"Nutrition",tt:"Current\ndiet?",sb:"No judgment - honest data only",k:"diet",s:true,o:[{v:"bad",i:"\ud83c\udf55",l:"Pretty bad",d:"Fast food, lots of sugar"},{v:"average",i:"\ud83c\udf54",l:"Average",d:"Mix of healthy and not"},{v:"ok",i:"\ud83e\udd57",l:"Decent",d:"Mostly clean"},{v:"good",i:"\ud83c\udf3f",l:"Very clean",d:"Consistent healthy eating"}]},
+{t:"ch",b:"Recovery",tt:"Daily sleep?",sb:"Your body rebuilds during sleep",k:"sleep",s:true,o:[{v:"lt5",i:"\ud83d\ude35",l:"Less than 5 hrs",d:"Sleep debt"},{v:"5-6",i:"\ud83d\ude34",l:"5-6 hrs",d:"Below average"},{v:"6-7",i:"\ud83d\ude10",l:"6-7 hrs",d:"Getting there"},{v:"7-8",i:"\ud83d\ude0a",l:"7-8 hrs",d:"Optimal"},{v:"gt8",i:"\u2b50",l:"8+ hrs",d:"Excellent"}]},
+{t:"ch",b:"Wellbeing",tt:"Stress level?",sb:"Stress impacts training and recovery",k:"stress",s:true,o:[{v:"low",i:"\ud83d\ude0c",l:"Low",d:"Calm, balanced"},{v:"medium",i:"\ud83d\ude10",l:"Moderate",d:"Some pressure"},{v:"high",i:"\ud83d\ude24",l:"High",d:"Often overwhelmed"},{v:"extreme",i:"\ud83e\udd2f",l:"Extreme",d:"Constantly stressed"}]},
+{t:"ch",b:"Mindset",tt:"Your biggest\nwhy?",sb:"This carries you through hard days",k:"motivation",s:true,o:[{v:"health",i:"\u2764\ufe0f",l:"Health",d:"Live longer"},{v:"looks",i:"\ud83e\uddd6",l:"Look great",d:"Confidence"},{v:"sport",i:"\ud83c\udfc6",l:"Performance",d:"Compete"},{v:"energy",i:"\u26a1",l:"Energy",d:"Feel alive"},{v:"family",i:"\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67",l:"Family",d:"Be there for them"}]},
+{t:"re"}
 ];
 
 // ════════════════════════════════════════
@@ -730,28 +708,39 @@ function bChoice(sc){
     return`<div class="opt" onclick="pick(this,'${sc.k}','${o.v}',${sc.s})">
       ${noI?`<div class="ico" style="font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:rgba(255,255,255,.35)">${o.v}</div>`:`<div class="ico">${o.i}</div>`}
       <div><div class="lbl">${o.l}</div>${o.d?`<div class="dsc">${o.d}</div>`:''}</div>
-      ${multi?`<div class="chk">✓</div>`:`<div class="arr">›</div>`}
+      ${multi?`<div class="chk">&#10003;</div>`:`<div class="arr">&#8250;</div>`}
     </div>`;}).join('');
-  const mb=multi?`<div class="cw"><button class="cta" id="mBtn" onclick="advM('${sc.k}')" disabled>CONTINUE →</button></div>`:'';
-  // No hero photo on text/choice screens - clean look
+  const mb=multi?`<div class="cw"><button class="cta" id="mBtn" onclick="advM('${sc.k}')" disabled>CONTINUE &#8594;</button></div>`:'';
+  // Vertically center screens with <=2 options (e.g. gender)
+  const useFlex=!multi && sc.o.length<=2;
+  if(useFlex){
+    return`<div style="min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 20px 40px"><div class="badge" style="margin-bottom:12px">${sc.b}</div><div class="qtitle" style="margin-bottom:8px">${sc.tt.replace(/\n/,'<br/>')}</div><div class="qsub" style="margin-bottom:24px">${sc.sb}</div><div class="opts">${rows}</div></div>`;
+  }
   return`<div style="height:64px"></div><div class="ct"><div class="badge">${sc.b}</div><div class="qtitle">${sc.tt.replace(/\n/,'<br/>')}</div><div class="qsub">${sc.sb}${note}</div><div class="opts">${rows}</div></div>${mb}`;
 }
 
 function bBG(){
-  const g = S.gender||'male';
-  const ty=[['slender','Slender'],['medium','Medium Build'],['stocky','Stocky'],['overweight','Overweight']];
-  const cards=ty.map(([t,l])=>`
-    <div class="bt-card" id="bc_${t}" onclick="pBuild('${t}')">
-      <div class="bt-card-inner">
-        <img src="${IMGS[g+'_'+t]||IMGS.male_medium}" loading="lazy"/>
-      </div>
-      <div class="bt-card-fade"></div>
-      <span class="bt-label">${l}</span>
-      <div class="bt-dot" id="bd_${t}">✓</div>
-    </div>`).join('');
-  return`<div style="height:62px"></div><div class="ct" style="padding-bottom:12px"><div class="badge">Body Profile</div><div class="qtitle" style="font-size:1.8rem">Your current<br/>build?</div><div class="qsub" style="margin-bottom:14px">Honest baseline — just for you</div><div class="bt-grid">${cards}</div></div>`;
+  var g=S.gender||"male";
+  var types=[["slender","Slender"],["medium","Medium Build"],["stocky","Stocky"],["overweight","Overweight"]];
+  var cards="";
+  for(var i=0;i<types.length;i++){
+    var t=types[i][0],l=types[i][1];
+    var src=IMGS[g+"_"+t]||IMGS["male_medium"];
+    cards+="<div class=\"bt-card\" id=\"bc_"+t+"\" onclick=\"pBuild('"+t+"')\">"
+      +"<div class=\"bt-card-inner\"><img src=\""+src+"\" loading=\"lazy\"/></div>"
+      +"<div class=\"bt-fade\"></div>"
+      +"<span class=\"bt-label\">"+l+"</span>"
+      +"<div class=\"bt-dot\" id=\"bd_"+t+"\">&#10003;</div>"
+      +"</div>";
+  }
+  return "<div style=\"height:62px\"></div>"
+    +"<div class=\"ct\" style=\"padding-bottom:12px\">"
+    +"<div class=\"badge\">Body Profile</div>"
+    +"<div class=\"qtitle\" style=\"font-size:1.85rem\">Your current<br/>build?</div>"
+    +"<div class=\"qsub\" style=\"margin-bottom:14px\">Honest baseline</div>"
+    +"<div class=\"bt-grid\">"+cards+"</div>"
+    +"</div>";
 }
-
 function bDG(){
   const g = S.gender||'male';
   const ty=[['slender','Lean & Cut'],['medium','Athletic'],['muscular','Muscular']];
@@ -768,56 +757,81 @@ function bDG(){
 }
 
 function bZones(){
-  const g = S.gender||'male';
-  // 7 zones including Shoulders
-  const zl=[
-    {v:'shoulders',l:'Shoulders'},
-    {v:'chest',l:'Chest / Pecs'},
-    {v:'arms',l:'Arms'},
-    {v:'belly',l:'Belly / Core'},
-    {v:'back',l:'Back'},
-    {v:'legs',l:'Legs'},
-    {v:'glutes',l:'Glutes'}
+  var g=S.gender||"male";
+  // Anatomy-accurate zone labels
+  var zl=[
+    {v:"shoulders",l:"Shoulders",c:2},
+    {v:"chest",l:"Chest / Pecs",c:1},
+    {v:"arms",l:"Arms",c:2},
+    {v:"belly",l:"Belly / Core",c:1},
+    {v:"back",l:"Back / Lats",c:2},
+    {v:"legs",l:"Legs",c:2},
+    {v:"glutes",l:"Glutes",c:1}
   ];
-  const rows=zl.map(z=>`<div class="zr" id="zr_${z.v}" onclick="togZ('${z.v}')"><span class="zn">${z.l}</span><div class="zck" id="zc_${z.v}">✓</div></div>`).join('');
-  const zSrc = g==='female' ? IMGS.zones_female : IMGS.zones_male;
+  var rows="";
+  for(var i=0;i<zl.length;i++){
+    var z=zl[i];
+    rows+="<div class=\"zr\" id=\"zr_"+z.v+"\" onclick=\"togZ('"+z.v+"',"+z.c+")\">"
+      +"<span class=\"zn\">"+z.l+"</span>"
+      +"<div class=\"zck\" id=\"zc_"+z.v+"\">&#10003;</div></div>";
+  }
+  var src=IMGS[g+"_medium"]||IMGS["male_medium"];
 
-  // Highlight overlays - % positions calibrated to fill-cover photo
-  // Photo is cropped to fill the column so positions shift slightly
-  const zonePos={
-    shoulders:[{top:'16%',left:'3%',w:'30%',h:'13%'},{top:'16%',left:'67%',w:'30%',h:'13%'}],
-    chest:    [{top:'25%',left:'18%',w:'62%',h:'17%'}],
-    arms:     [{top:'22%',left:'0%',w:'22%',h:'34%'},{top:'22%',left:'78%',w:'22%',h:'34%'}],
-    belly:    [{top:'42%',left:'22%',w:'56%',h:'15%'}],
-    back:     [{top:'24%',left:'16%',w:'68%',h:'28%'}],
-    legs:     [{top:'57%',left:'16%',w:'28%',h:'32%'},{top:'57%',left:'56%',w:'28%',h:'32%'}],
-    glutes:   [{top:'52%',left:'18%',w:'64%',h:'13%'}]
-  };
+  // ── ANATOMY NOTES ────────────────────────────────────────────────────────
+  // Positions are % of zfig-col (height:480px, width:~220px)
+  // Image is 780×1300, object-fit:cover crops 34px L/R, scale=0.369
+  // SHOULDERS  → anterior deltoid cap (top of arm where it caps the shoulder)
+  // CHEST      → pectoralis major (clavicle to lower pec fold, MALE); upper chest visible under bra (FEMALE)
+  // ARMS       → biceps brachii (front of upper arm, shoulder to elbow)
+  // BELLY/CORE → rectus abdominis (solar plexus to navel, above waistband)
+  // BACK/LATS  → latissimus dorsi flare visible as side bulk under armpits
+  // GLUTES     → gluteus maximus region (hip/upper glute, partially visible front)
+  // LEGS       → quadriceps (front of upper leg, shorts hem to knee)
+  // ─────────────────────────────────────────────────────────────────────────
 
-  let hlHTML='';
-  for(const[k,arr] of Object.entries(zonePos)){
-    arr.forEach((p,i)=>{
-      hlHTML+=`<div id="mhl_${k}_${i}" class="zone-hl" style="top:${p.top};left:${p.left};width:${p.w};height:${p.h}"></div>`;
-    });
+  var zPos;
+  if(g==="female"){
+    zPos={
+      shoulders:[{t:"20%",l:"14%",w:"13%",h:"6%"},{t:"20%",l:"73%",w:"13%",h:"6%"}],
+      chest:    [{t:"22%",l:"27%",w:"46%",h:"9%"}],
+      arms:     [{t:"24%",l:"5%", w:"12%",h:"16%"},{t:"24%",l:"83%",w:"12%",h:"16%"}],
+      belly:    [{t:"30%",l:"28%",w:"44%",h:"13%"}],
+      back:     [{t:"23%",l:"10%",w:"12%",h:"16%"},{t:"23%",l:"78%",w:"12%",h:"16%"}],
+      legs:     [{t:"50%",l:"21%",w:"24%",h:"23%"},{t:"50%",l:"55%",w:"24%",h:"23%"}],
+      glutes:   [{t:"42%",l:"24%",w:"52%",h:"9%"}]
+    };
+  } else {
+    zPos={
+      shoulders:[{t:"21%",l:"11%",w:"17%",h:"6%"},{t:"21%",l:"72%",w:"17%",h:"6%"}],
+      chest:    [{t:"23%",l:"22%",w:"56%",h:"13%"}],
+      arms:     [{t:"26%",l:"3%", w:"14%",h:"14%"},{t:"26%",l:"83%",w:"14%",h:"14%"}],
+      belly:    [{t:"38%",l:"27%",w:"46%",h:"11%"}],
+      back:     [{t:"25%",l:"10%",w:"13%",h:"16%"},{t:"25%",l:"77%",w:"13%",h:"16%"}],
+      legs:     [{t:"55%",l:"22%",w:"23%",h:"19%"},{t:"55%",l:"55%",w:"23%",h:"19%"}],
+      glutes:   [{t:"49%",l:"26%",w:"48%",h:"7%"}]
+    };
   }
 
-  return`
-    <div style="height:62px"></div>
-    <div class="ct" style="padding-bottom:10px">
-      <div class="badge">Focus Areas</div>
-      <div class="qtitle">Target zones?</div>
-      <div class="qsub">Select all areas you want to work on</div>
-    </div>
-    <div class="zw">
-      <div class="zl">${rows}</div>
-      <div class="zfig-col">
-        <img src="${zSrc}" loading="lazy"/>
-        ${hlHTML}
-      </div>
-    </div>
-    <div class="cw" style="padding-top:10px"><button class="cta" id="zBtn" onclick="advZ()" disabled>NEXT STEP →</button></div>`;
+  var hlHTML="";
+  for(var k in zPos){
+    var arr=zPos[k];
+    for(var j=0;j<arr.length;j++){
+      var p=arr[j];
+      hlHTML+="<div id=\"mhl_"+k+"_"+j+"\" class=\"zone-hl\" style=\"top:"+p.t+";left:"+p.l+";width:"+p.w+";height:"+p.h+"\"></div>";
+    }
+  }
+  return "<div style=\"height:62px\"></div>"
+    +"<div class=\"ct\" style=\"padding-bottom:10px\">"
+    +"<div class=\"badge\">Focus Areas</div>"
+    +"<div class=\"qtitle\">Target zones?</div>"
+    +"<div class=\"qsub\">Select all areas you want to work on</div>"
+    +"</div>"
+    +"<div class=\"zw\">"
+    +"<div class=\"zl\">"+rows+"</div>"
+    +"<div class=\"zfig-col\"><img src=\""+src+"\" loading=\"lazy\"/>"+hlHTML+"</div>"
+    +"</div>"
+    +"<div class=\"cw\" style=\"padding-top:10px\"><button class=\"cta\" id=\"zBtn\" onclick=\"advZ()\" disabled>NEXT STEP &#8594;</button></div>";
 }
-
 function bInter(sc){
   const st=sc.st?sc.st.map(s=>`<div class="sbox"><div class="sv">${s.v}</div><div class="sl">${s.l}</div></div>`).join(''):'';
   return`<div class="inter"><div class="inter-ico">${sc.ico}</div><div class="inter-title">${sc.tt.replace(/\n/,'<br/>')}</div><div class="inter-body">${sc.bd}</div>${st?`<div class="srow">${st}</div>`:''}<button class="cta" onclick="adv()">${sc.ct}</button></div>`;
@@ -869,16 +883,19 @@ function pDream(t){
   if(c)c.classList.add('sel');if(r){r.style.background='var(--blue)';r.style.borderColor='var(--blue)';r.style.color='#fff';}
   setTimeout(()=>adv(),200);
 }
-function togZ(v){
+function togZ(v,count){
   if(!Array.isArray(S.zones))S.zones=[];
-  const on=S.zones.includes(v);
-  if(on)S.zones=S.zones.filter(x=>x!==v);else S.zones.push(v);
-  document.getElementById('zr_'+v)?.classList.toggle('on',!on);
-  for(let i=0;i<3;i++){
-    const el=document.getElementById(`mhl_${v}_${i}`);
-    if(el)el.style.opacity=(!on)?'1':'0';
+  var idx=S.zones.indexOf(v);
+  var on=idx===-1;
+  if(on)S.zones.push(v);else S.zones.splice(idx,1);
+  var zr=document.getElementById('zr_'+v);if(zr)zr.classList.toggle('on',on);
+  var zc=document.getElementById('zc_'+v);
+  if(zc){zc.style.background=on?'var(--blue)':'';zc.style.borderColor=on?'var(--blue)':'var(--dim)';zc.style.color=on?'#fff':'transparent';}
+  for(var i=0;i<(count||1);i++){
+    var el=document.getElementById('mhl_'+v+'_'+i);
+    if(el)el.style.opacity=on?'1':'0';
   }
-  const b=document.getElementById('zBtn');if(b)b.disabled=S.zones.length===0;
+  var b=document.getElementById('zBtn');if(b)b.disabled=S.zones.length===0;
 }
 function advZ(){if(S.zones.length>0)adv();}
 function advM(k){if(Array.isArray(S[k])&&S[k].length>0)adv();}
@@ -971,38 +988,7 @@ function buildRes(d){
       <div class="ai-content" id="content-meal" style="display:none"></div>
     </div>
 
-    <!-- SAVE PLAN CTA -->
-    <div id="savePlanCard" style="margin:0 20px 20px;background:linear-gradient(135deg,rgba(91,138,240,.12),rgba(139,92,246,.12));border:1px solid rgba(91,138,240,.25);border-radius:20px;padding:24px 20px;text-align:center;">
-      <div style="font-size:1.5rem;margin-bottom:6px">🔒</div>
-      <div style="font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:6px;letter-spacing:-.03em">Save Your Plan</div>
-      <div style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:20px">Create a free account to save your workout & meal plan, track progress, and get weekly updates.</div>
-
-      <!-- Email capture (quick option) -->
-      <div id="emailCapture">
-        <div style="display:flex;gap:8px;margin-bottom:10px">
-          <input id="saveEmail" class="auth-input" type="email" placeholder="your@email.com" style="flex:1;padding:13px 14px;font-size:.88rem"/>
-          <button onclick="saveWithEmail()" style="background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none;border-radius:12px;padding:13px 16px;font-weight:800;font-size:.82rem;cursor:pointer;white-space:nowrap;font-family:'Sora',sans-serif;">GET PLAN</button>
-        </div>
-        <div style="font-size:.7rem;color:var(--muted);margin-bottom:16px">Free forever · No credit card needed</div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-          <div style="flex:1;height:1px;background:var(--bdr)"></div>
-          <span style="font-size:.7rem;color:var(--muted)">or</span>
-          <div style="flex:1;height:1px;background:var(--bdr)"></div>
-        </div>
-        <button onclick="showFullSignup()" style="width:100%;padding:14px;background:transparent;color:var(--txt);border:1.5px solid var(--bdr);border-radius:50px;font-weight:700;font-size:.88rem;cursor:pointer;font-family:'Sora',sans-serif;">Create Full Account →</button>
-      </div>
-
-      <!-- Success state -->
-      <div id="saveSuccess" style="display:none">
-        <div style="font-size:2rem;margin-bottom:10px">✅</div>
-        <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Plan Saved!</div>
-        <div style="font-size:.8rem;color:var(--muted)">Check your email for your full plan + weekly tips.</div>
-      </div>
-    </div>
-
-    <div class="cw" style="padding-top:4px">
-      <button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">↩ Retake Quiz</button>
-    </div>`;
+    <div id="planAuthGate" style="margin:0 20px 32px"></div>`;
 
   const pct=Math.min(Math.max((bmi-10)/35,0),1);
   setTimeout(()=>{
@@ -1011,20 +997,8 @@ function buildRes(d){
   },350);
   setTimeout(()=>drawChart(w,gw,weeks),500);
 
-  // Show/hide save card based on login status
-  const sess = getSession();
-  if(sess){
-    // Already logged in — hide save card, show a different CTA
-    setTimeout(()=>{
-      const card = document.getElementById('savePlanCard');
-      if(card){
-        card.innerHTML=`
-          <div style="font-size:1.5rem;margin-bottom:8px">✅</div>
-          <div style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:800;margin-bottom:6px">Logged in as ${sess.name}</div>
-          <div style="font-size:.78rem;color:var(--muted)">Your plan is being generated and saved to your account.</div>`;
-      }
-    }, 100);
-  }
+  // Render inline auth gate at bottom of results
+  setTimeout(()=>{ renderPlanAuthGate(); }, 100);
 
   // Build profile string for AI
   const profile = buildProfileString(w, gw, h, bmi, tdee, goalCalories);
@@ -1159,39 +1133,48 @@ function switchTab(tab){
   document.getElementById('plan-meal').style.display = tab==='meal'?'block':'none';
 }
 
-function saveWithEmail(){
-  const email = document.getElementById('saveEmail')?.value?.trim();
-  if(!email || !/\S+@\S+\.\S+/.test(email)){
-    document.getElementById('saveEmail').style.borderColor='var(--red)';
-    setTimeout(()=>{ document.getElementById('saveEmail').style.borderColor=''; }, 1500);
+function renderPlanAuthGate(){
+  const gate = document.getElementById('planAuthGate');
+  if(!gate) return;
+  const sess = getSession();
+  if(sess){
+    gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.1),rgba(139,92,246,.1));border:1px solid rgba(91,138,240,.22);border-radius:20px;padding:22px 20px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px">&#x2705;</div><div style="font-family:Sora,sans-serif;font-size:1rem;font-weight:800;margin-bottom:5px">Saved to your account</div><div style="font-size:.78rem;color:var(--muted)">Logged in as <strong style=color:var(--txt)>'+sess.name+'</strong> \u2014 your plan is saved.</div></div><div style="padding:12px 0 4px;text-align:center"><button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">&#8629; Retake Quiz</button></div>';
     return;
   }
-  // Save email + plan snapshot to localStorage
-  const plans = JSON.parse(localStorage.getItem('gp_saved_plans')||'[]');
-  plans.push({
-    email, 
-    date: new Date().toLocaleDateString(),
-    profile: {...S},
-    saved: Date.now()
-  });
+  gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.12),rgba(139,92,246,.12));border:1px solid rgba(91,138,240,.25);border-radius:20px;padding:24px 20px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:6px">&#x1F512;</div><div style="font-family:Sora,sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:6px;letter-spacing:-.03em">Unlock Your Plan</div><div style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:20px">Enter your email to get your full plan \u2014 or sign in to save it to your account.</div><div id="gateEmailCapture"><div style="display:flex;gap:8px;margin-bottom:10px"><input id="gateEmail" class="auth-input" type="email" placeholder="your@email.com" style="flex:1;padding:13px 14px;font-size:.88rem"/><button onclick="gateGetPlan()" style="background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none;border-radius:12px;padding:13px 16px;font-weight:800;font-size:.82rem;cursor:pointer;white-space:nowrap;font-family:Sora,sans-serif;">GET PLAN</button></div><div style="font-size:.7rem;color:var(--muted);margin-bottom:16px">Free forever \u00b7 No credit card needed</div><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><div style="flex:1;height:1px;background:var(--bdr)"></div><span style="font-size:.7rem;color:var(--muted)">or sign in</span><div style="flex:1;height:1px;background:var(--bdr)"></div></div><div style="display:flex;gap:8px"><button onclick="openAuthModal(&#x27;login&#x27;)" style="flex:1;padding:13px;background:var(--s1);color:var(--txt);border:1.5px solid var(--bdr);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;">Log In</button><button onclick="openAuthModal(&#x27;signup&#x27;)" style="flex:1;padding:13px;background:transparent;color:var(--blue);border:1.5px solid var(--blue);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;">Sign Up</button></div></div><div id="gateSuccess" style="display:none"><div style="font-size:2rem;margin-bottom:10px">&#x2705;</div><div style="font-weight:800;font-size:1rem;margin-bottom:6px">Plan Sent!</div><div style="font-size:.8rem;color:var(--muted)">Check your inbox for your full plan + weekly tips.</div></div></div><div style="padding:12px 0 4px;text-align:center"><button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">&#8629; Retake Quiz</button></div>';
+}
+
+function gateGetPlan(){
+  var email = document.getElementById('gateEmail') ? document.getElementById('gateEmail').value.trim() : '';
+  if(!email || !/\S+@\S+\.\S+/.test(email)){
+    var el = document.getElementById('gateEmail');
+    if(el){el.style.borderColor='var(--red)';setTimeout(function(){el.style.borderColor='';},1500);}
+    return;
+  }
+  var plans = JSON.parse(localStorage.getItem('gp_saved_plans')||'[]');
+  plans.push({email:email, date:new Date().toLocaleDateString(), profile:Object.assign({},S), saved:Date.now()});
   localStorage.setItem('gp_saved_plans', JSON.stringify(plans));
-  // Show success
-  document.getElementById('emailCapture').style.display='none';
-  document.getElementById('saveSuccess').style.display='block';
+  document.getElementById('gateEmailCapture').style.display='none';
+  document.getElementById('gateSuccess').style.display='block';
+}
+
+function openAuthModal(tab){
+  var typedEmail = document.getElementById('gateEmail') ? document.getElementById('gateEmail').value.trim() : '';
+  document.getElementById('authWall').style.display='flex';
+  switchAuthTab(tab);
+  if(typedEmail){
+    var el = document.getElementById(tab==='signup'?'signupEmail':'loginEmail');
+    if(el) el.value = typedEmail;
+  }
+  document.getElementById('authWall').scrollTop = 0;
+}
+
+function saveWithEmail(){
+  gateGetPlan();
 }
 
 function showFullSignup(){
-  // Pre-fill email if they typed one
-  const typedEmail = document.getElementById('saveEmail')?.value?.trim();
-  // Show auth wall in signup mode
-  document.getElementById('authWall').style.display='flex';
-  switchAuthTab('signup');
-  if(typedEmail){
-    const el = document.getElementById('signupEmail');
-    if(el) el.value = typedEmail;
-  }
-  // Scroll auth wall to top
-  document.getElementById('authWall').scrollTop = 0;
+  openAuthModal('signup');
 }
 
 function restartQuiz(){
@@ -1374,6 +1357,8 @@ function loginSuccess(user){
   saveSession(user);
   document.getElementById('authWall').style.display='none';
   setupUserUI(user);
+  // If we're on results screen, refresh the auth gate
+  setTimeout(()=>{ if(typeof renderPlanAuthGate==='function') renderPlanAuthGate(); }, 100);
   // Check URL param for direct preview
   const params = new URLSearchParams(window.location.search);
   if(user.role==='dev' && params.get('preview')==='true'){
@@ -1457,7 +1442,6 @@ function logoTap(){
 // ── INIT ──
 const _session = getSession();
 if(_session){
-  document.getElementById('authWall').style.display='none';
   setupUserUI(_session);
   const _params = new URLSearchParams(window.location.search);
   if(_session.role==='dev' && _params.get('preview')==='true'){
@@ -1465,8 +1449,9 @@ if(_session){
   } else {
     render(0);
   }
+} else {
+  render(0);
 }
-// else: auth wall is already visible by default
 
 setTimeout(()=>{
   const logo=document.getElementById('logoBtn');
