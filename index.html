@@ -214,7 +214,36 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .menu-item.danger{color:var(--red);}
 .menu-sep{height:1px;background:var(--bdr);margin:4px 0;}
 
-::-webkit-scrollbar{width:0;}
+/* ── MY PLANS ── */
+.myplans-wrap{padding:72px 20px 40px;}
+.myplans-section{background:var(--s1);border:1px solid var(--bdr);border-radius:20px;padding:20px;margin-bottom:14px;}
+.myplans-section-title{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.myplans-section-title::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.myplans-stat{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr2);font-size:.84rem;}
+.myplans-stat:last-child{border-bottom:none;padding-bottom:0;}
+.myplans-stat-label{color:var(--muted);font-weight:500;}
+.myplans-stat-val{color:var(--txt);font-weight:700;}
+.myplans-locked{text-align:center;padding:20px 10px;}
+.myplans-locked-icon{font-size:2.2rem;margin-bottom:10px;}
+.myplans-locked-title{font-size:1rem;font-weight:800;margin-bottom:6px;letter-spacing:-.02em;}
+.myplans-locked-sub{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:18px;}
+.myplans-cancel{background:none;border:none;color:var(--red);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:10px 0;}
+
+/* ── PLAN LOADING SCREEN ── */
+.plan-loading-wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center;}
+.plan-loading-ring{width:120px;height:120px;position:relative;margin:0 auto 28px;}
+.plan-loading-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.plan-loading-percent{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.plan-loading-title{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;margin-bottom:8px;}
+.plan-loading-steps{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:24px;}
+.plan-loading-step{background:var(--s1);border:1px solid var(--bdr);border-radius:12px;padding:11px 15px;font-size:.82rem;color:var(--muted);text-align:left;display:flex;align-items:center;gap:10px;transition:all .4s;}
+.plan-loading-step.done{border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.06);color:var(--txt);}
+.plan-loading-step.active{border-color:rgba(91,138,240,.3);background:rgba(91,138,240,.06);color:var(--txt);}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--dim);flex-shrink:0;transition:background .3s;}
+.plan-loading-step.done .step-dot{background:var(--green);}
+.plan-loading-step.active .step-dot{background:var(--blue);}
+
+
 
 /* ── PRICING ── */
 .pricing-wrap{padding:76px 20px 40px;}
@@ -277,7 +306,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
     <div class="menu-item" id="menuName" style="color:var(--muted);font-size:.75rem;cursor:default;pointer-events:none"></div>
     <div class="menu-sep"></div>
     <div class="menu-item" id="menuDevAccess" onclick="activateDevMode()" style="display:none">⚡ Dev Preview</div>
-    <div class="menu-item" onclick="toggleUserMenu()">📋 My Plans</div>
+    <div class="menu-item" onclick="toggleUserMenu();buildMyPlans()">📋 My Plans</div>
     <div class="menu-item danger" onclick="logout()">↩ Log Out</div>
   </div>
 </div>
@@ -1434,6 +1463,217 @@ function restartQuiz(){
   render(0);
 }
 
+// ════════════════════════════════════════
+//  MY PLANS PAGE
+// ════════════════════════════════════════
+function buildMyPlans(){
+  var app = document.getElementById('app');
+  var prev = app.querySelector('.sc.in');
+  if(prev){prev.classList.remove('in');prev.classList.add('out');setTimeout(function(){if(prev.parentNode)prev.remove();},310);}
+  var d = document.createElement('div');
+  d.className = 'sc in';
+  var activePlan = getActivePlan();
+  var sess = getSession();
+  var planNames = {fitness:'Fitness Plan',nutrition:'Nutrition Plan',complete:'Complete Plan'};
+  var planName = activePlan ? (planNames[activePlan.plan]||activePlan.plan) : null;
+
+  // Subscription section
+  var subSection = activePlan ? `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚡ Subscription</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Plan</span><span class="myplans-stat-val">${planName}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Billing</span><span class="myplans-stat-val">${activePlan.period==='yearly'?'Annual':'Monthly'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Status</span><span class="myplans-stat-val" style="color:var(--green)">✓ Active</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${activePlan.email||sess&&sess.email||'—'}</span></div>
+    </div>` : `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚡ Subscription</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">No Active Plan</div>
+        <div class="myplans-locked-sub">Subscribe to unlock your personalised workout and meal plans.</div>
+        <button class="pricing-cta" onclick="buildPricingScreen()">SEE PLANS & PRICING →</button>
+      </div>
+    </div>`;
+
+  // Workout section
+  var workoutSection = '';
+  if(!activePlan || !(activePlan.plan==='fitness'||activePlan.plan==='complete')){
+    workoutSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">💪 Workout Plan</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">Workout Plan Locked</div>
+        <div class="myplans-locked-sub">Available with the Fitness or Complete Plan.</div>
+        <button class="pricing-cta" onclick="openLSModal('fitness')">UNLOCK FROM $12/MO →</button>
+      </div>
+    </div>`;
+  } else {
+    workoutSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">💪 Workout Plan</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised weekly workout plan is active and ready to view.</div>
+      <button class="pricing-cta" onclick="goToMyWorkout()">VIEW WORKOUT PLAN →</button>
+    </div>`;
+  }
+
+  // Meal section
+  var mealSection = '';
+  if(!activePlan || !(activePlan.plan==='nutrition'||activePlan.plan==='complete')){
+    mealSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">Nutrition Plan Locked</div>
+        <div class="myplans-locked-sub">Available with the Nutrition or Complete Plan.</div>
+        <button class="pricing-cta" onclick="openLSModal('nutrition')">UNLOCK FROM $10/MO →</button>
+      </div>
+    </div>`;
+  } else {
+    mealSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised daily meal plan with macros and calories is active.</div>
+      <button class="pricing-cta" onclick="goToMyMeal()">VIEW NUTRITION PLAN →</button>
+    </div>`;
+  }
+
+  // Account section
+  var accountSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚙️ Account</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Name</span><span class="myplans-stat-val">${sess?sess.name:'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${sess?sess.email:'—'}</span></div>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+        <button class="cta" onclick="restartQuiz()" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem;">↺ Retake Quiz</button>
+        ${activePlan?`<button class="myplans-cancel" onclick="confirmCancel()">Cancel Subscription</button>`:''}
+        <button onclick="logout()" style="background:none;border:none;color:var(--red);font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:8px 0;">↩ Log Out</button>
+      </div>
+    </div>`;
+
+  d.innerHTML = `<div class="myplans-wrap">
+    <div style="font-size:1.6rem;font-weight:800;letter-spacing:-.04em;margin-bottom:4px;">My Plans</div>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:20px;">Manage your subscription and access your plans.</div>
+    ${subSection}${workoutSection}${mealSection}${accountSection}
+  </div>`;
+  app.appendChild(d);
+  document.getElementById('pf').style.width='100%';
+}
+
+function goToMyWorkout(){
+  var d = document.createElement('div');
+  d.className = 'sc in';
+  document.getElementById('app').appendChild(d);
+  buildRes(d);
+  setTimeout(function(){ switchTab('workout'); },300);
+}
+
+function goToMyMeal(){
+  var d = document.createElement('div');
+  d.className = 'sc in';
+  document.getElementById('app').appendChild(d);
+  buildRes(d);
+  setTimeout(function(){ switchTab('meal'); },300);
+}
+
+function confirmCancel(){
+  if(confirm('To cancel your subscription, visit your Lemon Squeezy receipt email and click "Manage Subscription". Your plan stays active until the end of the billing period.')){
+    window.open('https://app.lemonsqueezy.com','_blank');
+  }
+}
+
+// ════════════════════════════════════════
+//  POST-PAYMENT LOADING SCREEN
+// ════════════════════════════════════════
+function showPlanLoadingScreen(planKey, email){
+  var app = document.getElementById('app');
+  var prev = app.querySelector('.sc.in');
+  if(prev){prev.classList.remove('in');prev.classList.add('out');setTimeout(function(){if(prev.parentNode)prev.remove();},310);}
+
+  var d = document.createElement('div');
+  d.className = 'sc in';
+
+  var steps = [
+    'Analysing your body profile',
+    'Mapping your fitness goals',
+    'Building your workout schedule',
+    'Calculating your nutrition targets',
+    'Generating your personalised plan',
+    'Your plan is ready! 🎉'
+  ];
+
+  d.innerHTML = `<div class="plan-loading-wrap">
+    <div class="plan-loading-ring">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="#111118" stroke-width="10"/>
+        <circle cx="60" cy="60" r="50" fill="none" stroke="url(#lg2)" stroke-width="10"
+          stroke-linecap="round" stroke-dasharray="314"
+          id="loadRing" stroke-dashoffset="314"
+          style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"/>
+        <defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5b8af0"/>
+          <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient></defs>
+      </svg>
+      <div class="plan-loading-percent" id="loadPct">0%</div>
+    </div>
+    <div class="plan-loading-title">Building Your Plan</div>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:4px;">Personalised just for you</div>
+    <div class="plan-loading-steps" id="loadSteps">
+      ${steps.map((s,i)=>`<div class="plan-loading-step" id="lstep${i}"><div class="step-dot"></div>${s}</div>`).join('')}
+    </div>
+  </div>`;
+
+  app.appendChild(d);
+  document.getElementById('pf').style.width='100%';
+
+  // Animate steps
+  var pcts = [10,25,45,65,85,100];
+  steps.forEach(function(s, i){
+    setTimeout(function(){
+      // Mark previous as done
+      if(i>0){
+        var prev2 = document.getElementById('lstep'+(i-1));
+        if(prev2){prev2.classList.remove('active');prev2.classList.add('done');prev2.querySelector('.step-dot').textContent='';}
+      }
+      var el = document.getElementById('lstep'+i);
+      if(el) el.classList.add('active');
+      // Update ring
+      var ring = document.getElementById('loadRing');
+      if(ring) ring.style.strokeDashoffset = 314 - (314 * pcts[i] / 100);
+      var pctEl = document.getElementById('loadPct');
+      if(pctEl) pctEl.textContent = pcts[i]+'%';
+      // Last step — go to results
+      if(i===steps.length-1){
+        setTimeout(function(){
+          var last = document.getElementById('lstep'+(steps.length-1));
+          if(last){last.classList.remove('active');last.classList.add('done');}
+          // Save active plan
+          var planBase = (planKey||'complete').replace('_monthly','').replace('_yearly','');
+          var planPeriod = (planKey||'').includes('yearly')?'yearly':'monthly';
+          localStorage.setItem('gp_active_plan', JSON.stringify({
+            plan: planBase,
+            period: planPeriod,
+            email: email||'',
+            unlocked: true,
+            activatedAt: Date.now()
+          }));
+          // Navigate to results
+          var rd = document.createElement('div');
+          rd.className = 'sc in';
+          var rapp = document.getElementById('app');
+          var rprev = rapp.querySelector('.sc.in');
+          if(rprev){rprev.classList.remove('in');rprev.classList.add('out');setTimeout(function(){if(rprev.parentNode)rprev.remove();},310);}
+          rapp.appendChild(rd);
+          buildRes(rd);
+        }, 800);
+      }
+    }, i * 900);
+  });
+}
+
 function drawChart(cw,gw,weeks){
   const canvas=document.getElementById('wChart');
   if(!canvas)return;
@@ -2011,7 +2251,18 @@ function loginSuccess(user){
   setupUserUI(user);
   setTimeout(()=>{ if(typeof renderPlanAuthGate==='function') renderPlanAuthGate(); }, 100);
   const params = new URLSearchParams(window.location.search);
-  // If coming from "View My Plan" email link → go straight to results
+
+  // Coming back after payment — show loading screen
+  if(localStorage.getItem('gp_goto_plan')==='1' && localStorage.getItem('gp_pending_plan')){
+    var pendingPlan  = localStorage.getItem('gp_pending_plan');
+    var pendingEmail = localStorage.getItem('gp_pending_email')||user.email||'';
+    localStorage.removeItem('gp_goto_plan');
+    localStorage.removeItem('gp_pending_plan');
+    localStorage.removeItem('gp_pending_email');
+    showPlanLoadingScreen(pendingPlan, pendingEmail);
+    return;
+  }
+  // Coming from "View My Plan" email link
   if(params.get('plan')==='ready' || localStorage.getItem('gp_goto_plan')==='1'){
     localStorage.removeItem('gp_goto_plan');
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -2101,24 +2352,27 @@ function logoTap(){
 
 // ── INIT ──
 const _session = getSession();
-// Handle Stripe payment success redirect
 var _urlParams = new URLSearchParams(window.location.search);
+
+// Handle Lemon Squeezy payment success
 if(_urlParams.get('payment')==='success'){
   var _pEmail = _urlParams.get('email')||localStorage.getItem('gp_pending_email')||'';
-  var _pName = _urlParams.get('name')||localStorage.getItem('gp_pending_name')||'';
-  var _pPlan = _urlParams.get('plan')||'complete_monthly';
-  var _planBase = _pPlan.replace('_monthly','').replace('_yearly','');
-  var _planPeriod = _pPlan.includes('yearly')?'yearly':'monthly';
-  localStorage.setItem('gp_active_plan', JSON.stringify({plan:_planBase, period:_planPeriod, email:_pEmail, unlocked:true}));
+  var _pPlan  = _urlParams.get('plan')||'complete_monthly';
   localStorage.removeItem('gp_pending_email');
   localStorage.removeItem('gp_pending_name');
-  // Clean URL
   window.history.replaceState({}, document.title, window.location.pathname);
-}
-if(_session){
+  if(_session){
+    setupUserUI(_session);
+    setTimeout(function(){ showPlanLoadingScreen(_pPlan, _pEmail); }, 100);
+  } else {
+    localStorage.setItem('gp_goto_plan','1');
+    localStorage.setItem('gp_pending_plan', _pPlan);
+    localStorage.setItem('gp_pending_email', _pEmail);
+    document.getElementById('authWall').style.display='flex';
+  }
+} else if(_session){
   setupUserUI(_session);
   const _params = new URLSearchParams(window.location.search);
-  // Handle email "View My Plan" link
   if(_params.get('plan')==='ready'){
     window.history.replaceState({}, document.title, window.location.pathname);
     var _d=document.createElement('div');_d.className='sc in';
@@ -2130,13 +2384,11 @@ if(_session){
     render(0);
   }
 } else {
-  // Not logged in — check if coming from email link
   var _np = new URLSearchParams(window.location.search);
   if(_np.get('plan')==='ready'){
     localStorage.setItem('gp_goto_plan','1');
     window.history.replaceState({}, document.title, window.location.pathname);
   }
-  // Show auth wall
   document.getElementById('authWall').style.display='flex';
 }
 
