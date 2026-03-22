@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -9,26 +10,26 @@
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  --bg:#07070b;--s1:#0d0d12;--s2:#13131a;--s3:#1a1a24;
-  --bdr:rgba(255,255,255,.07);--bdr2:rgba(255,255,255,.04);
-  --blue:#5b8af0;--indigo:#6366f1;--violet:#8b5cf6;--rose:#f43f5e;
-  --green:#10b981;--amber:#f59e0b;--red:#ef4444;--cyan:#06b6d4;
-  --txt:#f2f2f8;--muted:#737380;--dim:#3a3a46;
-  --skin1:#d4916a;--skin2:#c07848;--skin3:#8b4820;
-  --hair:#1c0e08;
+–bg:#07070b;–s1:#0d0d12;–s2:#13131a;–s3:#1a1a24;
+–bdr:rgba(255,255,255,.07);–bdr2:rgba(255,255,255,.04);
+–blue:#5b8af0;–indigo:#6366f1;–violet:#8b5cf6;–rose:#f43f5e;
+–green:#10b981;–amber:#f59e0b;–red:#ef4444;–cyan:#06b6d4;
+–txt:#f2f2f8;–muted:#737380;–dim:#3a3a46;
+–skin1:#d4916a;–skin2:#c07848;–skin3:#8b4820;
+–hair:#1c0e08;
 }
-html,body{height:100%;overflow:hidden;background:var(--bg);}
-body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-#app{width:100%;max-width:430px;height:100%;margin:0 auto;position:relative;overflow:hidden;background:var(--bg);}
+html,body{height:100%;overflow:hidden;background:var(–bg);}
+body{color:var(–txt);font-family:‘Sora’,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+#app{width:100%;max-width:430px;height:100%;margin:0 auto;position:relative;overflow:hidden;background:var(–bg);}
 
 /* ── PROGRESS ── */
 #pl{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:2px;background:rgba(255,255,255,.03);z-index:400;}
-#pf{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width .65s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(139,92,246,.5);}
+#pf{height:100%;width:0;background:linear-gradient(90deg,var(–blue),var(–violet));transition:width .65s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(139,92,246,.5);}
 
 /* ── TOPBAR ── */
 #tb{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:env(safe-area-inset-top,14px) 20px 0;z-index:300;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,7,11,.96) 65%,transparent);}
-.logo{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.45));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-#bk{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.88rem;user-select:none;transition:background .2s;}
+.logo{font-family:‘Sora’,sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.45));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#bk{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(–bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(–muted);font-size:.88rem;user-select:none;transition:background .2s;}
 #bk:active{background:rgba(255,255,255,.12);}
 
 /* ── SCREENS ── */
@@ -49,72 +50,72 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 
 /* ── BODY TYPE CARDS ── */
 .bt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-.bt-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;border:1.5px solid var(--bdr2);transition:border-color .18s,transform .12s;user-select:none;background:#000;}
+.bt-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;border:1.5px solid var(–bdr2);transition:border-color .18s,transform .12s;user-select:none;background:#000;}
 .bt-card:active{transform:scale(.965);}
-.bt-card.sel{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.18);}
+.bt-card.sel{border-color:var(–blue);box-shadow:0 0 0 3px rgba(91,138,240,.18);}
 .bt-card-inner{width:100%;height:230px;position:relative;overflow:hidden;background:#000;}
 .bt-card-inner img{width:100%;height:100%;object-fit:cover;object-position:top center;}
 .bt-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,.3) 45%,transparent 70%);z-index:2;pointer-events:none;}
 .bt-card-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,11,1) 0%,rgba(7,7,11,.4) 40%,transparent 70%);z-index:2;pointer-events:none;}
 .bt-label{position:absolute;bottom:10px;left:13px;font-size:.88rem;font-weight:700;z-index:3;letter-spacing:.01em;}
 .bt-dot{position:absolute;bottom:10px;right:11px;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:transparent;z-index:3;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:transparent;transition:all .15s;}
-.bt-card.sel .bt-dot{background:var(--blue);border-color:var(--blue);color:#fff;}
+.bt-card.sel .bt-dot{background:var(–blue);border-color:var(–blue);color:#fff;}
 .dream-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:24px;}
 
 /* ── CONTENT ── */
 .ct{padding:16px 20px 0;}
-.badge{display:inline-flex;align-items:center;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.2);border-radius:99px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;margin-bottom:10px;}
-.qtitle{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;line-height:1.08;margin-bottom:7px;letter-spacing:-.04em;}
-.qsub{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:18px;font-weight:400;}
+.badge{display:inline-flex;align-items:center;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.2);border-radius:99px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.1em;color:var(–blue);text-transform:uppercase;margin-bottom:10px;}
+.qtitle{font-family:‘Sora’,sans-serif;font-size:2rem;font-weight:800;line-height:1.08;margin-bottom:7px;letter-spacing:-.04em;}
+.qsub{font-size:.82rem;color:var(–muted);line-height:1.6;margin-bottom:18px;font-weight:400;}
 
 /* ── OPTIONS ── */
 .opts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
-.opt{background:var(--s1);border:1.5px solid var(--bdr2);border-radius:14px;padding:13px 15px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .14s,background .14s,transform .1s;user-select:none;}
+.opt{background:var(–s1);border:1.5px solid var(–bdr2);border-radius:14px;padding:13px 15px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .14s,background .14s,transform .1s;user-select:none;}
 .opt:active{transform:scale(.98);}
-.opt:hover{border-color:rgba(91,138,240,.3);background:var(--s2);}
-.opt.sel{border-color:var(--blue);background:rgba(91,138,240,.08);box-shadow:0 0 0 3px rgba(91,138,240,.1);}
+.opt:hover{border-color:rgba(91,138,240,.3);background:var(–s2);}
+.opt.sel{border-color:var(–blue);background:rgba(91,138,240,.08);box-shadow:0 0 0 3px rgba(91,138,240,.1);}
 .opt .ico{font-size:1.3rem;width:26px;text-align:center;flex-shrink:0;}
 .opt .lbl{font-size:.9rem;font-weight:600;}
-.opt .dsc{font-size:.72rem;color:var(--muted);margin-top:1px;}
-.opt .arr{margin-left:auto;color:var(--dim);font-size:.75rem;flex-shrink:0;}
-.opt .chk{margin-left:auto;width:19px;height:19px;border-radius:5px;border:1.5px solid var(--dim);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:transparent;transition:all .14s;}
-.opt.sel .chk{background:var(--blue);border-color:var(--blue);color:#fff;}
+.opt .dsc{font-size:.72rem;color:var(–muted);margin-top:1px;}
+.opt .arr{margin-left:auto;color:var(–dim);font-size:.75rem;flex-shrink:0;}
+.opt .chk{margin-left:auto;width:19px;height:19px;border-radius:5px;border:1.5px solid var(–dim);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:transparent;transition:all .14s;}
+.opt.sel .chk{background:var(–blue);border-color:var(–blue);color:#fff;}
 
 /* ── ZONES ── */
 .zw{display:flex;gap:0;height:470px;}
 .zl{width:50%;padding:0 0 0 18px;display:flex;flex-direction:column;justify-content:center;gap:7px;z-index:2;}
-.zr{background:var(--s1);border:1.5px solid var(--bdr2);border-radius:11px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .14s;user-select:none;}
-.zr.on{background:rgba(91,138,240,.1);border-color:var(--blue);}
+.zr{background:var(–s1);border:1.5px solid var(–bdr2);border-radius:11px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .14s;user-select:none;}
+.zr.on{background:rgba(91,138,240,.1);border-color:var(–blue);}
 .zr .zn{font-size:.8rem;font-weight:600;}
-.zck{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--dim);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:transparent;flex-shrink:0;transition:all .14s;}
-.zr.on .zck{background:var(--blue);border-color:var(--blue);color:#fff;}
+.zck{width:18px;height:18px;border-radius:4px;border:1.5px solid var(–dim);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:transparent;flex-shrink:0;transition:all .14s;}
+.zr.on .zck{background:var(–blue);border-color:var(–blue);color:#fff;}
 .zfig-col{width:50%;position:relative;overflow:hidden;background:#000;}
 .zfig-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.zfig-col::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(7,7,11,.55) 0%,transparent 28%);pointer-events:none;z-index:3;}
+.zfig-col::before{content:’’;position:absolute;inset:0;background:linear-gradient(to right,rgba(7,7,11,.55) 0%,transparent 28%);pointer-events:none;z-index:3;}
 .zone-hl{position:absolute;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(239,68,68,.98) 0%,rgba(230,40,40,.7) 35%,rgba(200,20,20,.3) 60%,transparent 75%);filter:blur(9px);opacity:0;transition:opacity .3s;pointer-events:none;z-index:4;}
 .zone-hl.on{opacity:1;}
 
 /* ── INTERSTITIAL ── */
 .inter{min-height:100%;padding:72px 20px 36px;display:flex;flex-direction:column;justify-content:center;}
 .inter-ico{font-size:2.8rem;margin-bottom:16px;}
-.inter-title{font-family:'Sora',sans-serif;font-size:2.2rem;font-weight:800;line-height:1.08;margin-bottom:11px;letter-spacing:-.04em;}
-.inter-body{font-size:.88rem;color:var(--muted);line-height:1.78;margin-bottom:22px;}
-.inter-body strong{color:var(--txt);}
+.inter-title{font-family:‘Sora’,sans-serif;font-size:2.2rem;font-weight:800;line-height:1.08;margin-bottom:11px;letter-spacing:-.04em;}
+.inter-body{font-size:.88rem;color:var(–muted);line-height:1.78;margin-bottom:22px;}
+.inter-body strong{color:var(–txt);}
 .srow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:26px;}
-.sbox{background:var(--s1);border:1px solid var(--bdr);border-radius:13px;padding:13px 8px;text-align:center;}
-.sv{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.sl{font-size:.66rem;color:var(--muted);margin-top:2px;font-weight:600;letter-spacing:.04em;}
+.sbox{background:var(–s1);border:1px solid var(–bdr);border-radius:13px;padding:13px 8px;text-align:center;}
+.sv{font-family:‘Sora’,sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.sl{font-size:.66rem;color:var(–muted);margin-top:2px;font-weight:600;letter-spacing:.04em;}
 
 /* ── MEASURES ── */
 .mr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .mg{display:flex;flex-direction:column;gap:5px;}
-.ml{font-size:.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
-.mi{background:var(--s1);border:1.5px solid var(--bdr);border-radius:12px;padding:14px 15px;color:var(--txt);font-size:1.2rem;font-weight:700;width:100%;outline:none;transition:border-color .2s,box-shadow .2s;font-family:'Sora',sans-serif;}
-.mi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
-.mi::placeholder{color:var(--dim);}
+.ml{font-size:.68rem;color:var(–muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+.mi{background:var(–s1);border:1.5px solid var(–bdr);border-radius:12px;padding:14px 15px;color:var(–txt);font-size:1.2rem;font-weight:700;width:100%;outline:none;transition:border-color .2s,box-shadow .2s;font-family:‘Sora’,sans-serif;}
+.mi:focus{border-color:var(–blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
+.mi::placeholder{color:var(–dim);}
 
 /* ── CTA ── */
-.cta{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:700;font-size:.95rem;border:none;border-radius:50px;padding:18px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:'Sora',sans-serif;letter-spacing:0em;}
+.cta{background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;font-weight:700;font-size:.95rem;border:none;border-radius:50px;padding:18px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:‘Sora’,sans-serif;letter-spacing:0em;}
 .cta:hover{opacity:.9;transform:translateY(-1px);}
 .cta:active{transform:scale(.98);}
 .cta:disabled{opacity:.25;cursor:not-allowed;transform:none!important;}
@@ -122,99 +123,145 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 
 /* ── RESULTS ── */
 .res-top{padding:72px 20px 0;text-align:center;}
-.res-top h1{font-family:'Sora',sans-serif;font-size:2.3rem;font-weight:800;line-height:1.08;margin-bottom:6px;letter-spacing:-.04em;}
-.res-top p{font-size:.82rem;color:var(--muted);}
+.res-top h1{font-family:‘Sora’,sans-serif;font-size:2.3rem;font-weight:800;line-height:1.08;margin-bottom:6px;letter-spacing:-.04em;}
+.res-top p{font-size:.82rem;color:var(–muted);}
 .bmi-ring{width:160px;height:160px;margin:20px auto 8px;position:relative;display:flex;align-items:center;justify-content:center;}
 .bmi-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
 .bmi-inner{text-align:center;}
-.bmi-num{font-family:'Sora',sans-serif;font-size:2.3rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-.bmi-cat{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+.bmi-num{font-family:‘Sora’,sans-serif;font-size:2.3rem;font-weight:800;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.bmi-cat{font-size:.68rem;color:var(–muted);text-transform:uppercase;letter-spacing:.1em;}
 .scale-w{padding:0 20px;margin-bottom:6px;}
 .scale-t{height:8px;border-radius:99px;background:linear-gradient(90deg,#5b8af0,#10b981,#f59e0b,#ef4444);position:relative;margin:9px 0 5px;}
-.scale-th{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;background:#fff;border-radius:50%;border:2.5px solid var(--blue);box-shadow:0 0 10px rgba(91,138,240,.7);transition:left 1.3s cubic-bezier(.4,0,.2,1);}
-.scale-ll{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);}
+.scale-th{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;background:#fff;border-radius:50%;border:2.5px solid var(–blue);box-shadow:0 0 10px rgba(91,138,240,.7);transition:left 1.3s cubic-bezier(.4,0,.2,1);}
+.scale-ll{display:flex;justify-content:space-between;font-size:.62rem;color:var(–muted);}
 .ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 20px;margin:12px 0;}
-.ib{background:var(--s1);border:1px solid var(--bdr);border-radius:12px;padding:12px 14px;}
-.ibl{font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
-.ibv{font-family:'Sora',sans-serif;font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.05;}
-.ibu{font-size:.7rem;color:var(--muted);}
-.graph-card{margin:0 20px 14px;background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:16px 14px;}
+.ib{background:var(–s1);border:1px solid var(–bdr);border-radius:12px;padding:12px 14px;}
+.ibl{font-size:.66rem;color:var(–muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
+.ibv{font-family:‘Sora’,sans-serif;font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.05;}
+.ibu{font-size:.7rem;color:var(–muted);}
+.graph-card{margin:0 20px 14px;background:var(–s1);border:1px solid var(–bdr);border-radius:16px;padding:16px 14px;}
 .graph-title{font-size:.82rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
 .pt{padding:0 20px;margin-bottom:16px;}
-.pt h3{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:6px;}
-.tag{display:inline-block;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.16);border-radius:6px;padding:4px 10px;font-size:.75rem;font-weight:600;color:var(--blue);margin:2px 3px 2px 0;}
+.pt h3{font-size:.66rem;color:var(–muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:6px;}
+.tag{display:inline-block;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.16);border-radius:6px;padding:4px 10px;font-size:.75rem;font-weight:600;color:var(–blue);margin:2px 3px 2px 0;}
 
 /* ── AI PLAN ── */
-.plan-tab{flex:1;padding:11px 8px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--s1);color:var(--muted);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Sora',sans-serif;}
-.plan-tab.active{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(91,138,240,.3);}
-.ai-card{margin:0 20px 16px;background:var(--s1);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;min-height:120px;}
+.plan-tab{flex:1;padding:11px 8px;border-radius:10px;border:1.5px solid var(–bdr);background:var(–s1);color:var(–muted);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:‘Sora’,sans-serif;}
+.plan-tab.active{background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(91,138,240,.3);}
+.ai-card{margin:0 20px 16px;background:var(–s1);border:1px solid var(–bdr);border-radius:16px;overflow:hidden;min-height:120px;}
 .ai-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:14px;}
-.ai-spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(--bdr);border-top-color:var(--blue);animation:spin .8s linear infinite;}
+.ai-spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(–bdr);border-top-color:var(–blue);animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.ai-loading-text{font-size:.8rem;color:var(--muted);font-weight:500;text-align:center;}
-.ai-error{padding:20px;text-align:center;color:var(--red);font-size:.85rem;}
+.ai-loading-text{font-size:.8rem;color:var(–muted);font-weight:500;text-align:center;}
+.ai-error{padding:20px;text-align:center;color:var(–red);font-size:.85rem;}
 .ai-content{padding:16px;}
 
 /* workout plan styles */
 .plan-week{display:flex;flex-direction:column;gap:12px;}
-.plan-day{background:var(--s2);border-radius:12px;padding:14px;border:1px solid var(--bdr);}
-.plan-rest{background:rgba(91,138,240,.05);border-radius:12px;padding:12px 14px;border:1px dashed var(--bdr);text-align:center;color:var(--muted);font-size:.82rem;font-weight:600;}
-.plan-day-title{font-size:.88rem;font-weight:800;margin-bottom:10px;color:var(--txt);letter-spacing:-.02em;}
-.plan-exercise{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr2);font-size:.82rem;}
+.plan-day{background:var(–s2);border-radius:12px;padding:14px;border:1px solid var(–bdr);}
+.plan-rest{background:rgba(91,138,240,.05);border-radius:12px;padding:12px 14px;border:1px dashed var(–bdr);text-align:center;color:var(–muted);font-size:.82rem;font-weight:600;}
+.plan-day-title{font-size:.88rem;font-weight:800;margin-bottom:10px;color:var(–txt);letter-spacing:-.02em;}
+.plan-exercise{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(–bdr2);font-size:.82rem;}
 .plan-exercise:last-of-type{border-bottom:none;}
-.plan-exercise-name{font-weight:600;color:var(--txt);}
-.plan-exercise-sets{color:var(--blue);font-weight:700;font-size:.78rem;white-space:nowrap;margin-left:8px;}
-.plan-note{margin-top:10px;padding:8px 12px;background:rgba(91,138,240,.08);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;font-size:.76rem;color:var(--muted);line-height:1.5;}
+.plan-exercise-name{font-weight:600;color:var(–txt);}
+.plan-exercise-sets{color:var(–blue);font-weight:700;font-size:.78rem;white-space:nowrap;margin-left:8px;}
+.plan-note{margin-top:10px;padding:8px 12px;background:rgba(91,138,240,.08);border-left:3px solid var(–blue);border-radius:0 8px 8px 0;font-size:.76rem;color:var(–muted);line-height:1.5;}
 
 /* meal plan styles */
 .meal-macro-bar{display:flex;gap:8px;margin-bottom:14px;}
-.macro-pill{flex:1;background:var(--s2);border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--bdr);}
-.macro-pill-val{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.macro-pill-lbl{font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
-.meal-section{background:var(--s2);border-radius:12px;padding:13px;margin-bottom:10px;border:1px solid var(--bdr);}
-.meal-title{font-size:.88rem;font-weight:800;margin-bottom:9px;color:var(--txt);}
-.meal-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:.8rem;}
+.macro-pill{flex:1;background:var(–s2);border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(–bdr);}
+.macro-pill-val{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.macro-pill-lbl{font-size:.65rem;color:var(–muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.meal-section{background:var(–s2);border-radius:12px;padding:13px;margin-bottom:10px;border:1px solid var(–bdr);}
+.meal-title{font-size:.88rem;font-weight:800;margin-bottom:9px;color:var(–txt);}
+.meal-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(–bdr2);font-size:.8rem;}
 .meal-item:last-of-type{border-bottom:none;}
-.meal-item-name{color:var(--txt);font-weight:500;}
-.meal-item-cals{color:var(--muted);font-size:.74rem;white-space:nowrap;margin-left:6px;}
-.meal-tip{margin-top:10px;padding:8px 12px;background:rgba(16,185,129,.08);border-left:3px solid var(--green);border-radius:0 8px 8px 0;font-size:.76rem;color:var(--muted);line-height:1.5;}
-.meal-hydration{margin-top:10px;padding:10px 14px;background:rgba(6,182,212,.08);border-radius:10px;border:1px solid rgba(6,182,212,.2);font-size:.8rem;color:var(--cyan);font-weight:600;text-align:center;}
+.meal-item-name{color:var(–txt);font-weight:500;}
+.meal-item-cals{color:var(–muted);font-size:.74rem;white-space:nowrap;margin-left:6px;}
+.meal-tip{margin-top:10px;padding:8px 12px;background:rgba(16,185,129,.08);border-left:3px solid var(–green);border-radius:0 8px 8px 0;font-size:.76rem;color:var(–muted);line-height:1.5;}
+.meal-hydration{margin-top:10px;padding:10px 14px;background:rgba(6,182,212,.08);border-radius:10px;border:1px solid rgba(6,182,212,.2);font-size:.8rem;color:var(–cyan);font-weight:600;text-align:center;}
 
 /* ── AUTH ── */
-#authWall{position:fixed;inset:0;background:var(--bg);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
-.auth-logo{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
-.auth-tagline{font-size:.82rem;color:var(--muted);margin-bottom:36px;text-align:center;}
-.auth-tabs{display:flex;background:var(--s1);border-radius:12px;padding:4px;margin-bottom:24px;width:100%;}
-.auth-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-size:.85rem;font-weight:700;cursor:pointer;border-radius:9px;transition:all .18s;font-family:'Sora',sans-serif;}
-.auth-tab.active{background:var(--s2);color:var(--txt);box-shadow:0 2px 8px rgba(0,0,0,.3);}
+#authWall{position:fixed;inset:0;background:var(–bg);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
+.auth-logo{font-family:‘Sora’,sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
+.auth-tagline{font-size:.82rem;color:var(–muted);margin-bottom:36px;text-align:center;}
+.auth-tabs{display:flex;background:var(–s1);border-radius:12px;padding:4px;margin-bottom:24px;width:100%;}
+.auth-tab{flex:1;padding:10px;border:none;background:transparent;color:var(–muted);font-size:.85rem;font-weight:700;cursor:pointer;border-radius:9px;transition:all .18s;font-family:‘Sora’,sans-serif;}
+.auth-tab.active{background:var(–s2);color:var(–txt);box-shadow:0 2px 8px rgba(0,0,0,.3);}
 .auth-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;width:100%;}
-.auth-label{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
-.auth-input{background:var(--s1);border:1.5px solid var(--bdr);border-radius:12px;padding:14px 16px;color:var(--txt);font-size:.95rem;font-weight:500;width:100%;outline:none;transition:border-color .2s,box-shadow .2s;font-family:'Sora',sans-serif;}
-.auth-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
-.auth-input::placeholder{color:var(--dim);}
-.auth-btn{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:800;font-size:.95rem;border:none;border-radius:50px;padding:17px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:'Sora',sans-serif;margin-top:4px;}
+.auth-label{font-size:.7rem;color:var(–muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+.auth-input{background:var(–s1);border:1.5px solid var(–bdr);border-radius:12px;padding:14px 16px;color:var(–txt);font-size:.95rem;font-weight:500;width:100%;outline:none;transition:border-color .2s,box-shadow .2s;font-family:‘Sora’,sans-serif;}
+.auth-input:focus{border-color:var(–blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
+.auth-input::placeholder{color:var(–dim);}
+.auth-btn{background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;font-weight:800;font-size:.95rem;border:none;border-radius:50px;padding:17px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:‘Sora’,sans-serif;margin-top:4px;}
 .auth-btn:hover{opacity:.9;transform:translateY(-1px);}
 .auth-btn:active{transform:scale(.98);}
-.auth-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px 14px;font-size:.8rem;color:var(--red);margin-bottom:12px;text-align:center;display:none;width:100%;}
+.auth-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px 14px;font-size:.8rem;color:var(–red);margin-bottom:12px;text-align:center;display:none;width:100%;}
 .auth-divider{display:flex;align-items:center;gap:10px;margin:16px 0;width:100%;}
-.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--bdr);}
-.auth-divider span{font-size:.72rem;color:var(--muted);}
-.auth-dev-btn{background:rgba(91,138,240,.08);border:1.5px solid rgba(91,138,240,.2);border-radius:50px;padding:13px;width:100%;color:var(--blue);font-weight:700;font-size:.85rem;cursor:pointer;font-family:'Sora',sans-serif;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.auth-divider::before,.auth-divider::after{content:’’;flex:1;height:1px;background:var(–bdr);}
+.auth-divider span{font-size:.72rem;color:var(–muted);}
+.auth-dev-btn{background:rgba(91,138,240,.08);border:1.5px solid rgba(91,138,240,.2);border-radius:50px;padding:13px;width:100%;color:var(–blue);font-weight:700;font-size:.85rem;cursor:pointer;font-family:‘Sora’,sans-serif;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .auth-dev-btn:hover{background:rgba(91,138,240,.15);}
 
 /* ── USER BAR ── */
 #userBar{display:flex;align-items:center;gap:8px;}
-.user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;flex-shrink:0;}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(–blue),var(–violet));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;flex-shrink:0;}
 .dev-badge{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:.55rem;font-weight:800;padding:2px 6px;border-radius:99px;letter-spacing:.04em;text-transform:uppercase;}
 
 /* ── USER MENU ── */
-#userMenu{position:fixed;top:56px;right:calc(50% - 195px);background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:8px;z-index:500;width:200px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
+#userMenu{position:fixed;top:56px;right:calc(50% - 195px);background:var(–s1);border:1px solid var(–bdr);border-radius:16px;padding:8px;z-index:500;width:200px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
 .menu-item{padding:11px 14px;border-radius:10px;font-size:.84rem;font-weight:600;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:10px;}
-.menu-item:hover{background:var(--s2);}
-.menu-item.danger{color:var(--red);}
-.menu-sep{height:1px;background:var(--bdr);margin:4px 0;}
+.menu-item:hover{background:var(–s2);}
+.menu-item.danger{color:var(–red);}
+.menu-sep{height:1px;background:var(–bdr);margin:4px 0;}
 
 ::-webkit-scrollbar{width:0;}
+
+/* ── PRICING ── */
+.pricing-wrap{padding:76px 20px 40px;}
+.pricing-hero{text-align:center;margin-bottom:28px;}
+.pricing-hero h1{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:8px;}
+.pricing-hero p{font-size:.85rem;color:var(–muted);line-height:1.6;}
+.pricing-toggle{display:flex;background:var(–s1);border:1px solid var(–bdr);border-radius:50px;padding:4px;margin:0 auto 28px;width:fit-content;gap:2px;}
+.ptog-btn{padding:8px 22px;border-radius:50px;font-size:.82rem;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(–muted);transition:all .2s;font-family:‘Sora’,sans-serif;white-space:nowrap;}
+.ptog-btn.active{background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;box-shadow:0 4px 14px rgba(91,138,240,.35);}
+.save-badge{display:inline-block;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:6px;letter-spacing:.05em;}
+.plan-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.plan-card{background:var(–s1);border:1.5px solid var(–bdr);border-radius:20px;padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.plan-card:active{transform:scale(.98);}
+.plan-card.popular{border-color:var(–blue);background:rgba(91,138,240,.07);}
+.plan-card.selected{border-color:var(–violet);background:rgba(139,92,246,.09);box-shadow:0 0 0 3px rgba(139,92,246,.15);}
+.popular-tag{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;font-size:.62rem;font-weight:800;padding:3px 10px;border-radius:99px;letter-spacing:.06em;}
+.plan-name{font-size:1rem;font-weight:800;margin-bottom:4px;letter-spacing:-.02em;padding-left:30px;}
+.plan-desc{font-size:.75rem;color:var(–muted);margin-bottom:14px;line-height:1.5;padding-left:30px;}
+.plan-price-row{display:flex;align-items:flex-end;gap:6px;margin-bottom:10px;}
+.plan-price{font-size:2rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(–blue),var(–violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.plan-price-period{font-size:.78rem;color:var(–muted);padding-bottom:5px;}
+.plan-price-orig{font-size:.78rem;color:var(–muted);text-decoration:line-through;padding-bottom:5px;}
+.plan-features{display:flex;flex-direction:column;gap:5px;}
+.plan-feat{font-size:.75rem;color:var(–muted);display:flex;align-items:center;gap:7px;}
+.plan-feat::before{content:”\2713”;color:var(–green);font-weight:800;font-size:.8rem;flex-shrink:0;}
+.plan-select-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(–dim);position:absolute;top:20px;left:20px;transition:all .2s;}
+.plan-card.selected .plan-select-dot{background:var(–violet);border-color:var(–violet);}
+.pricing-cta{width:100%;padding:18px;background:linear-gradient(135deg,var(–blue),var(–violet));color:#fff;border:none;border-radius:50px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:‘Sora’,sans-serif;box-shadow:0 8px 28px rgba(91,138,240,.35);transition:opacity .2s,transform .14s;letter-spacing:-.01em;}
+.pricing-cta:active{transform:scale(.98);}
+.pricing-cta:disabled{opacity:.3;cursor:not-allowed;}
+.pricing-trust{display:flex;justify-content:center;gap:20px;margin-top:14px;}
+.trust-item{font-size:.68rem;color:var(–muted);display:flex;align-items:center;gap:4px;}
+.pay-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:8000;display:none;align-items:flex-end;justify-content:center;}
+.pay-modal.open{display:flex;}
+.pay-sheet{background:var(–s1);border-radius:28px 28px 0 0;padding:28px 24px 44px;width:100%;max-width:430px;border-top:1px solid var(–bdr);}
+.pay-sheet h2{font-size:1.2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;}
+.pay-sheet p{font-size:.8rem;color:var(–muted);margin-bottom:22px;}
+.pay-summary{background:var(–s2);border-radius:14px;padding:14px 16px;margin-bottom:20px;}
+.pay-summary-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;margin-bottom:6px;}
+.pay-summary-row:last-child{margin-bottom:0;font-weight:800;font-size:.9rem;border-top:1px solid var(–bdr);padding-top:8px;margin-top:4px;}
+.pay-input{background:var(–s2);border:1.5px solid var(–bdr);border-radius:12px;padding:14px 15px;color:var(–txt);font-size:.95rem;font-family:‘Sora’,sans-serif;outline:none;width:100%;transition:border-color .2s;margin-bottom:10px;}
+.pay-input:focus{border-color:var(–blue);}
+.pay-input::placeholder{color:var(–dim);}
+.stripe-note{font-size:.68rem;color:var(–muted);text-align:center;margin-top:12px;}
+.stripe-note span{color:var(–blue);}
+
 </style>
 </head>
 <body>
@@ -237,6 +284,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 </div>
 
 <!-- AUTH WALL -->
+
 <div id="authWall">
   <div class="auth-logo">GetPhysIQ</div>
   <div class="auth-tagline">Your body. Your plan. Built by AI.</div>
@@ -274,7 +322,64 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
   <div class="auth-divider"><span>or</span></div>
   <button class="auth-dev-btn" onclick="doDevLogin()"><span>⚡</span> Developer Access</button>
 </div>
+
+<!-- PAYMENT MODAL -->
+
+<div id="payModal" class="pay-modal" onclick="if(event.target===this)closePayModal()">
+  <div class="pay-sheet">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <h2>Complete your order</h2>
+      <button onclick="closePayModal()" style="background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;padding:4px;">&#x2715;</button>
+    </div>
+    <p>Secure checkout powered by Stripe</p>
+    <div class="pay-summary" id="paySummary"></div>
+    <div class="pay-input-group">
+      <input class="pay-input" type="email" id="payEmail" placeholder="Email address" autocomplete="email"/>
+      <input class="pay-input" type="text" id="payName" placeholder="Full name" autocomplete="name"/>
+      <!-- Stripe card element will mount here -->
+      <div id="stripeCardElement" style="background:var(--s2);border:1.5px solid var(--bdr);border-radius:12px;padding:14px 15px;min-height:48px;display:flex;align-items:center;">
+        <span style="color:var(--dim);font-size:.88rem;" id="cardPlaceholder">&#x1F4B3; Card details (Stripe loads here)</span>
+      </div>
+    </div>
+    <button class="pricing-cta" id="payBtn" onclick="processPayment()">PAY NOW &#x2192;</button>
+    <div class="stripe-note">&#x1F512; Secured by <span>Stripe</span> &nbsp;&#x2022;&nbsp; Cancel anytime &nbsp;&#x2022;&nbsp; SSL encrypted</div>
+  </div>
+</div>
+
 <script>
+// ════════════════════════════════════════════════════════════════
+//  STRIPE CONFIG — paste your keys here tomorrow
+//  1. Go to dashboard.stripe.com → Developers → API Keys
+//  2. Copy "Publishable key" (starts with pk_live_ or pk_test_)
+//  3. Paste below
+// ════════════════════════════════════════════════════════════════
+const STRIPE_KEY = 'pk_test_51TDh0jR1mWgKQOQnTgpKS2e07i16MCec8rPgAYhEjaQYBvR36BdrAe8mNxkH5ynlhnz2xX6k0isFVAm8p4Ou7TJm00QOEbwHWh';
+
+// ── RESEND CONFIG ────────────────────────────────────────────────
+//  1. Go to resend.com → API Keys → Create
+//  2. Paste your key below
+//  3. Set your FROM email (must match verified domain)
+const RESEND_KEY = 'REPLACE_WITH_YOUR_RESEND_KEY';
+const FROM_EMAIL = 'plans@getphysiq.fit';
+const REPLY_EMAIL = 'hello@getphysiq.fit';
+
+// ── PRICING PLANS ────────────────────────────────────────────────
+//  After creating products in Stripe dashboard, paste price IDs here
+//  Stripe Dashboard → Products → Add Product → copy Price ID
+const PLANS = {
+  fitness_monthly:  { id:'price_1TDhsOR1mWgKQOQnb3m7w7J6', label:'Fitness Plan',   price:12,  currency:'EUR', period:'month', stripe:true },
+  fitness_yearly:   { id:'price_1TDht0R1mWgKQOQnTGdacYCu', label:'Fitness Plan',   price:79,  currency:'EUR', period:'year',  stripe:true },
+  nutrition_monthly:{ id:'price_1TDhvzR1mWgKQOQn6DsurbXP', label:'Nutrition Plan', price:10,  currency:'EUR', period:'month', stripe:true },
+  nutrition_yearly: { id:'price_1TDhwLR1mWgKQOQn0nF7H4h4', label:'Nutrition Plan', price:67,  currency:'EUR', period:'year',  stripe:true },
+  complete_monthly: { id:'price_1TDhwkR1mWgKQOQn4eaXYgGw', label:'Complete Plan',  price:17,  currency:'EUR', period:'month', stripe:true },
+  complete_yearly:  { id:'price_1TDhx8R1mWgKQOQnqj4mGKm8', label:'Complete Plan',  price:107, currency:'EUR', period:'year',  stripe:true },
+};
+
+// ── CURRENT SELECTED PLAN ─────────────────────────────────────────
+var selectedPlan = null;
+var pricingPeriod = 'monthly'; // 'monthly' or 'yearly'
+
+
 // Images loaded from DOM (avoids JS string size limit)
 function getImg(key){ 
   const el=document.getElementById('img_'+key); 
@@ -1037,7 +1142,32 @@ PROFILE:
 - Main motivation: ${S.motivation||'health'}`;
 }
 
-async function generateWorkoutPlan(profile){
+async function generateWorkoutPlan(profile, hasAccess){
+  if(!hasAccess){
+    // Show locked preview
+    var el = document.getElementById('content-workout');
+    var load = document.getElementById('loading-workout');
+    if(load) load.style.display='none';
+    if(el){
+      el.style.display='block';
+      el.innerHTML='<div style="position:relative;overflow:hidden;border-radius:12px;">'
+        +'<div style="filter:blur(4px);pointer-events:none;opacity:.4;font-size:.8rem;color:var(--muted);padding:10px 0;">'
+        +'<div class="plan-week"><div class="plan-day"><div class="plan-day-title">Monday - Chest & Triceps</div>'
+        +'<div class="plan-exercise"><span class="plan-exercise-name">Bench Press</span><span class="plan-exercise-sets">4 sets x 8-10 reps</span></div>'
+        +'<div class="plan-exercise"><span class="plan-exercise-name">Incline Dumbbell Press</span><span class="plan-exercise-sets">3 sets x 10-12 reps</span></div>'
+        +'<div class="plan-exercise"><span class="plan-exercise-name">Tricep Pushdowns</span><span class="plan-exercise-sets">3 sets x 12-15 reps</span></div></div>'
+        +'<div class="plan-day"><div class="plan-day-title">Wednesday - Back & Biceps</div>'
+        +'<div class="plan-exercise"><span class="plan-exercise-name">Pull-ups</span><span class="plan-exercise-sets">4 sets x max reps</span></div>'
+        +'<div class="plan-exercise"><span class="plan-exercise-name">Barbell Row</span><span class="plan-exercise-sets">4 sets x 8-10 reps</span></div></div></div>'
+        +'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,11,.7);backdrop-filter:blur(2px);border-radius:12px;">'
+        +'<div style="font-size:1.8rem;margin-bottom:8px;">&#x1F512;</div>'
+        +'<div style="font-weight:800;font-size:.95rem;margin-bottom:6px;">Unlock Workout Plan</div>'
+        +'<div style="font-size:.75rem;color:var(--muted);margin-bottom:14px;text-align:center;">From $12/month</div>'
+        +'<button class="pricing-cta" style="width:auto;padding:12px 24px;font-size:.85rem;" onclick="buildPricingScreen()">GET ACCESS &#x2192;</button>'
+        +'</div></div>';
+    }
+    return;
+  }
   const prompt = `You are an elite personal trainer and fitness coach. Based on this client profile, create a highly personalised weekly workout plan.
 
 ${profile}
@@ -1081,7 +1211,14 @@ Rules:
   }
 }
 
-async function generateMealPlan(profile, calories){
+async function generateMealPlan(profile, calories, hasAccess){
+  if(!hasAccess){
+    var el=document.getElementById("content-meal");
+    var load=document.getElementById("loading-meal");
+    if(load)load.style.display="none";
+    if(el){el.style.display="block";el.innerHTML="<div style='position:relative;overflow:hidden;border-radius:12px;'><div style='filter:blur(4px);pointer-events:none;opacity:.4;font-size:.8rem;color:var(--muted);padding:10px;'>Breakfast: Oat porridge 420kcal &bull; Lunch: Chicken rice 580kcal &bull; Dinner: Salmon &amp; veg 520kcal</div><div style='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(7,7,11,.75);backdrop-filter:blur(2px);border-radius:12px;'><div style='font-size:1.8rem;margin-bottom:8px;'>&#x1F512;</div><div style='font-weight:800;font-size:.95rem;margin-bottom:6px;'>Unlock Meal Plan</div><div style='font-size:.75rem;color:var(--muted);margin-bottom:14px;'>From $10/month</div><button class='pricing-cta' style='width:auto;padding:12px 24px;font-size:.85rem;' onclick='buildPricingScreen()'>GET ACCESS &#x2192;</button></div></div>";}
+    return;
+  }
   const prompt = `You are a certified nutritionist and dietitian. Based on this client profile, create a highly personalised daily meal plan.
 
 ${profile}
@@ -1134,14 +1271,46 @@ function switchTab(tab){
 }
 
 function renderPlanAuthGate(){
-  const gate = document.getElementById('planAuthGate');
+  var gate = document.getElementById('planAuthGate');
   if(!gate) return;
-  const sess = getSession();
-  if(sess){
-    gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.1),rgba(139,92,246,.1));border:1px solid rgba(91,138,240,.22);border-radius:20px;padding:22px 20px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px">&#x2705;</div><div style="font-family:Sora,sans-serif;font-size:1rem;font-weight:800;margin-bottom:5px">Saved to your account</div><div style="font-size:.78rem;color:var(--muted)">Logged in as <strong style=color:var(--txt)>'+sess.name+'</strong> \u2014 your plan is saved.</div></div><div style="padding:12px 0 4px;text-align:center"><button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">&#8629; Retake Quiz</button></div>';
+  var activePlan = getActivePlan();
+  if(activePlan){
+    // Already paid — show plan status
+    gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(91,138,240,.08));border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:22px 20px;text-align:center;">'
+      +'<div style="font-size:1.5rem;margin-bottom:8px">&#x2705;</div>'
+      +'<div style="font-family:Sora,sans-serif;font-size:1rem;font-weight:800;margin-bottom:5px">Plan Active</div>'
+      +'<div style="font-size:.78rem;color:var(--muted);line-height:1.6;">You have the <strong style="color:var(--txt)">'+
+      ({fitness:'Fitness',nutrition:'Nutrition',complete:'Complete'}[activePlan.plan]||activePlan.plan)+' Plan</strong> active.</div>'
+      +'</div>'
+      +'<div style="padding:12px 0 4px;text-align:center">'
+      +'<button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">&#8629; Retake Quiz</button>'
+      +'</div>';
     return;
   }
-  gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.12),rgba(139,92,246,.12));border:1px solid rgba(91,138,240,.25);border-radius:20px;padding:24px 20px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:6px">&#x1F512;</div><div style="font-family:Sora,sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:6px;letter-spacing:-.03em">Unlock Your Plan</div><div style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:20px">Enter your email to get your full plan \u2014 or sign in to save it to your account.</div><div id="gateEmailCapture"><div style="display:flex;gap:8px;margin-bottom:10px"><input id="gateEmail" class="auth-input" type="email" placeholder="your@email.com" style="flex:1;padding:13px 14px;font-size:.88rem"/><button onclick="gateGetPlan()" style="background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none;border-radius:12px;padding:13px 16px;font-weight:800;font-size:.82rem;cursor:pointer;white-space:nowrap;font-family:Sora,sans-serif;">GET PLAN</button></div><div style="font-size:.7rem;color:var(--muted);margin-bottom:16px">Free forever \u00b7 No credit card needed</div><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><div style="flex:1;height:1px;background:var(--bdr)"></div><span style="font-size:.7rem;color:var(--muted)">or sign in</span><div style="flex:1;height:1px;background:var(--bdr)"></div></div><div style="display:flex;gap:8px"><button onclick="openAuthModal(&#x27;login&#x27;)" style="flex:1;padding:13px;background:var(--s1);color:var(--txt);border:1.5px solid var(--bdr);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;">Log In</button><button onclick="openAuthModal(&#x27;signup&#x27;)" style="flex:1;padding:13px;background:transparent;color:var(--blue);border:1.5px solid var(--blue);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;">Sign Up</button></div></div><div id="gateSuccess" style="display:none"><div style="font-size:2rem;margin-bottom:10px">&#x2705;</div><div style="font-weight:800;font-size:1rem;margin-bottom:6px">Plan Sent!</div><div style="font-size:.8rem;color:var(--muted)">Check your inbox for your full plan + weekly tips.</div></div></div><div style="padding:12px 0 4px;text-align:center"><button class="cta" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem" onclick="restartQuiz()">&#8629; Retake Quiz</button></div>';
+  // Not paid — show unlock CTA
+  gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.12),rgba(139,92,246,.12));border:1px solid rgba(91,138,240,.3);border-radius:20px;padding:24px 20px;text-align:center;">'
+    +'<div style="font-size:2.2rem;margin-bottom:10px">&#x1F512;</div>'
+    +'<div style="font-family:Sora,sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.03em">Unlock Your Full Plan</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:20px;">Your personalised workout and meal plan is ready.<br/>Get full access from <strong style="color:var(--txt)">$10/month.</strong></div>'
+    +'<button class="pricing-cta" onclick="buildPricingScreen()" style="margin-bottom:12px;">SEE PLANS &amp; PRICING &#x2192;</button>'
+    +'<div style="display:flex;justify-content:center;gap:16px;margin-bottom:14px;">'
+    +'<div style="font-size:.68rem;color:var(--muted);">&#x1F512; Secure</div>'
+    +'<div style="font-size:.68rem;color:var(--muted);">&#x21A9; Cancel anytime</div>'
+    +'<div style="font-size:.68rem;color:var(--muted);">&#x26A1; Instant access</div>'
+    +'</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">'
+    +'<div style="flex:1;height:1px;background:var(--bdr)"></div>'
+    +'<span style="font-size:.7rem;color:var(--muted)">already have an account?</span>'
+    +'<div style="flex:1;height:1px;background:var(--bdr)"></div>'
+    +'</div>'
+    +'<div style="display:flex;gap:8px;">'
+    +"<button onclick=\"openAuthModal('login')\" style=\"flex:1;padding:12px;background:var(--s1);color:var(--txt);border:1.5px solid var(--bdr);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;\">Log In</button>"
+    +"<button onclick=\"openAuthModal('signup')\" style=\"flex:1;padding:12px;background:transparent;color:var(--blue);border:1.5px solid var(--blue);border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Sora,sans-serif;\">Sign Up</button>"
+    +'</div>'
+    +'</div>'
+    +'<div style="padding:10px 0 4px;text-align:center;">'
+    +'<button style="background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;font-family:Sora,sans-serif;" onclick="restartQuiz()">&#8629; Retake Quiz</button>'
+    +'</div>';
 }
 
 function gateGetPlan(){
@@ -1179,6 +1348,7 @@ function showFullSignup(){
 
 function restartQuiz(){
   cur=0; hist=[];
+  selectedPlan=null; pricingPeriod="monthly";
   S.gender=null;S.age=null;S.build=null;S.dreamBuild=null;
   S.goals=[];S.zones=[];S.activity=null;
   S.height=null;S.weight=null;S.goalWeight=null;
@@ -1288,6 +1458,413 @@ function drawChart(cw,gw,weeks){
 }
 
 // ════════════════════════════════════════
+
+// ════════════════════════════════════════════════════════════════
+//  PRICING SYSTEM
+// ════════════════════════════════════════════════════════════════
+
+function buildPricingScreen(){
+  var d=document.createElement('div');
+  d.className='sc in';
+  d.innerHTML=getPricingHTML();
+  var app=document.getElementById('app');
+  var prev=app.querySelector('.sc.in');
+  if(prev){prev.classList.remove('in');prev.classList.add('out');setTimeout(function(){if(prev.parentNode)prev.remove();},300);}
+  app.appendChild(d);
+  document.getElementById('pf').style.width='100%';
+}
+
+function getPricingHTML(){
+  var m = pricingPeriod==='monthly';
+  var plans = [
+    {
+      key:'fitness',
+      name:'Fitness Plan',
+      emoji:'&#x1F3CB;&#xFE0F;',
+      desc:'AI-generated workout plan tailored to your body, goals and schedule.',
+      price: m?12:79,
+      orig: m?null:144,
+      features:['Personalised weekly workout plan','Exercise instructions + sets/reps','Progressive overload built in','Home, gym or outdoor options','Updates every 4 weeks']
+    },
+    {
+      key:'nutrition',
+      name:'Nutrition Plan',
+      emoji:'&#x1F957;',
+      desc:'Custom meal plan with macros, calories and recipes matched to your goals.',
+      price: m?10:67,
+      orig: m?null:120,
+      features:['Daily meal plan with recipes','Macro & calorie targets','Tailored to your diet preference','Grocery list included','Weekly meal variation']
+    },
+    {
+      key:'complete',
+      name:'Complete Plan',
+      emoji:'&#x26A1;',
+      desc:'Everything — workout + nutrition combined. The full transformation system.',
+      price: m?17:107,
+      orig: m?null:264,
+      features:['Full workout plan','Full nutrition & meal plan','Save $5/mo vs buying separate','Priority plan regeneration','Progress tracking dashboard'],
+      popular:true
+    }
+  ];
+
+  var cards='';
+  for(var i=0;i<plans.length;i++){
+    var p=plans[i];
+    var feats=p.features.map(function(f){return '<div class="plan-feat">'+f+'</div>';}).join('');
+    var origHTML = p.orig?'<span class="plan-price-orig">$'+p.orig+'</span>':'';
+    var period = m?'/mo':'/yr';
+    var saving = p.orig ? '<span class="save-badge">SAVE '+(Math.round((1-(p.price/p.orig))*100))+'%</span>' : '';
+    cards+='<div class="plan-card'+(p.popular?' popular':'')+(selectedPlan===p.key?' selected':'')+'" onclick="selectPlan(\''+p.key+'\',this)">'
+      +'<div class="plan-select-dot"></div>'
+      +(p.popular?'<div class="popular-tag">MOST POPULAR</div>':'')
+      +'<div class="plan-name">'+p.emoji+' '+p.name+'</div>'
+      +'<div class="plan-desc">'+p.desc+'</div>'
+      +'<div class="plan-price-row">'
+      +'<div class="plan-price">$'+p.price+'</div>'
+      +'<div class="plan-price-period">'+period+'</div>'
+      +origHTML+saving
+      +'</div>'
+      +'<div class="plan-features">'+feats+'</div>'
+      +'</div>';
+  }
+
+  var saveBadge = m ? '' : '<span class="save-badge">SAVE UP TO 47%</span>';
+
+  return '<div class="pricing-wrap">'
+    +'<div class="pricing-hero">'
+    +'<div class="badge" style="margin-bottom:12px">Choose Your Plan</div>'
+    +'<h1>Your plan is<br/>ready to unlock</h1>'
+    +'<p>Based on your quiz, we built a plan<br/>personalised to your exact body & goals.</p>'
+    +'</div>'
+    +'<div class="pricing-toggle">'
+    +'<button class="ptog-btn'+(m?' active':'')+'" onclick="setPricingPeriod(\'monthly\',this)">Monthly</button>'
+    +'<button class="ptog-btn'+(!m?' active':'')+'" onclick="setPricingPeriod(\'yearly\',this)">Yearly '+saveBadge+'</button>'
+    +'</div>'
+    +'<div class="plan-cards">'+cards+'</div>'
+    +'<button class="pricing-cta" id="pricingCTA" onclick="goToCheckout()" '+(selectedPlan?'':'disabled')+'>GET MY PLAN &#x2192;</button>'
+    +'<div class="pricing-trust">'
+    +'<div class="trust-item">&#x1F512; Secure payment</div>'
+    +'<div class="trust-item">&#x21A9; Cancel anytime</div>'
+    +'<div class="trust-item">&#x2705; Instant access</div>'
+    +'</div>'
+    +'</div>';
+}
+
+function selectPlan(key, el){
+  selectedPlan = key;
+  // Update UI
+  var cards = document.querySelectorAll('.plan-card');
+  for(var i=0;i<cards.length;i++) cards[i].classList.remove('selected');
+  el.classList.add('selected');
+  var cta = document.getElementById('pricingCTA');
+  if(cta) cta.disabled = false;
+}
+
+function setPricingPeriod(period, btn){
+  pricingPeriod = period;
+  // Re-render pricing screen in place
+  var wrap = document.querySelector('.pricing-wrap');
+  if(wrap){
+    var sc = wrap.parentElement;
+    sc.innerHTML = getPricingHTML();
+  }
+}
+
+function goToCheckout(){
+  if(!selectedPlan) return;
+  var period = pricingPeriod;
+  var key = selectedPlan+'_'+period;
+  var plan = PLANS[key];
+  if(!plan) return;
+
+  // Check if logged in — pre-fill email
+  var sess = getSession();
+  var email = sess ? sess.email : '';
+  var name = sess ? sess.name : '';
+
+  // Build summary
+  var periodLabel = period==='monthly' ? '/month' : '/year (billed annually)';
+  var summaryHTML = '<div class="pay-summary-row"><span>'+plan.label+'</span><span style="color:var(--muted);font-size:.75rem">'+
+    (period==='yearly'?'Annual':'Monthly')+'</span></div>'+
+    '<div class="pay-summary-row"><span>Total today</span><span style="color:var(--blue);font-weight:800">$'+plan.price+periodLabel+'</span></div>';
+
+  document.getElementById('paySummary').innerHTML = summaryHTML;
+  if(email) document.getElementById('payEmail').value = email;
+  if(name) document.getElementById('payName').value = name;
+
+  // Open modal
+  document.getElementById('payModal').classList.add('open');
+
+  // Load Stripe if not loaded
+  initStripe();
+}
+
+function closePayModal(){
+  document.getElementById('payModal').classList.remove('open');
+}
+
+var stripeInstance = null;
+var stripeElements = null;
+var stripeCard = null;
+
+function initStripe(){
+  // Only init if key is set
+  if(STRIPE_KEY.includes('REPLACE')) {
+    document.getElementById('cardPlaceholder').textContent = '⚠️ Stripe key not set yet — add it tomorrow';
+    return;
+  }
+  if(stripeInstance) return; // Already loaded
+  // Load Stripe.js dynamically
+  if(!window.Stripe){
+    var s = document.createElement('script');
+    s.src = 'https://js.stripe.com/v3/';
+    s.onload = function(){ mountStripeCard(); };
+    document.head.appendChild(s);
+  } else {
+    mountStripeCard();
+  }
+}
+
+function mountStripeCard(){
+  if(!window.Stripe) return;
+  stripeInstance = Stripe(STRIPE_KEY);
+  stripeElements = stripeInstance.elements();
+  var cardEl = document.getElementById('stripeCardElement');
+  // Remove placeholder
+  cardEl.innerHTML = '';
+  stripeCard = stripeElements.create('card', {
+    style:{
+      base:{
+        color:'#f2f2f8',
+        fontFamily:'Sora, sans-serif',
+        fontSize:'15px',
+        '::placeholder':{color:'#3a3a46'}
+      }
+    }
+  });
+  stripeCard.mount('#stripeCardElement');
+}
+
+async function processPayment(){
+  var email = document.getElementById('payEmail').value.trim();
+  var name = document.getElementById('payName').value.trim();
+  var btn = document.getElementById('payBtn');
+
+  if(!email || !/\S+@\S+\.\S+/.test(email)){
+    document.getElementById('payEmail').style.borderColor='var(--red)';
+    setTimeout(function(){document.getElementById('payEmail').style.borderColor='';},1500);
+    return;
+  }
+  if(!name){
+    document.getElementById('payName').style.borderColor='var(--red)';
+    setTimeout(function(){document.getElementById('payName').style.borderColor='';},1500);
+    return;
+  }
+
+  // If Stripe not set up yet — show message
+  if(STRIPE_KEY.includes('REPLACE')){
+    btn.textContent = '⚠️ Stripe not configured yet';
+    btn.style.background = 'var(--amber)';
+    setTimeout(function(){btn.textContent='PAY NOW →';btn.style.background='';},3000);
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  try {
+    var period = pricingPeriod;
+    var planKey = selectedPlan+'_'+period;
+    var plan = PLANS[planKey];
+
+    // Create payment method
+    var result = await stripeInstance.createPaymentMethod({
+      type: 'card',
+      card: stripeCard,
+      billing_details: { name: name, email: email }
+    });
+
+    if(result.error){
+      btn.disabled = false;
+      btn.textContent = 'PAY NOW →';
+      showPayError(result.error.message);
+      return;
+    }
+
+    // TODO: Send to your backend/serverless function
+    // For now, simulate success
+    await new Promise(function(r){setTimeout(r,1500);});
+    onPaymentSuccess(email, name, plan);
+
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = 'PAY NOW →';
+    showPayError('Payment failed. Please try again.');
+  }
+}
+
+function showPayError(msg){
+  var existing = document.getElementById('payErr');
+  if(existing) existing.remove();
+  var err = document.createElement('div');
+  err.id = 'payErr';
+  err.style.cssText = 'color:var(--red);font-size:.8rem;text-align:center;margin-top:8px;';
+  err.textContent = msg;
+  document.getElementById('payBtn').after(err);
+}
+
+function onPaymentSuccess(email, name, plan){
+  // Save subscription to localStorage (will sync to backend when Stripe is live)
+  var subs = JSON.parse(localStorage.getItem('gp_subscriptions')||'[]');
+  subs.push({
+    email: email,
+    name: name,
+    plan: plan.label,
+    planKey: selectedPlan,
+    period: pricingPeriod,
+    price: plan.price,
+    startDate: new Date().toISOString(),
+    status: 'active'
+  });
+  localStorage.setItem('gp_subscriptions', JSON.stringify(subs));
+  localStorage.setItem('gp_active_plan', JSON.stringify({
+    plan: selectedPlan,
+    period: pricingPeriod,
+    email: email,
+    unlocked: ['fitness','complete'].includes(selectedPlan) ? ['workout'] : [],
+    mealUnlocked: ['nutrition','complete'].includes(selectedPlan)
+  }));
+
+  // Send welcome email (when Resend is configured)
+  sendWelcomeEmail(email, name, plan);
+
+  // Close modal and show success
+  closePayModal();
+  showPaymentSuccess(email, plan);
+}
+
+function showPaymentSuccess(email, plan){
+  var app = document.getElementById('app');
+  var prev = app.querySelector('.sc.in');
+  if(prev){prev.classList.remove('in');prev.classList.add('out');setTimeout(function(){if(prev.parentNode)prev.remove();},300);}
+  var d = document.createElement('div');
+  d.className = 'sc in';
+  d.innerHTML = '<div style="min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center;">'
+    +'<div style="font-size:4rem;margin-bottom:20px">&#x1F389;</div>'
+    +'<div style="font-size:1.8rem;font-weight:800;letter-spacing:-.04em;margin-bottom:10px;line-height:1.1">Payment<br/>Successful!</div>'
+    +'<div style="font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:28px">Your <strong style="color:var(--txt)">'+plan.label+'</strong> is now active.<br/>Check <strong style="color:var(--blue)">'+email+'</strong> for your full plan.</div>'
+    +'<div style="background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:18px 20px;width:100%;margin-bottom:24px;">'
+    +'<div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">What happens next</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);line-height:1.8;text-align:left;">'
+    +'&#x2705; Your plan is being generated now<br/>'
+    +'&#x1F4E7; Full plan sent to your email<br/>'
+    +'&#x1F504; Updates every 4 weeks automatically<br/>'
+    +'&#x1F4F2; Access anytime at getphysiq.fit'
+    +'</div></div>'
+    +'<button class="pricing-cta" onclick="goToResults()">VIEW MY PLAN &#x2192;</button>'
+    +'</div>';
+  app.appendChild(d);
+  document.getElementById('pf').style.width='100%';
+}
+
+function goToResults(){
+  // Go back to results screen
+  hist.push(cur);
+  cur = SCREENS.length - 1;
+  render(cur);
+}
+
+// ── EMAIL SYSTEM (Resend) ─────────────────────────────────────────
+async function sendWelcomeEmail(email, name, plan){
+  if(RESEND_KEY.includes('REPLACE')) {
+    console.log('Resend not configured yet — email would send to:', email);
+    return;
+  }
+  try {
+    var profileSummary = buildEmailProfileSummary();
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer '+RESEND_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: FROM_EMAIL,
+        to: email,
+        reply_to: REPLY_EMAIL,
+        subject: '&#x1F3CB;&#xFE0F; Your GetPhysIQ Plan is Ready, '+name.split(' ')[0]+'!',
+        html: buildWelcomeEmailHTML(name, plan, profileSummary)
+      })
+    });
+  } catch(e) {
+    console.log('Email send failed:', e);
+  }
+}
+
+async function sendPlanEmail(email, name, workoutHTML, mealHTML){
+  if(RESEND_KEY.includes('REPLACE')) return;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method:'POST',
+      headers:{'Authorization':'Bearer '+RESEND_KEY,'Content-Type':'application/json'},
+      body: JSON.stringify({
+        from: FROM_EMAIL,
+        to: email,
+        reply_to: REPLY_EMAIL,
+        subject: '&#x1F4AA; Your Personalised Fitness Plan from GetPhysIQ',
+        html: buildPlanEmailHTML(name, workoutHTML, mealHTML)
+      })
+    });
+  } catch(e){ console.log('Plan email failed:',e); }
+}
+
+function buildEmailProfileSummary(){
+  return 'Gender: '+(S.gender||'?')+' | Age: '+(S.age||'?')+' | Goal: '+(S.goals||[]).join(', ');
+}
+
+function buildWelcomeEmailHTML(name, plan, profile){
+  return '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#07070b;color:#f2f2f8;padding:0;margin:0;">'
+    +'<div style="max-width:500px;margin:0 auto;padding:40px 24px;">'
+    +'<div style="font-size:1.4rem;font-weight:800;margin-bottom:24px;color:#5b8af0;">GetPhysIQ</div>'
+    +'<h1 style="font-size:1.6rem;margin-bottom:12px;">Welcome, '+name.split(' ')[0]+'! &#x1F4AA;</h1>'
+    +'<p style="color:#737380;line-height:1.7;margin-bottom:20px;">Your <strong style="color:#f2f2f8;">'+plan.label+'</strong> is now active. '
+    +'We\'ve generated a personalised plan based on your quiz results.</p>'
+    +'<div style="background:#0d0d12;border-radius:12px;padding:16px;margin-bottom:20px;">'
+    +'<div style="font-size:.75rem;color:#737380;margin-bottom:8px;">YOUR PROFILE</div>'
+    +'<div style="font-size:.85rem;color:#f2f2f8;">'+profile+'</div>'
+    +'</div>'
+    +'<a href="https://getphysiq.fit/getphysiq.html" style="display:block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;text-decoration:none;padding:16px;border-radius:50px;text-align:center;font-weight:800;margin-bottom:20px;">VIEW MY PLAN &#x2192;</a>'
+    +'<p style="color:#737380;font-size:.75rem;line-height:1.6;">Questions? Reply to this email.<br/>To cancel, visit getphysiq.fit and go to account settings.</p>'
+    +'</div></body></html>';
+}
+
+function buildPlanEmailHTML(name, workoutHTML, mealHTML){
+  return '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#07070b;color:#f2f2f8;padding:0;margin:0;">'
+    +'<div style="max-width:600px;margin:0 auto;padding:40px 24px;">'
+    +'<div style="font-size:1.4rem;font-weight:800;margin-bottom:24px;color:#5b8af0;">GetPhysIQ</div>'
+    +'<h1 style="font-size:1.5rem;margin-bottom:16px;">Your Plan, '+name.split(' ')[0]+'</h1>'
+    +(workoutHTML?'<h2 style="color:#5b8af0;font-size:1rem;margin:20px 0 10px;">&#x1F3CB;&#xFE0F; Workout Plan</h2>'+workoutHTML:'')
+    +(mealHTML?'<h2 style="color:#10b981;font-size:1rem;margin:20px 0 10px;">&#x1F957; Meal Plan</h2>'+mealHTML:'')
+    +'<a href="https://getphysiq.fit/getphysiq.html" style="display:block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;text-decoration:none;padding:16px;border-radius:50px;text-align:center;font-weight:800;margin-top:28px;">Open Full Plan &#x2192;</a>'
+    +'</div></body></html>';
+}
+
+// ── SUBSCRIPTION CHECK ─────────────────────────────────────────────
+function getActivePlan(){
+  return JSON.parse(localStorage.getItem('gp_active_plan')||'null');
+}
+
+function hasWorkoutAccess(){
+  var p = getActivePlan();
+  return p && (p.plan==='fitness'||p.plan==='complete');
+}
+
+function hasMealAccess(){
+  var p = getActivePlan();
+  return p && (p.plan==='nutrition'||p.plan==='complete');
+}
+
+
 //  AUTH SYSTEM
 // ════════════════════════════════════════
 
