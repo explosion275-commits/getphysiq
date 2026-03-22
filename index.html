@@ -2009,10 +2009,18 @@ function loginSuccess(user){
   saveSession(user);
   document.getElementById('authWall').style.display='none';
   setupUserUI(user);
-  // If we're on results screen, refresh the auth gate
   setTimeout(()=>{ if(typeof renderPlanAuthGate==='function') renderPlanAuthGate(); }, 100);
-  // Check URL param for direct preview
   const params = new URLSearchParams(window.location.search);
+  // If coming from "View My Plan" email link → go straight to results
+  if(params.get('plan')==='ready' || localStorage.getItem('gp_goto_plan')==='1'){
+    localStorage.removeItem('gp_goto_plan');
+    window.history.replaceState({}, document.title, window.location.pathname);
+    var _d=document.createElement('div');_d.className='sc in';
+    document.getElementById('app').appendChild(_d);
+    buildRes(_d);
+    return;
+  }
+  // Dev preview
   if(user.role==='dev' && params.get('preview')==='true'){
     loadDemoProfile(); return;
   }
@@ -2110,13 +2118,26 @@ if(_urlParams.get('payment')==='success'){
 if(_session){
   setupUserUI(_session);
   const _params = new URLSearchParams(window.location.search);
-  if(_session.role==='dev' && _params.get('preview')==='true'){
+  // Handle email "View My Plan" link
+  if(_params.get('plan')==='ready'){
+    window.history.replaceState({}, document.title, window.location.pathname);
+    var _d=document.createElement('div');_d.className='sc in';
+    document.getElementById('app').appendChild(_d);
+    buildRes(_d);
+  } else if(_session.role==='dev' && _params.get('preview')==='true'){
     loadDemoProfile();
   } else {
     render(0);
   }
 } else {
-  render(0);
+  // Not logged in — check if coming from email link
+  var _np = new URLSearchParams(window.location.search);
+  if(_np.get('plan')==='ready'){
+    localStorage.setItem('gp_goto_plan','1');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+  // Show auth wall
+  document.getElementById('authWall').style.display='flex';
 }
 
 setTimeout(()=>{
