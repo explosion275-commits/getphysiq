@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
     <!-- CTA -->
     <div style="text-align:center;margin:28px 0;">
-      <a href="https://getphysiq.fit" style="display:inline-block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;font-weight:800;font-size:.95rem;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:-.01em;">View My Plan →</a>
+      <a href="https://getphysiq.fit?plan=ready" style="display:inline-block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;font-weight:800;font-size:.95rem;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:-.01em;">View My Plan →</a>
     </div>
 
     <!-- What's next -->
