@@ -249,7 +249,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .trust-item{font-size:.68rem;color:var(--muted);display:flex;align-items:center;gap:4px;}
 .pay-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:8000;display:none;align-items:flex-end;justify-content:center;}
 .pay-modal.open{display:flex;}
-.pay-sheet{background:var(--s1);border-radius:28px 28px 0 0;padding:28px 24px 44px;width:100%;max-width:430px;border-top:1px solid var(--bdr);}
+.pay-sheet{background:var(--s1);border-radius:28px 28px 0 0;padding:28px 24px 44px;width:100%;max-width:430px;border-top:1px solid var(--bdr);max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .pay-sheet h2{font-size:1.2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;}
 .pay-sheet p{font-size:.8rem;color:var(--muted);margin-bottom:22px;}
 .pay-summary{background:var(--s2);border-radius:14px;padding:14px 16px;margin-bottom:20px;}
@@ -1004,10 +1004,10 @@ function bMeasures(sc){
   return`${heroHTML}<div class="ct">
     <div class="badge">${sc.b}</div><div class="qtitle">${sc.tt.replace(/\n/,'<br/>')}</div><div class="qsub">${sc.sb}</div>
     <div class="mr">
-      <div class="mg"><div class="ml">Height (cm)</div><input class="mi" type="number" id="hIn" placeholder="175" min="130" max="230" inputmode="numeric" oninput="chkM()"/></div>
-      <div class="mg"><div class="ml">Weight (kg)</div><input class="mi" type="number" id="wIn" placeholder="80" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
+      <div class="mg"><div class="ml">Height (cm)</div><input class="mi" type="number" id="hIn" placeholder="" min="130" max="230" inputmode="numeric" oninput="chkM()"/></div>
+      <div class="mg"><div class="ml">Weight (kg)</div><input class="mi" type="number" id="wIn" placeholder="" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
     </div>
-    <div class="mg" style="margin-bottom:18px"><div class="ml">Goal Weight (kg)</div><input class="mi" type="number" id="gwIn" placeholder="70" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
+    <div class="mg" style="margin-bottom:18px"><div class="ml">Goal Weight (kg)</div><input class="mi" type="number" id="gwIn" placeholder="" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
     <button class="cta" id="mB" onclick="savM()" disabled>CONTINUE →</button>
   </div>`;
 }
@@ -1647,12 +1647,17 @@ function setPricingPeriod(period, btn){
 }
 
 function goToCheckout(){
-  openLSModal('complete');
+  if(!selectedPlan) return;
+  var period = pricingPeriod;
+  var url = LS_LINKS[selectedPlan] && LS_LINKS[selectedPlan][period];
+  if(url) window.open(url, '_blank');
 }
 
 function closeLSModal(){
   var modal = document.getElementById('payModal');
   if(modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('app').style.overflow = '';
 }
 
 // context: 'fitness' | 'nutrition' | 'complete'
@@ -1684,6 +1689,8 @@ function openLSModal(context){
   lsSetBilling('monthly');
 
   modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('app').style.overflow = 'hidden';
 }
 
 // ── LEMON SQUEEZY CHECKOUT LINKS ─────────────────────────────────
@@ -1745,15 +1752,28 @@ function lsSelect(p){
   lsSelected = p;
   ['complete','fitness','nutrition'].forEach(function(id){
     var card = document.getElementById('ls-'+id);
+    var dot  = document.getElementById('lsdot-'+id);
     if(!card) return;
     if(id===p){
       card.style.background = 'rgba(91,138,240,.07)';
       card.style.border     = '1.5px solid var(--blue)';
       card.style.boxShadow  = '0 0 0 3px rgba(91,138,240,.1)';
+      if(dot){
+        dot.style.background   = 'var(--blue)';
+        dot.style.borderColor  = 'var(--blue)';
+        var inner = dot.querySelector('div');
+        if(inner) inner.style.opacity = '1';
+      }
     } else {
       card.style.background = 'var(--s2)';
-      card.style.border     = '1.5px solid var(--bdr2)';
+      card.style.border     = '1.5px solid rgba(255,255,255,.04)';
       card.style.boxShadow  = 'none';
+      if(dot){
+        dot.style.background  = 'transparent';
+        dot.style.borderColor = 'var(--dim)';
+        var inner = dot.querySelector('div');
+        if(inner) inner.style.opacity = '0';
+      }
     }
   });
   var names = {complete:'Complete Plan', fitness:'Fitness Plan', nutrition:'Nutrition Plan'};
