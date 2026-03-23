@@ -1108,6 +1108,8 @@ function animCalc(d){
 //  RESULTS
 // ════════════════════════════════════════
 function buildRes(d){
+  // Save quiz state for plans.html
+  try{ localStorage.setItem('gp_quiz_state', JSON.stringify(S)); }catch(e){}
   const h=S.height||175,w=S.weight||80,gw=S.goalWeight||70;
   const bmi=(w/((h/100)**2)).toFixed(1);
   let cat='Normal',cc='var(--green)';
@@ -2354,7 +2356,33 @@ function logoTap(){
 const _session = getSession();
 var _urlParams = new URLSearchParams(window.location.search);
 
-// Handle Lemon Squeezy payment success
+// ── AUTO LOGIN from email link ──
+if(_urlParams.get('autologin')==='1'){
+  var _alEmail  = decodeURIComponent(_urlParams.get('e')||'');
+  var _alPass   = decodeURIComponent(_urlParams.get('p')||'');
+  var _alPlan   = decodeURIComponent(_urlParams.get('plan')||'complete');
+  var _alPeriod = decodeURIComponent(_urlParams.get('period')||'monthly');
+  window.history.replaceState({}, document.title, window.location.pathname);
+  if(_alEmail && _alPass){
+    // Auto-create or update user account
+    var _alUsers = getUsers();
+    if(!_alUsers[_alEmail]){
+      _alUsers[_alEmail] = {email:_alEmail, name:_alEmail.split('@')[0], password:btoa(_alPass), role:'user', created:Date.now()};
+      saveUsers(_alUsers);
+    }
+    // Save active plan
+    localStorage.setItem('gp_active_plan', JSON.stringify({
+      plan:_alPlan, period:_alPeriod, email:_alEmail, unlocked:true, activatedAt:Date.now()
+    }));
+    // Log in and show loading screen
+    var _alUser = _alUsers[_alEmail];
+    saveSession(_alUser);
+    setupUserUI(_alUser);
+    setTimeout(function(){ showPlanLoadingScreen(_alPlan+'_'+_alPeriod, _alEmail); }, 100);
+  } else {
+    document.getElementById('authWall').style.display='flex';
+  }
+} else
 if(_urlParams.get('payment')==='success'){
   var _pEmail = _urlParams.get('email')||localStorage.getItem('gp_pending_email')||'';
   var _pPlan  = _urlParams.get('plan')||'complete_monthly';
