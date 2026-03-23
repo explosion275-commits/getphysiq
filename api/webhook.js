@@ -1,13 +1,47 @@
 const { Resend } = require('resend');
+const crypto = require('crypto');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Simple password generator
+// ── HELPERS ──────────────────────────────────────────────────────
+
+// Cryptographically secure password generator (replaces Math.random)
 function generatePassword() {
   const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  const bytes = crypto.randomBytes(12);
   let pwd = '';
-  for (let i = 0; i < 8; i++) pwd += chars[Math.floor(Math.random() * chars.length)];
+  for (let i = 0; i < 12; i++) {
+    pwd += chars[bytes[i] % chars.length];
+  }
   return pwd;
+}
+
+// Generate a signed autologin token (no password in URL)
+function generateAutologinToken(email, plan, period) {
+  const secret = process.env.AUTOLOGIN_SECRET;
+  if (!secret) throw new Error('AUTOLOGIN_SECRET env var not set');
+  const exp = Date.now() + 48 * 60 * 60 * 1000; // 48 hours
+  const payload = `${email}|${plan}|${period}|${exp}`;
+  const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  return { exp, sig };
+}
+
+// Verify Lemon Squeezy webhook signature
+function verifyLemonSqueezySignature(rawBody, signature) {
+  const secret = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET;
+  if (!secret) {
+    console.warn('LEMON_SQUEEZY_WEBHOOK_SECRET not set — skipping signature check');
+    return true; // Allow in dev; set the secret in production
+  }
+  const expected = crypto.createHmac('sha256', secret).update(rawBody).digest('hex');
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(signature || '', 'hex'),
+      Buffer.from(expected, 'hex')
+    );
+  } catch (_) {
+    return false;
+  }
 }
 
 // Determine plan key from product name
@@ -19,13 +53,22 @@ function getPlanKey(productName) {
   return 'complete';
 }
 
+// ── HANDLER ──────────────────────────────────────────────────────
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Verify signature before touching any data
+  const signature = req.headers['x-signature'] || req.headers['x-lemon-squeezy-signature'] || '';
+  const rawBody   = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+  if (!verifyLemonSqueezySignature(rawBody, signature)) {
+    return res.status(401).json({ error: 'Invalid webhook signature' });
+  }
+
   try {
-    const event = req.body;
+    const event     = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const eventName = event?.meta?.event_name;
 
     if (eventName !== 'subscription_created' && eventName !== 'order_created') {
@@ -42,9 +85,21 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No customer email' });
     }
 
-    const planKey  = getPlanKey(productName);
-    const password = generatePassword();
+    const planKey   = getPlanKey(productName);
+    const password  = generatePassword();
     const firstName = customerName.split(' ')[0];
+
+    // Build signed autologin token for the email CTA link
+    let autologinParams = '';
+    try {
+      const { exp, sig } = generateAutologinToken(customerEmail, planKey, period);
+      autologinParams = `?autologin=1&e=${encodeURIComponent(customerEmail)}&plan=${planKey}&period=${period}&exp=${exp}&sig=${sig}`;
+    } catch (tokenErr) {
+      console.warn('Could not generate autologin token:', tokenErr.message);
+      autologinParams = '?plan=ready';
+    }
+
+    const planUrl = `https://getphysiq.fit/plans.html${autologinParams}`;
 
     const isComplete  = planKey === 'complete';
     const isNutrition = planKey === 'nutrition';
@@ -92,18 +147,18 @@ export default async function handler(req, res) {
       <span style="color:#737380;">Password</span>
       <span style="color:#5b8af0;font-weight:800;font-size:1.1rem;letter-spacing:.08em;">${password}</span>
     </div>
-    <div style="font-size:.72rem;color:#3a3a46;margin-top:10px;line-height:1.6;">Save this password — you'll need it to log in to GetPhysIQ.</div>
+    <div style="font-size:.72rem;color:#3a3a46;margin-top:10px;line-height:1.6;">Save this password — you'll need it if you log in on a new device.</div>
   </div>
 
-  <!-- CTA -->
+  <!-- CTA — signed token link, no password in URL -->
   <div style="text-align:center;margin:28px 0;">
-    <a href="https://getphysiq.fit?plan=ready" style="display:inline-block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;font-weight:800;font-size:.95rem;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:-.01em;">View My Plan →</a>
+    <a href="${planUrl}" style="display:inline-block;background:linear-gradient(135deg,#5b8af0,#8b5cf6);color:#fff;font-weight:800;font-size:.95rem;padding:16px 40px;border-radius:50px;text-decoration:none;letter-spacing:-.01em;">View My Plan →</a>
   </div>
 
   <div style="background:#0d0d12;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px;margin-bottom:24px;">
     <div style="font-size:.72rem;font-weight:700;color:#737380;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">What happens next</div>
     <div style="font-size:.82rem;color:#737380;line-height:2;">
-      ✅ Log in with the password above<br/>
+      ✅ Click the button above for instant one-click access<br/>
       💪 Your personalised plan is generated instantly<br/>
       🔄 Plans regenerate every 4 weeks automatically<br/>
       ↩️ Cancel anytime from your Lemon Squeezy receipt
@@ -125,21 +180,10 @@ export default async function handler(req, res) {
       html: emailHtml,
     });
 
-    // Store user credentials in KV or just return them
-    // Since we have no DB, we store the hashed password in the webhook response
-    // The main app reads from localStorage — but we need to pre-create the user
-    // We do this by calling a special endpoint on the same app
-    // For now: store in a Vercel KV if available, otherwise the email IS the credential
-    // The app will auto-create the user on first login with this password
-
-    return res.status(200).json({
-      success: true,
-      // Return for debugging only — remove in production
-      _debug: { email: customerEmail, plan: planKey, period }
-    });
+    return res.status(200).json({ success: true });
 
   } catch (err) {
     console.error('Webhook error:', err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: 'Internal error' });
   }
 }
