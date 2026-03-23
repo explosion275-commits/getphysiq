@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+<title>GetPhysIQ — My Plans</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#07070b;--s1:#0d0d12;--s2:#13131a;--s3:#1a1a24;
+  --bdr:rgba(255,255,255,.07);--bdr2:rgba(255,255,255,.04);
+  --blue:#5b8af0;--violet:#8b5cf6;--green:#10b981;--amber:#f59e0b;
+  --red:#ef4444;--cyan:#06b6d4;--txt:#f2f2f8;--muted:#737380;--dim:#3a3a46;
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);}
+body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antialiased;}
+#app{width:100%;max-width:430px;height:100%;margin:0 auto;position:relative;overflow:hidden;background:var(--bg);}
+
+/* ── TOPBAR ── */
+#tb{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:env(safe-area-inset-top,14px) 20px 0;z-index:300;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,7,11,.96) 65%,transparent);}
+.logo{font-size:1.2rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.45));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#bk{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.88rem;user-select:none;transition:background .2s;}
+#bk:active{background:rgba(255,255,255,.12);}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;}
+
+/* ── USER MENU ── */
+#userMenu{position:fixed;top:56px;right:calc(50% - 195px);background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:8px;z-index:500;width:200px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
+.menu-item{padding:11px 14px;border-radius:10px;font-size:.84rem;font-weight:600;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:10px;}
+.menu-item:hover{background:var(--s2);}
+.menu-item.danger{color:var(--red);}
+.menu-sep{height:1px;background:var(--bdr);margin:4px 0;}
+
+/* ── SCREENS ── */
+.sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,40px);}
+.sc.in{pointer-events:all;animation:sIn .42s cubic-bezier(.16,1,.3,1) forwards;}
+.sc.out{pointer-events:none;animation:sOut .3s ease-in forwards;}
+@keyframes sIn{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+@keyframes sOut{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-30px)}}
+
+/* ── BOTTOM NAV ── */
+#nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(7,7,11,.95);backdrop-filter:blur(20px);border-top:1px solid var(--bdr);display:flex;z-index:300;padding-bottom:env(safe-area-inset-bottom,0);}
+.nav-btn{flex:1;padding:14px 0 12px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:none;color:var(--muted);font-family:'Sora',sans-serif;transition:color .18s;user-select:none;}
+.nav-btn.on{color:var(--blue);}
+.nav-icon{font-size:1.2rem;line-height:1;}
+.nav-label{font-size:.6rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+
+/* ── STATS SECTION ── */
+.res-top{padding:72px 20px 0;text-align:center;}
+.res-top h1{font-size:2rem;font-weight:800;line-height:1.08;margin-bottom:6px;letter-spacing:-.04em;}
+.res-top p{font-size:.82rem;color:var(--muted);}
+.bmi-ring{width:160px;height:160px;margin:20px auto 8px;position:relative;display:flex;align-items:center;justify-content:center;}
+.bmi-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.bmi-inner{text-align:center;}
+.bmi-num{font-size:2.3rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.bmi-cat{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+.scale-w{padding:0 20px;margin-bottom:6px;}
+.scale-t{height:8px;border-radius:99px;background:linear-gradient(90deg,#5b8af0,#10b981,#f59e0b,#ef4444);position:relative;margin:9px 0 5px;}
+.scale-th{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;background:#fff;border-radius:50%;border:2.5px solid var(--blue);box-shadow:0 0 10px rgba(91,138,240,.7);transition:left 1.3s cubic-bezier(.4,0,.2,1);}
+.scale-ll{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 20px;margin:12px 0;}
+.ib{background:var(--s1);border:1px solid var(--bdr);border-radius:12px;padding:12px 14px;}
+.ibl{font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;}
+.ibv{font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.05;}
+.ibu{font-size:.7rem;color:var(--muted);}
+.graph-card{margin:0 20px 14px;background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:16px 14px;}
+.graph-title{font-size:.82rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.pt{padding:0 20px;margin-bottom:16px;}
+.pt h3{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:6px;}
+.tag{display:inline-block;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.16);border-radius:6px;padding:4px 10px;font-size:.75rem;font-weight:600;color:var(--blue);margin:2px 3px 2px 0;}
+
+/* ── PLAN TABS ── */
+.plan-tab{flex:1;padding:11px 8px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--s1);color:var(--muted);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Sora',sans-serif;}
+.plan-tab.active{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(91,138,240,.3);}
+.ai-card{margin:0 20px 16px;background:var(--s1);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;min-height:120px;}
+.ai-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:14px;}
+.ai-spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(--bdr);border-top-color:var(--blue);animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-loading-text{font-size:.8rem;color:var(--muted);font-weight:500;text-align:center;}
+.ai-error{padding:20px;text-align:center;color:var(--red);font-size:.85rem;}
+.ai-content{padding:16px;}
+
+/* ── WORKOUT PLAN ── */
+.plan-week{display:flex;flex-direction:column;gap:12px;}
+.plan-day{background:var(--s2);border-radius:12px;padding:14px;border:1px solid var(--bdr);}
+.plan-rest{background:rgba(91,138,240,.05);border-radius:12px;padding:12px 14px;border:1px dashed var(--bdr);text-align:center;color:var(--muted);font-size:.82rem;font-weight:600;}
+.plan-day-title{font-size:.88rem;font-weight:800;margin-bottom:10px;color:var(--txt);letter-spacing:-.02em;}
+.plan-exercise{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--bdr2);font-size:.82rem;}
+.plan-exercise:last-of-type{border-bottom:none;}
+.plan-exercise-name{font-weight:600;color:var(--txt);}
+.plan-exercise-sets{color:var(--blue);font-weight:700;font-size:.78rem;white-space:nowrap;margin-left:8px;}
+.plan-note{margin-top:10px;padding:8px 12px;background:rgba(91,138,240,.08);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;font-size:.76rem;color:var(--muted);line-height:1.5;}
+
+/* ── MEAL PLAN ── */
+.meal-macro-bar{display:flex;gap:8px;margin-bottom:14px;}
+.macro-pill{flex:1;background:var(--s2);border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--bdr);}
+.macro-pill-val{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.macro-pill-lbl{font-size:.65rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.meal-section{background:var(--s2);border-radius:12px;padding:13px;margin-bottom:10px;border:1px solid var(--bdr);}
+.meal-title{font-size:.88rem;font-weight:800;margin-bottom:9px;color:var(--txt);}
+.meal-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:.8rem;}
+.meal-item:last-of-type{border-bottom:none;}
+.meal-item-name{color:var(--txt);font-weight:500;}
+.meal-item-cals{color:var(--muted);font-size:.74rem;white-space:nowrap;margin-left:6px;}
+.meal-tip{margin-top:10px;padding:8px 12px;background:rgba(16,185,129,.08);border-left:3px solid var(--green);border-radius:0 8px 8px 0;font-size:.76rem;color:var(--muted);line-height:1.5;}
+.meal-hydration{margin-top:10px;padding:10px 14px;background:rgba(6,182,212,.08);border-radius:10px;border:1px solid rgba(6,182,212,.2);font-size:.8rem;color:var(--cyan);font-weight:600;text-align:center;}
+
+/* ── MY PLANS / ACCOUNT ── */
+.myplans-wrap{padding:72px 20px 100px;}
+.myplans-section{background:var(--s1);border:1px solid var(--bdr);border-radius:20px;padding:20px;margin-bottom:14px;}
+.myplans-section-title{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.myplans-section-title::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.myplans-stat{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr2);font-size:.84rem;}
+.myplans-stat:last-child{border-bottom:none;}
+.myplans-stat-label{color:var(--muted);font-weight:500;}
+.myplans-stat-val{color:var(--txt);font-weight:700;}
+.myplans-locked{text-align:center;padding:16px 0 4px;}
+.myplans-locked-icon{font-size:2rem;margin-bottom:8px;}
+.myplans-locked-title{font-size:.95rem;font-weight:800;margin-bottom:5px;}
+.myplans-locked-sub{font-size:.76rem;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+
+/* ── CTA BUTTON ── */
+.cta{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:700;font-size:.95rem;border:none;border-radius:50px;padding:18px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:'Sora',sans-serif;}
+.cta:active{transform:scale(.98);}
+.cta:disabled{opacity:.25;cursor:not-allowed;}
+
+/* ── AUTH WALL ── */
+#authWall{position:fixed;inset:0;background:var(--bg);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
+.auth-logo{font-size:2rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
+.auth-tagline{font-size:.82rem;color:var(--muted);margin-bottom:36px;text-align:center;}
+.auth-tabs{display:flex;background:var(--s1);border-radius:12px;padding:4px;margin-bottom:24px;width:100%;}
+.auth-tab{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-size:.85rem;font-weight:700;cursor:pointer;border-radius:9px;transition:all .18s;font-family:'Sora',sans-serif;}
+.auth-tab.active{background:var(--s2);color:var(--txt);box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.auth-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;width:100%;}
+.auth-label{font-size:.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+.auth-input{background:var(--s1);border:1.5px solid var(--bdr);border-radius:12px;padding:14px 16px;color:var(--txt);font-size:.95rem;font-weight:500;width:100%;outline:none;transition:border-color .2s;font-family:'Sora',sans-serif;}
+.auth-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
+.auth-input::placeholder{color:var(--dim);}
+.auth-btn{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:800;font-size:.95rem;border:none;border-radius:50px;padding:17px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);font-family:'Sora',sans-serif;margin-top:4px;}
+.auth-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px 14px;font-size:.8rem;color:var(--red);margin-bottom:12px;text-align:center;display:none;width:100%;}
+.auth-divider{display:flex;align-items:center;gap:10px;margin:16px 0;width:100%;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.auth-divider span{font-size:.72rem;color:var(--muted);}
+
+/* ── NO QUIZ DATA ── */
+.no-data{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center;}
+.no-data-icon{font-size:3rem;margin-bottom:16px;}
+.no-data-title{font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px;}
+.no-data-sub{font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:28px;}
+
+/* ── REGEN BUTTON ── */
+.regen-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(91,138,240,.08);border:1.5px solid rgba(91,138,240,.2);border-radius:50px;padding:12px 20px;font-size:.82rem;font-weight:700;color:var(--blue);cursor:pointer;font-family:'Sora',sans-serif;transition:all .18s;margin:0 20px 16px;}
+.regen-btn:hover{background:rgba(91,138,240,.15);}
+
+::-webkit-scrollbar{width:0;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- TOPBAR -->
+  <div id="tb">
+    <div id="bk" onclick="goBack()">←</div>
+    <div class="logo">GetPhysIQ</div>
+    <div class="user-avatar" id="avatarBtn" onclick="toggleMenu()" style="display:none"></div>
+  </div>
+
+  <!-- USER MENU -->
+  <div id="userMenu">
+    <div class="menu-item" id="menuName" style="color:var(--muted);font-size:.75rem;cursor:default;pointer-events:none;"></div>
+    <div class="menu-sep"></div>
+    <div class="menu-item" onclick="toggleMenu();showTab('account')">📋 My Plans</div>
+    <div class="menu-item danger" onclick="doLogout()">↩ Log Out</div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div id="nav">
+    <button class="nav-btn on" id="nav-stats" onclick="showTab('stats')">
+      <div class="nav-icon">📊</div>
+      <div class="nav-label">Stats</div>
+    </button>
+    <button class="nav-btn" id="nav-workout" onclick="showTab('workout')">
+      <div class="nav-icon">💪</div>
+      <div class="nav-label">Workout</div>
+    </button>
+    <button class="nav-btn" id="nav-meal" onclick="showTab('meal')">
+      <div class="nav-icon">🥗</div>
+      <div class="nav-label">Nutrition</div>
+    </button>
+    <button class="nav-btn" id="nav-account" onclick="showTab('account')">
+      <div class="nav-icon">⚙️</div>
+      <div class="nav-label">Account</div>
+    </button>
+  </div>
+
+  <!-- SCREENS (filled by JS) -->
+  <div id="sc-stats"  class="sc in"></div>
+  <div id="sc-workout" class="sc"></div>
+  <div id="sc-meal"    class="sc"></div>
+  <div id="sc-account" class="sc"></div>
+
+</div>
+
+<!-- AUTH WALL -->
+<div id="authWall">
+  <div class="auth-logo">GetPhysIQ</div>
+  <div class="auth-tagline">Sign in to access your plans.</div>
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Log In</button>
+    <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+  </div>
+  <div class="auth-err" id="authErr"></div>
+  <div id="loginForm" style="width:100%">
+    <div class="auth-field">
+      <div class="auth-label">Email</div>
+      <input class="auth-input" type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email"/>
+    </div>
+    <div class="auth-field">
+      <div class="auth-label">Password</div>
+      <input class="auth-input" type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <button class="auth-btn" onclick="doLogin()">LOG IN →</button>
+  </div>
+  <div id="signupForm" style="display:none;width:100%">
+    <div class="auth-field">
+      <div class="auth-label">Full Name</div>
+      <input class="auth-input" type="text" id="signupName" placeholder="Your name"/>
+    </div>
+    <div class="auth-field">
+      <div class="auth-label">Email</div>
+      <input class="auth-input" type="email" id="signupEmail" placeholder="you@email.com" autocomplete="email"/>
+    </div>
+    <div class="auth-field">
+      <div class="auth-label">Password</div>
+      <input class="auth-input" type="password" id="signupPass" placeholder="Min 6 characters" autocomplete="new-password"/>
+    </div>
+    <button class="auth-btn" onclick="doSignup()">CREATE ACCOUNT →</button>
+  </div>
+  <div class="auth-divider"><span>already have the app?</span></div>
+  <button onclick="window.location.href='index.html'" style="background:none;border:none;color:var(--blue);font-size:.85rem;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;">← Back to GetPhysIQ</button>
+</div>
+
+<script>
+// ════════════════════════════════════════
+//  LOAD STATE FROM MAIN APP localStorage
+// ════════════════════════════════════════
+function loadS(){
+  try{ return JSON.parse(localStorage.getItem('gp_quiz_state')||'null'); }catch(e){ return null; }
+}
+function getSession(){ try{ return JSON.parse(localStorage.getItem('gp_session')||'null'); }catch(e){ return null; } }
+function saveSession(u){ localStorage.setItem('gp_session', JSON.stringify(u)); }
+function clearSession(){ localStorage.removeItem('gp_session'); }
+function getActivePlan(){ try{ return JSON.parse(localStorage.getItem('gp_active_plan')||'null'); }catch(e){ return null; } }
+function getUsers(){ try{ return JSON.parse(localStorage.getItem('gp_users')||'{}'); }catch(e){ return {}; } }
+function saveUsers(u){ localStorage.setItem('gp_users', JSON.stringify(u)); }
+
+var S = loadS() || {
+  gender:'male',age:'25-34',build:'medium',dreamBuild:'muscular',
+  goals:['lose_fat'],zones:['chest','belly','arms'],
+  activity:'moderate',experience:'intermediate',
+  height:180,weight:82,goalWeight:75,
+  workoutDays:'4',workoutDuration:'45',workoutLocation:['gym'],
+  diet:'average',sleep:'7-8',stress:'medium',motivation:'looks'
+};
+
+var currentTab = 'stats';
+var workoutGenerated = false;
+var mealGenerated    = false;
+
+// ════════════════════════════════════════
+//  CALCULATIONS
+// ════════════════════════════════════════
+function calcStats(){
+  var h = +S.height||180, w = +S.weight||80, gw = +S.goalWeight||75;
+  var bmi = (w/((h/100)**2)).toFixed(1);
+  var cat = 'Normal', cc = 'var(--green)';
+  if(bmi<18.5){cat='Underweight';cc='var(--blue)';}
+  else if(bmi<25){cat='Normal';cc='var(--green)';}
+  else if(bmi<30){cat='Overweight';cc='var(--amber)';}
+  else{cat='Obese';cc='var(--red)';}
+  var ageN = S.age==='18-24'?21:S.age==='25-34'?29:S.age==='35-44'?39:S.age==='45-54'?49:58;
+  var bmr = S.gender==='female'
+    ? 10*w + 6.25*h - 5*ageN - 161
+    : 10*w + 6.25*h - 5*ageN + 5;
+  var actMult={sedentary:1.2,light:1.375,moderate:1.55,active:1.725,athlete:1.9};
+  var tdee = Math.round(bmr*(actMult[S.activity]||1.55));
+  var goalCals = (S.goals||[]).includes('lose_fat') ? tdee-400 : (S.goals||[]).includes('build_muscle') ? tdee+300 : tdee;
+  var days = parseInt(S.workoutDays)||3;
+  var diff = Math.abs(w-gw);
+  var weeks = Math.max(2, Math.round(diff/.5/days*3));
+  return {h,w,gw,bmi,cat,cc,tdee,goalCals,weeks};
+}
+
+// ════════════════════════════════════════
+//  BUILD PROFILE STRING FOR AI
+// ════════════════════════════════════════
+function buildProfile(){
+  var c = calcStats();
+  var goalLabels={lose_fat:'lose fat and weight',build_muscle:'build muscle and strength',tone:'get lean and toned',endurance:'improve endurance',confidence:'build confidence'};
+  var zoneLabels={belly:'belly/core',chest:'chest/pecs',arms:'arms',back:'back',legs:'legs',glutes:'glutes',shoulders:'shoulders'};
+  var expLabels={beginner:'complete beginner',some:'some experience (inconsistent)',intermediate:'intermediate (1-2 years)',advanced:'advanced (3+ years)'};
+  var actLabels={sedentary:'sedentary',light:'lightly active',moderate:'moderately active',active:'very active',athlete:'athlete level'};
+  var dietLabels={bad:'poor (fast food, sugar)',average:'average (mix)',ok:'decent (mostly clean)',good:'very clean'};
+  var locLabels={home:'at home (no equipment)',gym:'gym (full equipment)',outdoor:'outdoors',travel:'on the go'};
+  return `PROFILE:
+- Gender: ${S.gender||'male'}
+- Age group: ${S.age||'25-34'}
+- Current build: ${S.build||'medium'}
+- Height: ${c.h}cm, Weight: ${c.w}kg, Goal weight: ${c.gw}kg
+- BMI: ${c.bmi}
+- Main goals: ${(S.goals||['lose_fat']).map(g=>goalLabels[g]||g).join(', ')}
+- Target zones: ${(S.zones||[]).map(z=>zoneLabels[z]||z).join(', ')||'general'}
+- Activity level: ${actLabels[S.activity]||'moderate'}
+- Training experience: ${expLabels[S.experience]||'beginner'}
+- Workout location: ${(S.workoutLocation||['gym']).map(l=>locLabels[l]||l).join(', ')}
+- Days per week: ${S.workoutDays||3}
+- Session length: ${S.workoutDuration||30} minutes
+- Current diet quality: ${dietLabels[S.diet]||'average'}
+- Sleep: ${S.sleep||'6-7'} hrs/night
+- Stress level: ${S.stress||'medium'}
+- TDEE: ${c.tdee} kcal, Target calories: ${c.goalCals} kcal/day
+- Main motivation: ${S.motivation||'health'}`;
+}
+
+// ════════════════════════════════════════
+//  STATS TAB
+// ════════════════════════════════════════
+function buildStatsTab(){
+  var c = calcStats();
+  var gm={lose_fat:'Fat Loss',build_muscle:'Muscle',tone:'Toning',endurance:'Endurance',confidence:'Confidence'};
+  var zm={belly:'Core',chest:'Chest',arms:'Arms',back:'Back',legs:'Legs',glutes:'Glutes',shoulders:'Shoulders'};
+  var gt=(S.goals||[]).map(function(g){return '<span class="tag">'+( gm[g]||g)+'</span>';}).join('');
+  var zt=(S.zones||[]).map(function(z){return '<span class="tag">'+(zm[z]||z)+'</span>';}).join('');
+  var pct = Math.min(Math.max((c.bmi-10)/35,0),1);
+
+  var d = document.getElementById('sc-stats');
+  d.innerHTML = `
+    <div class="res-top">
+      <h1>Your Stats 📊</h1>
+      <p>Based on your quiz answers.</p>
+    </div>
+    <div class="bmi-ring">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#111118" stroke-width="13"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="url(#rg)" stroke-width="13"
+          stroke-linecap="round" stroke-dasharray="402" id="bA" stroke-dashoffset="402"
+          style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)"/>
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5b8af0"/>
+          <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient></defs>
+      </svg>
+      <div class="bmi-inner">
+        <div class="bmi-num">${c.bmi}</div>
+        <div class="bmi-cat" style="color:${c.cc}">${c.cat}</div>
+      </div>
+    </div>
+    <div class="scale-w">
+      <div class="scale-t"><div class="scale-th" id="sTh" style="left:0%"></div></div>
+      <div class="scale-ll"><span>Underweight</span><span>Normal</span><span>Overweight</span><span>Obese</span></div>
+    </div>
+    <div class="ig">
+      <div class="ib"><div class="ibl">Current Weight</div><div class="ibv">${c.w}</div><div class="ibu">kg</div></div>
+      <div class="ib"><div class="ibl">Goal Weight</div><div class="ibv">${c.gw}</div><div class="ibu">kg</div></div>
+      <div class="ib"><div class="ibl">Est. Timeline</div><div class="ibv">${c.weeks}</div><div class="ibu">weeks</div></div>
+      <div class="ib"><div class="ibl">Daily Calories</div><div class="ibv">${c.goalCals}</div><div class="ibu">kcal/day</div></div>
+    </div>
+    <div class="graph-card">
+      <div class="graph-title">📈 Weight Journey to Goal</div>
+      <canvas id="wChart"></canvas>
+    </div>
+    ${gt?`<div class="pt"><h3>Your Goals</h3>${gt}</div>`:''}
+    ${zt?`<div class="pt"><h3>Focus Zones</h3>${zt}</div>`:''}
+    <div style="padding:0 20px 100px;">
+      <button class="cta" onclick="showTab('workout')">View Workout Plan 💪</button>
+    </div>`;
+
+  setTimeout(function(){
+    var a=document.getElementById('bA');
+    if(a) a.style.strokeDashoffset = 402-(402*pct);
+    var t=document.getElementById('sTh');
+    if(t) t.style.left=(pct*100)+'%';
+  },350);
+  setTimeout(function(){ drawChart(c.w, c.gw, c.weeks); },500);
+}
+
+function drawChart(cw, gw, weeks){
+  var canvas = document.getElementById('wChart');
+  if(!canvas) return;
+  var card = canvas.parentElement;
+  var W = card.clientWidth - 28;
+  var H = Math.round(W*0.52);
+  var dpr = window.devicePixelRatio||1;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  var pts = Math.max(8,Math.min(weeks,20));
+  var data = [];
+  for(var i=0;i<=pts;i++){var t=i/pts,e=1-(1-t)**2.6;data.push(cw+(gw-cw)*e);}
+  var mn=Math.min(...data),mx=Math.max(...data);
+  var pad_y=(mx-mn)*0.25||3;
+  var yMin=mn-pad_y,yMax=mx+pad_y;
+  var pad={l:44,r:14,t:16,b:28};
+  var cW2=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  var xp=function(i){return pad.l+(i/pts)*cW2;};
+  var yp=function(v){return pad.t+(1-(v-yMin)/(yMax-yMin))*cH;};
+  for(var i=0;i<=5;i++){
+    var y=pad.t+i/5*cH;
+    var val=yMax-(yMax-yMin)*i/5;
+    ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.28)';
+    ctx.font=Math.max(9,Math.round(W/42))+'px Sora';
+    ctx.textAlign='right';
+    ctx.fillText(val.toFixed(1),pad.l-5,y+3.5);
+  }
+  var fg=ctx.createLinearGradient(0,pad.t,0,H);
+  fg.addColorStop(0,'rgba(91,138,240,.28)');fg.addColorStop(1,'rgba(91,138,240,0)');
+  ctx.beginPath();ctx.moveTo(xp(0),yp(data[0]));
+  data.forEach(function(_,i){if(i>0)ctx.lineTo(xp(i),yp(data[i]));});
+  ctx.lineTo(xp(pts),H-pad.b);ctx.lineTo(xp(0),H-pad.b);ctx.closePath();
+  ctx.fillStyle=fg;ctx.fill();
+  var lg=ctx.createLinearGradient(0,0,W,0);
+  lg.addColorStop(0,'#5b8af0');lg.addColorStop(1,'#8b5cf6');
+  ctx.beginPath();ctx.moveTo(xp(0),yp(data[0]));
+  data.forEach(function(_,i){if(i>0)ctx.lineTo(xp(i),yp(data[i]));});
+  ctx.strokeStyle=lg;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+  if(gw!==cw){
+    ctx.setLineDash([5,5]);
+    ctx.beginPath();ctx.moveTo(pad.l,yp(gw));ctx.lineTo(W-pad.r,yp(gw));
+    ctx.strokeStyle='rgba(16,185,129,.55)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#10b981';
+    ctx.font='bold '+Math.max(9,Math.round(W/44))+'px Sora';
+    ctx.textAlign='left';ctx.fillText('Goal',pad.l+5,yp(gw)-5);
+  }
+  [0,Math.floor(pts/3),Math.floor(pts*2/3),pts].forEach(function(i){
+    if(i<=pts){
+      ctx.beginPath();ctx.arc(xp(i),yp(data[i]),4,0,Math.PI*2);
+      ctx.fillStyle='#fff';ctx.fill();
+      ctx.strokeStyle='#5b8af0';ctx.lineWidth=2;ctx.stroke();
+    }
+  });
+  ctx.fillStyle='rgba(255,255,255,.28)';
+  ctx.font=Math.max(9,Math.round(W/44))+'px Sora';
+  ctx.textAlign='center';
+  var xTicks=Math.min(5,pts);
+  for(var i=0;i<=xTicks;i++){
+    var idx=Math.round(i/xTicks*pts);
+    ctx.fillText('wk'+idx,xp(idx),H-pad.b+14);
+  }
+}
+
+// ════════════════════════════════════════
+//  WORKOUT TAB
+// ════════════════════════════════════════
+function buildWorkoutTab(){
+  var d = document.getElementById('sc-workout');
+  var activePlan = getActivePlan();
+  var hasAccess = activePlan && (activePlan.plan==='fitness'||activePlan.plan==='complete');
+
+  if(!hasAccess){
+    d.innerHTML = `<div class="no-data">
+      <div class="no-data-icon">🔒</div>
+      <div class="no-data-title">Workout Plan Locked</div>
+      <div class="no-data-sub">Subscribe to the Fitness or Complete Plan to unlock your personalised weekly workout schedule.</div>
+      <button class="cta" onclick="window.location.href='index.html'">GET ACCESS → from $12/mo</button>
+    </div>`;
+    return;
+  }
+
+  d.innerHTML = `
+    <div style="padding:72px 20px 12px;">
+      <div style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;">💪 Workout Plan</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px;">Personalised to your goals & schedule</div>
+    </div>
+    <button class="regen-btn" onclick="regenWorkout()">🔄 Regenerate Plan</button>
+    <div class="ai-card" id="workout-card">
+      <div class="ai-loading" id="workout-loading">
+        <div class="ai-spinner"></div>
+        <div class="ai-loading-text">Generating your personalised workout plan…</div>
+      </div>
+      <div class="ai-content" id="workout-content" style="display:none;padding-bottom:80px;"></div>
+    </div>`;
+
+  if(!workoutGenerated){
+    generateWorkout();
+    workoutGenerated = true;
+  }
+}
+
+async function generateWorkout(){
+  var profile = buildProfile();
+  var prompt = `You are an elite personal trainer and fitness coach. Based on this client profile, create a highly personalised weekly workout plan.
+
+${profile}
+
+Create a complete weekly workout schedule. Format your response as clean HTML using these exact CSS classes:
+- <div class="plan-week"> for the weekly overview
+- <div class="plan-day"> for each training day
+- <div class="plan-day-title"> for day name (e.g. "Monday — Push Day")
+- <div class="plan-exercise"> for each exercise: <span class="plan-exercise-name">Exercise</span><span class="plan-exercise-sets">3x12</span>
+- <div class="plan-note"> for coaching tips
+- <div class="plan-rest"> for rest day cards
+
+Rules:
+- Match exactly ${S.workoutDays||3} training days per week
+- Keep sessions to ${S.workoutDuration||30} minutes
+- Match equipment to: ${(S.workoutLocation||['gym']).join(', ')}
+- Focus on target zones: ${(S.zones||[]).join(', ')}
+- Match intensity to experience level
+- Include warm-up note and cool-down note per day
+- Add 1 motivating coaching tip per day using plan-note
+- Make it feel personal, not generic
+- Only output the HTML, no markdown`;
+
+  try {
+    var res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    var data = await res.json();
+    var html = (data.content&&data.content[0]&&data.content[0].text)||'<p style="color:var(--muted)">Could not generate plan.</p>';
+    var loading = document.getElementById('workout-loading');
+    var content = document.getElementById('workout-content');
+    if(loading) loading.style.display='none';
+    if(content){content.style.display='block';content.innerHTML=html;}
+    // Cache it
+    localStorage.setItem('gp_cached_workout', html);
+    localStorage.setItem('gp_cached_workout_ts', Date.now().toString());
+  } catch(e){
+    var loading = document.getElementById('workout-loading');
+    if(loading) loading.innerHTML='<div class="ai-error">⚠️ Could not connect. Try again.</div>';
+  }
+}
+
+function regenWorkout(){
+  workoutGenerated = false;
+  localStorage.removeItem('gp_cached_workout');
+  buildWorkoutTab();
+  generateWorkout();
+  workoutGenerated = true;
+}
+
+// ════════════════════════════════════════
+//  MEAL TAB
+// ════════════════════════════════════════
+function buildMealTab(){
+  var d = document.getElementById('sc-meal');
+  var activePlan = getActivePlan();
+  var hasAccess = activePlan && (activePlan.plan==='nutrition'||activePlan.plan==='complete');
+
+  if(!hasAccess){
+    d.innerHTML = `<div class="no-data">
+      <div class="no-data-icon">🔒</div>
+      <div class="no-data-title">Nutrition Plan Locked</div>
+      <div class="no-data-sub">Subscribe to the Nutrition or Complete Plan to unlock your personalised daily meal plan with macros and calories.</div>
+      <button class="cta" onclick="window.location.href='index.html'">GET ACCESS → from $10/mo</button>
+    </div>`;
+    return;
+  }
+
+  var c = calcStats();
+  d.innerHTML = `
+    <div style="padding:72px 20px 12px;">
+      <div style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;">🥗 Nutrition Plan</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px;">Daily meals matched to your ${c.goalCals} kcal target</div>
+    </div>
+    <button class="regen-btn" onclick="regenMeal()">🔄 Regenerate Plan</button>
+    <div class="ai-card" id="meal-card">
+      <div class="ai-loading" id="meal-loading">
+        <div class="ai-spinner"></div>
+        <div class="ai-loading-text">Generating your personalised meal plan…</div>
+      </div>
+      <div class="ai-content" id="meal-content" style="display:none;padding-bottom:80px;"></div>
+    </div>`;
+
+  if(!mealGenerated){
+    generateMeal(c.goalCals);
+    mealGenerated = true;
+  }
+}
+
+async function generateMeal(calories){
+  var profile = buildProfile();
+  var prompt = `You are a certified nutritionist. Based on this client profile, create a highly personalised daily meal plan.
+
+${profile}
+
+Create a full day meal plan (breakfast, lunch, dinner, 2 snacks) with ${calories} kcal target. Format as clean HTML using these exact CSS classes:
+- <div class="meal-macro-bar"> wrapping 3 <div class="macro-pill"> for Protein/Carbs/Fats totals
+  - Inside each pill: <div class="macro-pill-val">180g</div><div class="macro-pill-lbl">Protein</div>
+- <div class="meal-section"> for each meal
+- <div class="meal-title"> for meal name + time (e.g. "🌅 Breakfast — 7:00 AM")
+- <div class="meal-item"> with <span class="meal-item-name">Food item (200g)</span><span class="meal-item-cals">350 kcal</span>
+- <div class="meal-tip"> for one nutrition tip per meal
+- <div class="meal-hydration"> at the end for daily water target
+
+Rules:
+- Hit exactly ${calories} kcal (±50 kcal)
+- Protein at 2g per kg bodyweight (~${Math.round((+S.weight||80)*2)}g)
+- Match food to diet quality: ${S.diet||'average'}
+- Consider goals: ${(S.goals||[]).join(', ')}
+- Include portion sizes in grams
+- Make it practical, easy to prepare, and personal
+- Only output the HTML, no markdown`;
+
+  try {
+    var res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    var data = await res.json();
+    var html = (data.content&&data.content[0]&&data.content[0].text)||'<p style="color:var(--muted)">Could not generate plan.</p>';
+    var loading = document.getElementById('meal-loading');
+    var content = document.getElementById('meal-content');
+    if(loading) loading.style.display='none';
+    if(content){content.style.display='block';content.innerHTML=html;}
+    localStorage.setItem('gp_cached_meal', html);
+    localStorage.setItem('gp_cached_meal_ts', Date.now().toString());
+  } catch(e){
+    var loading = document.getElementById('meal-loading');
+    if(loading) loading.innerHTML='<div class="ai-error">⚠️ Could not connect. Try again.</div>';
+  }
+}
+
+function regenMeal(){
+  mealGenerated = false;
+  localStorage.removeItem('gp_cached_meal');
+  var c = calcStats();
+  buildMealTab();
+  generateMeal(c.goalCals);
+  mealGenerated = true;
+}
+
+// ════════════════════════════════════════
+//  ACCOUNT TAB
+// ════════════════════════════════════════
+function buildAccountTab(){
+  var d = document.getElementById('sc-account');
+  var sess = getSession();
+  var activePlan = getActivePlan();
+  var planNames = {fitness:'Fitness Plan',nutrition:'Nutrition Plan',complete:'Complete Plan'};
+  var planName  = activePlan ? (planNames[activePlan.plan]||activePlan.plan) : null;
+
+  var subSection = activePlan ? `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚡ Subscription</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Plan</span><span class="myplans-stat-val">${planName}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Billing</span><span class="myplans-stat-val">${activePlan.period==='yearly'?'Annual':'Monthly'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Status</span><span class="myplans-stat-val" style="color:var(--green)">✓ Active</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.76rem;">${activePlan.email||sess&&sess.email||'—'}</span></div>
+    </div>` : `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚡ Subscription</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">No Active Plan</div>
+        <div class="myplans-locked-sub">Subscribe to unlock your personalised workout and meal plans.</div>
+        <button class="cta" onclick="window.location.href='index.html'">SEE PLANS & PRICING →</button>
+      </div>
+    </div>`;
+
+  var workoutSection = activePlan && (activePlan.plan==='fitness'||activePlan.plan==='complete') ? `
+    <div class="myplans-section">
+      <div class="myplans-section-title">💪 Workout Plan</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised weekly workout plan is active.</div>
+      <button class="cta" onclick="showTab('workout')">VIEW WORKOUT PLAN →</button>
+    </div>` : `
+    <div class="myplans-section">
+      <div class="myplans-section-title">💪 Workout Plan</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">Workout Plan Locked</div>
+        <div class="myplans-locked-sub">Available with Fitness or Complete Plan.</div>
+        <button class="cta" onclick="window.location.href='index.html'">UNLOCK FROM $12/MO →</button>
+      </div>
+    </div>`;
+
+  var mealSection = activePlan && (activePlan.plan==='nutrition'||activePlan.plan==='complete') ? `
+    <div class="myplans-section">
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised daily meal plan is active.</div>
+      <button class="cta" onclick="showTab('meal')">VIEW NUTRITION PLAN →</button>
+    </div>` : `
+    <div class="myplans-section">
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
+      <div class="myplans-locked">
+        <div class="myplans-locked-icon">🔒</div>
+        <div class="myplans-locked-title">Nutrition Plan Locked</div>
+        <div class="myplans-locked-sub">Available with Nutrition or Complete Plan.</div>
+        <button class="cta" onclick="window.location.href='index.html'">UNLOCK FROM $10/MO →</button>
+      </div>
+    </div>`;
+
+  var profileSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">👤 Your Profile</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Gender</span><span class="myplans-stat-val">${S.gender||'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Age</span><span class="myplans-stat-val">${S.age||'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Height</span><span class="myplans-stat-val">${S.height||'—'} cm</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Weight</span><span class="myplans-stat-val">${S.weight||'—'} kg</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Goal Weight</span><span class="myplans-stat-val">${S.goalWeight||'—'} kg</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Activity</span><span class="myplans-stat-val">${S.activity||'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Experience</span><span class="myplans-stat-val">${S.experience||'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Workout Days</span><span class="myplans-stat-val">${S.workoutDays||'—'}/week</span></div>
+    </div>`;
+
+  var accountSection = `
+    <div class="myplans-section">
+      <div class="myplans-section-title">⚙️ Account</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Name</span><span class="myplans-stat-val">${sess?sess.name:'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.76rem;">${sess?sess.email:'—'}</span></div>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+        <button class="cta" onclick="window.location.href='index.html'" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem;">← Back to Quiz App</button>
+        ${activePlan?`<button onclick="confirmCancel()" style="background:none;border:none;color:var(--red);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:8px 0;">Cancel Subscription</button>`:''}
+        <button onclick="doLogout()" style="background:none;border:none;color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:8px 0;">↩ Log Out</button>
+      </div>
+    </div>`;
+
+  d.innerHTML = `<div class="myplans-wrap">
+    <div style="font-size:1.4rem;font-weight:800;letter-spacing:-.04em;margin-bottom:4px;">My Plans</div>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:20px;">Manage your subscription and plans.</div>
+    ${subSection}${workoutSection}${mealSection}${profileSection}${accountSection}
+  </div>`;
+}
+
+function confirmCancel(){
+  if(confirm('To cancel, visit your Lemon Squeezy receipt email and click "Manage Subscription".')){
+    window.open('https://app.lemonsqueezy.com','_blank');
+  }
+}
+
+// ════════════════════════════════════════
+//  TAB NAVIGATION
+// ════════════════════════════════════════
+function showTab(tab){
+  // Hide all
+  ['stats','workout','meal','account'].forEach(function(t){
+    document.getElementById('sc-'+t).className='sc';
+    document.getElementById('nav-'+t).classList.remove('on');
+  });
+  // Show selected
+  document.getElementById('sc-'+tab).className='sc in';
+  document.getElementById('nav-'+tab).classList.add('on');
+  currentTab = tab;
+
+  // Build content if needed
+  if(tab==='stats')   buildStatsTab();
+  if(tab==='workout') buildWorkoutTab();
+  if(tab==='meal')    buildMealTab();
+  if(tab==='account') buildAccountTab();
+}
+
+function goBack(){
+  // On this standalone page, just go back to stats
+  if(currentTab!=='stats') showTab('stats');
+  else window.location.href='index.html';
+}
+
+// ════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════
+function switchTab(tab){
+  document.getElementById('loginForm').style.display  = tab==='login'  ? 'block':'none';
+  document.getElementById('signupForm').style.display = tab==='signup' ? 'block':'none';
+  document.getElementById('tabLogin').classList.toggle('active',  tab==='login');
+  document.getElementById('tabSignup').classList.toggle('active', tab==='signup');
+  document.getElementById('authErr').style.display='none';
+}
+
+function showAuthErr(msg){
+  var el=document.getElementById('authErr');
+  el.textContent=msg; el.style.display=msg?'block':'none';
+}
+
+function doLogin(){
+  var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  var pass  = document.getElementById('loginPass').value;
+  if(!email||!pass){showAuthErr('Please fill in all fields.');return;}
+  var users = getUsers();
+  if(users[email] && users[email].password===btoa(pass)){
+    loginSuccess(users[email]);
+  } else if(email==='dev@getphysiq.fit'&&pass==='physiq2025dev'){
+    loginSuccess({email:'dev@getphysiq.fit',name:'Developer',role:'dev'});
+  } else {
+    showAuthErr('Incorrect email or password.');
+  }
+}
+
+function doSignup(){
+  var name  = document.getElementById('signupName').value.trim();
+  var email = document.getElementById('signupEmail').value.trim().toLowerCase();
+  var pass  = document.getElementById('signupPass').value;
+  if(!name||!email||!pass){showAuthErr('Please fill in all fields.');return;}
+  if(pass.length<6){showAuthErr('Password must be at least 6 characters.');return;}
+  var users = getUsers();
+  if(users[email]){showAuthErr('Account already exists. Please log in.');return;}
+  var newUser={email,name,password:btoa(pass),role:'user',created:Date.now()};
+  users[email]=newUser; saveUsers(users);
+  loginSuccess(newUser);
+}
+
+function loginSuccess(user){
+  saveSession(user);
+  document.getElementById('authWall').style.display='none';
+  setupUserUI(user);
+  init();
+}
+
+function doLogout(){
+  clearSession();
+  document.getElementById('userMenu').style.display='none';
+  document.getElementById('avatarBtn').style.display='none';
+  document.getElementById('authWall').style.display='flex';
+}
+
+function setupUserUI(user){
+  var avatar = document.getElementById('avatarBtn');
+  avatar.style.display='flex';
+  avatar.textContent=user.name.charAt(0).toUpperCase();
+  document.getElementById('menuName').textContent=user.name;
+}
+
+function toggleMenu(){
+  var m=document.getElementById('userMenu');
+  m.style.display=m.style.display==='block'?'none':'block';
+  if(m.style.display==='block'){
+    setTimeout(function(){
+      document.addEventListener('click',function close(e){
+        if(!m.contains(e.target)&&e.target.id!=='avatarBtn'){
+          m.style.display='none';
+          document.removeEventListener('click',close);
+        }
+      });
+    },50);
+  }
+}
+
+// ════════════════════════════════════════
+//  NO QUIZ DATA SCREEN
+// ════════════════════════════════════════
+function showNoData(){
+  var d = document.getElementById('sc-stats');
+  d.innerHTML = `<div class="no-data">
+    <div class="no-data-icon">📋</div>
+    <div class="no-data-title">No Quiz Data Found</div>
+    <div class="no-data-sub">Complete the GetPhysIQ quiz first so we can generate your personalised plans.</div>
+    <button class="cta" onclick="window.location.href='index.html'">Take the Quiz →</button>
+  </div>`;
+  document.getElementById('sc-stats').className='sc in';
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+function init(){
+  var quizData = localStorage.getItem('gp_quiz_state');
+  if(!quizData){
+    showNoData();
+    return;
+  }
+  S = JSON.parse(quizData);
+  workoutGenerated = false;
+  mealGenerated    = false;
+  buildStatsTab();
+  buildAccountTab();
+}
+
+// ── Startup ──
+var _sess = getSession();
+
+// Handle autologin from email link
+var _plParams = new URLSearchParams(window.location.search);
+if(_plParams.get('autologin')==='1'){
+  var _plEmail  = decodeURIComponent(_plParams.get('e')||'');
+  var _plPass   = decodeURIComponent(_plParams.get('p')||'');
+  var _plPlan   = decodeURIComponent(_plParams.get('plan')||'complete');
+  var _plPeriod = decodeURIComponent(_plParams.get('period')||'monthly');
+  window.history.replaceState({}, document.title, window.location.pathname);
+  if(_plEmail && _plPass){
+    var _plUsers = getUsers();
+    if(!_plUsers[_plEmail]){
+      _plUsers[_plEmail]={email:_plEmail,name:_plEmail.split('@')[0],password:btoa(_plPass),role:'user',created:Date.now()};
+      saveUsers(_plUsers);
+    }
+    localStorage.setItem('gp_active_plan', JSON.stringify({plan:_plPlan,period:_plPeriod,email:_plEmail,unlocked:true,activatedAt:Date.now()}));
+    var _plUser = _plUsers[_plEmail];
+    saveSession(_plUser);
+    setupUserUI(_plUser);
+    init();
+  }
+} else if(_sess){
+  setupUserUI(_sess);
+  init();
+} else {
+  // No session — try to load plans anyway if quiz data exists (show locked state)
+  var _hasQuiz = !!localStorage.getItem('gp_quiz_state');
+  if(_hasQuiz){
+    init();
+  } else {
+    document.getElementById('authWall').style.display='flex';
+  }
+}
+
+// ── 5x logo tap = dev login ──
+var _logoTapCount=0, _logoTapTimer=null;
+document.querySelector('.logo').addEventListener('click', function(){
+  _logoTapCount++;
+  clearTimeout(_logoTapTimer);
+  _logoTapTimer=setTimeout(function(){_logoTapCount=0;},1500);
+  if(_logoTapCount>=5){
+    _logoTapCount=0;
+    var devUser={email:'dev@getphysiq.fit',name:'Developer',role:'dev',created:Date.now()};
+    // Give dev full access
+    localStorage.setItem('gp_active_plan',JSON.stringify({plan:'complete',period:'monthly',email:'dev@getphysiq.fit',unlocked:true}));
+    saveSession(devUser);
+    setupUserUI(devUser);
+    document.getElementById('authWall').style.display='none';
+    workoutGenerated=false; mealGenerated=false;
+    init();
+  }
+});
+</script>
+</body>
+</html>
