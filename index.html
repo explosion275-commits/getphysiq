@@ -305,7 +305,6 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
   <div id="userMenu">
     <div class="menu-item" id="menuName" style="color:var(--muted);font-size:.75rem;cursor:default;pointer-events:none"></div>
     <div class="menu-sep"></div>
-    <div class="menu-item" id="menuDevAccess" onclick="activateDevMode()" style="display:none">⚡ Dev Preview</div>
     <div class="menu-item" onclick="toggleUserMenu();buildMyPlans()">📋 My Plans</div>
     <div class="menu-item danger" onclick="logout()">↩ Log Out</div>
   </div>
@@ -346,9 +345,6 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
     </div>
     <button class="auth-btn" onclick="doSignup()">CREATE ACCOUNT →</button>
   </div>
-  <div class="auth-divider"><span>or</span></div>
-  <button class="auth-dev-btn" onclick="doDevLogin()"><span>⚡</span> Developer Access</button>
-</div>
 
 <!-- PAYMENT MODAL -->
 <div id="payModal" class="pay-modal" onclick="if(event.target===this)closeLSModal()">
@@ -2243,9 +2239,6 @@ function doSignup(){
   loginSuccess(newUser);
 }
 
-function doDevLogin(){
-  loginSuccess({email:DEV_EMAIL, name:'Developer', role:'dev', created: Date.now()});
-}
 
 function loginSuccess(user){
   saveSession(user);
