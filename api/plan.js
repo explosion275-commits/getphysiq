@@ -29,3 +29,6 @@ export default async function handler(req, res) {
     return res.status(503).json({ error: 'Backend unavailable', detail: err.message });
   }
 }
+
+// Extend Vercel function timeout to 60s (Hobby plan max) to survive Railway cold starts
+export const config = { maxDuration: 60 };
