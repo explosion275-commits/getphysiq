@@ -170,7 +170,7 @@ const { useState, useEffect, useRef } = React;
 
 // ── SET YOUR DEPLOYED BACKEND URL HERE ────────────────────────
 const API_BASE = 'https://web-production-c136a.up.railway.app';
-const fetchWithRetry = async (url, options = {}, retries = 4, delay = 3000) => {
+const fetchWithRetry = async (url, options = {}, retries = 6, delay = 8000) => {
   for (let i = 0; i < retries; i++) {
     try {
       const r = await fetch(url, options);
@@ -565,7 +565,7 @@ function App() {
 
     // Timeout after 12 seconds so it never hangs forever
     const controller = new AbortController();
-    const timeoutId  = setTimeout(() => controller.abort(), 45000);
+    const timeoutId  = setTimeout(() => controller.abort(), 90000);
 
     fetchWithRetry(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, {})
       .then(res => {
