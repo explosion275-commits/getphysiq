@@ -170,7 +170,12 @@ const { useState, useEffect, useRef } = React;
 
 // ── SET YOUR DEPLOYED BACKEND URL HERE ────────────────────────
 const API_BASE = 'https://web-production-c136a.up.railway.app';
-const fetchWithRetry = async (url, options = {}, retries = 6, delay = 8000) => {
+const fetchWithRetry = async (url, options = {}, retries = 8, delay = 4000) => {
+  // no-cors warm-up ping: wakes Railway even though cold-start 503s have no CORS headers
+  await Promise.race([
+    fetch(API_BASE, { mode: 'no-cors' }).catch(() => {}),
+    new Promise(r => setTimeout(r, 3000))
+  ]);
   for (let i = 0; i < retries; i++) {
     try {
       const r = await fetch(url, options);
