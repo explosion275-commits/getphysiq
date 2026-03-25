@@ -26,6 +26,18 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .error-icon{font-size:48px;}
 .error-title{font-size:20px;font-weight:800;}
 .error-msg{font-size:13px;color:var(--muted);max-width:300px;line-height:1.7;}
+/* ── Login section ── */
+#login-section{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.login-card{background:var(--surface2,#13131a);border:1px solid var(--bdr2,#2a2a3a);border-radius:20px;padding:32px 24px;width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px;align-items:center;}
+.login-logo{font-size:40px;}
+.login-title{font-size:20px;font-weight:800;color:var(--fg,#fff);text-align:center;}
+.login-sub{font-size:13px;color:var(--muted,#8b8b9e);text-align:center;line-height:1.6;max-width:260px;}
+.login-input{width:100%;background:var(--surface,#0d0d14);border:1px solid var(--bdr,#1e1e2e);border-radius:10px;padding:13px 16px;color:var(--fg,#fff);font-size:14px;outline:none;box-sizing:border-box;}
+.login-input:focus{border-color:#7b61ff;}
+.login-btn{width:100%;background:linear-gradient(135deg,#7b61ff,#a78bfa);color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;}
+.login-btn:disabled{opacity:.5;cursor:default;}
+.login-error-msg{font-size:13px;color:#f87171;text-align:center;min-height:18px;}
+
 
 /* ── App wrapper ── */
 #app{display:none;max-width:430px;margin:0 auto;min-height:100vh;position:relative;}
@@ -160,6 +172,18 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
   <div class="error-icon">⚠️</div>
   <div class="error-title">Plan not found</div>
   <div class="error-msg" id="error-msg">This link may have expired or is invalid.<br>Contact us at <strong>support@getphysiq.fit</strong></div>
+</div>
+
+<div id="login-section">
+  <div class="login-card">
+    <div class="login-logo">💪</div>
+    <div class="login-title">Access Your Plan</div>
+    <div class="login-sub">Enter the email and password from your welcome email</div>
+    <input id="login-email" class="login-input" type="email" placeholder="Email address" autocomplete="email" />
+    <input id="login-password" class="login-input" type="password" placeholder="Password" autocomplete="current-password" />
+    <button id="login-btn" class="login-btn" onclick="handleLogin()">View My Plan →</button>
+    <div id="login-error-msg" class="login-error-msg"></div>
+  </div>
 </div>
 
 <div id="app"></div>
@@ -560,9 +584,8 @@ function App() {
     const tok    = params.get('token');
 
     if (!tok) {
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('error').style.display   = 'flex';
-      document.getElementById('error-msg').textContent = 'No token found in URL. Please use the link from your welcome email.';
+      document.getElementById('loading').style.display       = 'none';
+      document.getElementById('login-section').style.display = 'flex';
       return;
     }
 
@@ -602,6 +625,46 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+</script>
+<script>
+function handleLogin() {
+  var email    = document.getElementById('login-email').value.trim();
+  var password = document.getElementById('login-password').value;
+  var btn      = document.getElementById('login-btn');
+  var errEl    = document.getElementById('login-error-msg');
+
+  errEl.textContent = '';
+  if (!email || !password) {
+    errEl.textContent = 'Please enter your email and password.';
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.textContent = 'Loading…';
+
+  fetch('/api/login?email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password))
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
+    .then(function(res) {
+      if (res.status === 200 && res.data.token) {
+        window.location.href = '/plans.html?token=' + encodeURIComponent(res.data.token);
+      } else {
+        errEl.textContent = res.data.detail || res.data.error || 'Invalid email or password.';
+        btn.disabled    = false;
+        btn.textContent = 'View My Plan →';
+      }
+    })
+    .catch(function() {
+      errEl.textContent = 'Network error. Please try again.';
+      btn.disabled    = false;
+      btn.textContent = 'View My Plan →';
+    });
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('login-section').style.display === 'flex') {
+    handleLogin();
+  }
+});
 </script>
 </body>
 </html>
