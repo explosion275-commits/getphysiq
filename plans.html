@@ -198,6 +198,17 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
     showToast('Regenerating your plan…', '🤖');
     try {
       const res = await fetch(`${API_BASE}/api/plan/regenerate`, {
+const fetchWithRetry = async (url, retries = 4, delay = 3000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const r = await fetch(url);
+      if (r.status === 503 && i < retries - 1) { await new Promise(x => setTimeout(x, delay)); continue; }
+      return r;
+    } catch (e) {
+      if (i < retries - 1) await new Promise(x => setTimeout(x, delay)); else throw e;
+    }
+  }
+};
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token })
@@ -555,7 +566,7 @@ function App() {
     const controller = new AbortController();
     const timeoutId  = setTimeout(() => controller.abort(), 12000);
 
-    fetch(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, { signal: controller.signal })
+    fetchWithRetry(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, { signal: controller.signal })
       .then(res => {
         clearTimeout(timeoutId);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
