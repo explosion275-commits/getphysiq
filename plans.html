@@ -6,7 +6,7 @@
 <title>GetPhysIQ — My Plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transpahrent;}
 :root{
   --bg:#07070b;--s1:#0d0d12;--s2:#13131a;--s3:#1a1a24;
   --bdr:rgba(255,255,255,.07);--bdr2:rgba(255,255,255,.04);
@@ -324,7 +324,7 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
     setRegen(true);
     showToast('Regenerating your plan…', '🤖');
     try {
-      const res = await fetch(`${API_BASE}/api/plan/regenerate`, {
+      const res = await fetch('/api/regenerate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token })
