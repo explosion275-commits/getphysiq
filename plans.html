@@ -565,9 +565,9 @@ function App() {
 
     // Timeout after 12 seconds so it never hangs forever
     const controller = new AbortController();
-    const timeoutId  = setTimeout(() => controller.abort(), 12000);
+    const timeoutId  = setTimeout(() => controller.abort(), 45000);
 
-    fetchWithRetry(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, { signal: controller.signal })
+    fetchWithRetry(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, {})
       .then(res => {
         clearTimeout(timeoutId);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
