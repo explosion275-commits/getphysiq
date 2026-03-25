@@ -572,7 +572,7 @@ function App() {
     const controller = new AbortController();
     const timeoutId  = setTimeout(() => controller.abort(), 90000);
 
-    fetchWithRetry(`${API_BASE}/api/plan?token=${encodeURIComponent(tok)}`, {})
+    fetchWithRetry(`/api/plan?token=${encodeURIComponent(tok)}`, {})
       .then(res => {
         clearTimeout(timeoutId);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
