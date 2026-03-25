@@ -2409,8 +2409,10 @@ if(_urlParams.get('payment')==='success'){
   if(_np.get('plan')==='ready'){
     localStorage.setItem('gp_goto_plan','1');
     window.history.replaceState({}, document.title, window.location.pathname);
+    document.getElementById('authWall').style.display='flex';
+  } else {
+    render(0);
   }
-  document.getElementById('authWall').style.display='flex';
 }
 
 setTimeout(()=>{
