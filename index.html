@@ -21,24 +21,24 @@ html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 #app{width:100%;max-width:430px;height:100%;margin:0 auto;position:relative;overflow:hidden;background:var(--bg);}
 
-/* ââ PROGRESS ââ */
+/* ── PROGRESS ── */
 #pl{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:2px;background:rgba(255,255,255,.03);z-index:400;}
 #pf{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width .65s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(139,92,246,.5);}
 
-/* ââ TOPBAR ââ */
+/* ── TOPBAR ── */
 #tb{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:env(safe-area-inset-top,14px) 20px 0;z-index:300;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(7,7,11,.96) 65%,transparent);}
 .logo{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.45));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 #bk{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.88rem;user-select:none;transition:background .2s;}
 #bk:active{background:rgba(255,255,255,.12);}
 
-/* ââ SCREENS ââ */
+/* ── SCREENS ── */
 .sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,20px);}
 .sc.in{pointer-events:all;animation:sIn .42s cubic-bezier(.16,1,.3,1) forwards;}
 .sc.out{pointer-events:none;animation:sOut .3s ease-in forwards;}
 @keyframes sIn{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
 @keyframes sOut{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-30px)}}
 
-/* ââ HERO AREA ââ */
+/* ── HERO AREA ── */
 .hero{width:100%;height:380px;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:#000;}
 .hero.short{height:300px;}
 .hero img.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:top center;z-index:1;}
@@ -47,7 +47,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(91,138,240,.08),transparent);z-index:2;}
 .fig-wrap{position:relative;z-index:4;display:flex;align-items:flex-end;justify-content:center;}
 
-/* ââ BODY TYPE CARDS ââ */
+/* ── BODY TYPE CARDS ── */
 .bt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
 .bt-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;border:1.5px solid var(--bdr2);transition:border-color .18s,transform .12s;user-select:none;background:#000;}
 .bt-card:active{transform:scale(.965);}
@@ -61,13 +61,13 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .bt-card.sel .bt-dot{background:var(--blue);border-color:var(--blue);color:#fff;}
 .dream-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:24px;}
 
-/* ââ CONTENT ââ */
+/* ── CONTENT ── */
 .ct{padding:16px 20px 0;}
 .badge{display:inline-flex;align-items:center;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.2);border-radius:99px;padding:4px 13px;font-size:.67rem;font-weight:700;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;margin-bottom:10px;}
 .qtitle{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;line-height:1.08;margin-bottom:7px;letter-spacing:-.04em;}
 .qsub{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:18px;font-weight:400;}
 
-/* ââ OPTIONS ââ */
+/* ── OPTIONS ── */
 .opts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
 .opt{background:var(--s1);border:1.5px solid var(--bdr2);border-radius:14px;padding:13px 15px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .14s,background .14s,transform .1s;user-select:none;}
 .opt:active{transform:scale(.98);}
@@ -80,7 +80,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .opt .chk{margin-left:auto;width:19px;height:19px;border-radius:5px;border:1.5px solid var(--dim);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:transparent;transition:all .14s;}
 .opt.sel .chk{background:var(--blue);border-color:var(--blue);color:#fff;}
 
-/* ââ ZONES ââ */
+/* ── ZONES ── */
 .zw{display:flex;gap:0;height:470px;}
 .zl{width:50%;padding:0 0 0 18px;display:flex;flex-direction:column;justify-content:center;gap:7px;z-index:2;}
 .zr{background:var(--s1);border:1.5px solid var(--bdr2);border-radius:11px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .14s;user-select:none;}
@@ -94,7 +94,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .zone-hl{position:absolute;border-radius:50%;background:radial-gradient(ellipse at 50% 50%,rgba(239,68,68,.98) 0%,rgba(230,40,40,.7) 35%,rgba(200,20,20,.3) 60%,transparent 75%);filter:blur(9px);opacity:0;transition:opacity .3s;pointer-events:none;z-index:4;}
 .zone-hl.on{opacity:1;}
 
-/* ââ INTERSTITIAL ââ */
+/* ── INTERSTITIAL ── */
 .inter{min-height:100%;padding:72px 20px 36px;display:flex;flex-direction:column;justify-content:center;}
 .inter-ico{font-size:2.8rem;margin-bottom:16px;}
 .inter-title{font-family:'Sora',sans-serif;font-size:2.2rem;font-weight:800;line-height:1.08;margin-bottom:11px;letter-spacing:-.04em;}
@@ -105,7 +105,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .sv{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .sl{font-size:.66rem;color:var(--muted);margin-top:2px;font-weight:600;letter-spacing:.04em;}
 
-/* ââ MEASURES ââ */
+/* ── MEASURES ── */
 .mr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .mg{display:flex;flex-direction:column;gap:5px;}
 .ml{font-size:.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
@@ -113,14 +113,14 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .mi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(91,138,240,.12);}
 .mi::placeholder{color:var(--dim);}
 
-/* ââ CTA ââ */
+/* ── CTA ── */
 .cta{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:700;font-size:.95rem;border:none;border-radius:50px;padding:18px;width:100%;cursor:pointer;box-shadow:0 8px 28px rgba(91,138,240,.32);transition:opacity .2s,transform .14s;font-family:'Sora',sans-serif;letter-spacing:0em;}
 .cta:hover{opacity:.9;transform:translateY(-1px);}
 .cta:active{transform:scale(.98);}
 .cta:disabled{opacity:.25;cursor:not-allowed;transform:none!important;}
 .cw{padding:0 20px 36px;}
 
-/* ââ RESULTS ââ */
+/* ── RESULTS ── */
 .res-top{padding:72px 20px 0;text-align:center;}
 .res-top h1{font-family:'Sora',sans-serif;font-size:2.3rem;font-weight:800;line-height:1.08;margin-bottom:6px;letter-spacing:-.04em;}
 .res-top p{font-size:.82rem;color:var(--muted);}
@@ -144,7 +144,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .pt h3{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:6px;}
 .tag{display:inline-block;background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.16);border-radius:6px;padding:4px 10px;font-size:.75rem;font-weight:600;color:var(--blue);margin:2px 3px 2px 0;}
 
-/* ââ AI PLAN ââ */
+/* ── AI PLAN ── */
 .plan-tab{flex:1;padding:11px 8px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--s1);color:var(--muted);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:'Sora',sans-serif;}
 .plan-tab.active{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(91,138,240,.3);}
 .ai-card{margin:0 20px 16px;background:var(--s1);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;min-height:120px;}
@@ -180,7 +180,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .meal-tip{margin-top:10px;padding:8px 12px;background:rgba(16,185,129,.08);border-left:3px solid var(--green);border-radius:0 8px 8px 0;font-size:.76rem;color:var(--muted);line-height:1.5;}
 .meal-hydration{margin-top:10px;padding:10px 14px;background:rgba(6,182,212,.08);border-radius:10px;border:1px solid rgba(6,182,212,.2);font-size:.8rem;color:var(--cyan);font-weight:600;text-align:center;}
 
-/* ââ AUTH ââ */
+/* ── AUTH ── */
 #authWall{position:fixed;inset:0;background:var(--bg);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;max-width:430px;margin:0 auto;left:50%;transform:translateX(-50%);}
 .auth-logo{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
 .auth-tagline{font-size:.82rem;color:var(--muted);margin-bottom:36px;text-align:center;}
@@ -202,19 +202,19 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .auth-dev-btn{background:rgba(91,138,240,.08);border:1.5px solid rgba(91,138,240,.2);border-radius:50px;padding:13px;width:100%;color:var(--blue);font-weight:700;font-size:.85rem;cursor:pointer;font-family:'Sora',sans-serif;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .auth-dev-btn:hover{background:rgba(91,138,240,.15);}
 
-/* ââ USER BAR ââ */
+/* ── USER BAR ── */
 #userBar{display:flex;align-items:center;gap:8px;}
 .user-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;flex-shrink:0;}
 .dev-badge{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:.55rem;font-weight:800;padding:2px 6px;border-radius:99px;letter-spacing:.04em;text-transform:uppercase;}
 
-/* ââ USER MENU ââ */
+/* ── USER MENU ── */
 #userMenu{position:fixed;top:56px;right:calc(50% - 195px);background:var(--s1);border:1px solid var(--bdr);border-radius:16px;padding:8px;z-index:500;width:200px;box-shadow:0 8px 32px rgba(0,0,0,.4);display:none;}
 .menu-item{padding:11px 14px;border-radius:10px;font-size:.84rem;font-weight:600;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:10px;}
 .menu-item:hover{background:var(--s2);}
 .menu-item.danger{color:var(--red);}
 .menu-sep{height:1px;background:var(--bdr);margin:4px 0;}
 
-/* ââ MY PLANS ââ */
+/* ── MY PLANS ── */
 .myplans-wrap{padding:72px 20px 40px;}
 .myplans-section{background:var(--s1);border:1px solid var(--bdr);border-radius:20px;padding:20px;margin-bottom:14px;}
 .myplans-section-title{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
@@ -229,7 +229,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .myplans-locked-sub{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:18px;}
 .myplans-cancel{background:none;border:none;color:var(--red);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:10px 0;}
 
-/* ââ PLAN LOADING SCREEN ââ */
+/* ── PLAN LOADING SCREEN ── */
 .plan-loading-wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center;}
 .plan-loading-ring{width:120px;height:120px;position:relative;margin:0 auto 28px;}
 .plan-loading-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
@@ -245,7 +245,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 
 
 
-/* ââ PRICING ââ */
+/* ── PRICING ── */
 .pricing-wrap{padding:76px 20px 40px;}
 .pricing-hero{text-align:center;margin-bottom:28px;}
 .pricing-hero h1{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:8px;}
@@ -299,7 +299,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 <div id="app">
   <div id="pl"><div id="pf"></div></div>
   <div id="tb">
-    <div id="bk" onclick="goBack()" style="visibility:hidden">â</div>
+    <div id="bk" onclick="goBack()" style="visibility:hidden">←</div>
     <div class="logo" id="logoBtn">GetPhysIQ</div>
     <div id="userBar">
       <div class="user-avatar" id="avatarBtn" onclick="toggleUserMenu()" style="display:none"></div>
@@ -308,13 +308,13 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
   <div id="userMenu">
     <div class="menu-item" id="menuName" style="color:var(--muted);font-size:.75rem;cursor:default;pointer-events:none"></div>
     <div class="menu-sep"></div>
-    <div class="menu-item" onclick="toggleUserMenu();buildMyPlans()">ð My Plans</div>
-    <div class="menu-item danger" onclick="logout()">â© Log Out</div>
+    <div class="menu-item" onclick="toggleUserMenu();buildMyPlans()">📋 My Plans</div>
+    <div class="menu-item danger" onclick="logout()">↩ Log Out</div>
   </div>
 </div>
 
 <!-- AUTH WALL -->
-<div id="authWall"><div class="auth-close" onclick="document.getElementById('authWall').style.display='none'">â</div>
+<div id="authWall"><div class="auth-close" onclick="document.getElementById('authWall').style.display='none'">✕</div>
   <div class="auth-logo">GetPhysIQ</div>
   <div class="auth-tagline">Your body. Your plan. Built by AI.</div>
   <div class="auth-tabs">
@@ -329,9 +329,9 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
     </div>
     <div class="auth-field">
       <div class="auth-label">Password</div>
-      <input class="auth-input" type="password" id="loginPass" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autocomplete="current-password"/>
+      <input class="auth-input" type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"/>
     </div>
-    <button class="auth-btn" onclick="doLogin()">LOG IN â</button>
+    <button class="auth-btn" onclick="doLogin()">LOG IN →</button>
   </div>
   <div id="signupForm" style="display:none;width:100%">
     <div class="auth-field">
@@ -346,14 +346,14 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
       <div class="auth-label">Password</div>
       <input class="auth-input" type="password" id="signupPass" placeholder="Min 6 characters" autocomplete="new-password"/>
     </div>
-    <button class="auth-btn" onclick="doSignup()">CREATE ACCOUNT â</button>
+    <button class="auth-btn" onclick="doSignup()">CREATE ACCOUNT →</button>
   </div>
 
 <!-- PAYMENT MODAL -->
 <div id="payModal" class="pay-modal" onclick="if(event.target===this)closeLSModal()">
   <div class="pay-sheet" style="padding:24px 20px 38px;">
     <div style="width:40px;height:4px;background:var(--dim);border-radius:99px;margin:0 auto 20px;"></div>
-    <div style="display:inline-flex;align-items:center;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:99px;padding:3px 11px;font-size:.62rem;font-weight:700;letter-spacing:.09em;color:#10b981;text-transform:uppercase;margin-bottom:12px;">â¦ Choose Your Plan</div>
+    <div style="display:inline-flex;align-items:center;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:99px;padding:3px 11px;font-size:.62rem;font-weight:700;letter-spacing:.09em;color:#10b981;text-transform:uppercase;margin-bottom:12px;">✦ Choose Your Plan</div>
     <div style="font-size:1.2rem;font-weight:800;letter-spacing:-.03em;color:var(--txt);margin-bottom:3px;">Unlock GetPhysIQ</div>
     <div style="font-size:.76rem;color:var(--muted);margin-bottom:16px;line-height:1.5;">Your plan is ready. Pick what fits your goals.</div>
 
@@ -370,12 +370,12 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
           <div id="lsdot-complete" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--blue);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--blue);"><div style="width:7px;height:7px;border-radius:50%;background:#fff;"></div></div>
           <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Complete Plan</div>
         </div>
-        <div style="font-size:.7rem;color:var(--muted);margin-left:28px;margin-bottom:8px;">Everything you need â workouts + nutrition in one.</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-left:28px;margin-bottom:8px;">Everything you need — workouts + nutrition in one.</div>
         <div style="display:flex;flex-direction:column;gap:3px;margin-left:28px;margin-bottom:10px;">
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Workout Plan</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Meal Plan</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Progress Tracking</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Unlimited Regeneration</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Workout Plan</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Meal Plan</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Progress Tracking</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Unlimited Regeneration</div>
         </div>
         <div style="display:flex;align-items:flex-end;gap:5px;margin-left:28px;">
           <div id="lsprice-complete" style="font-size:1.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$17.00</div>
@@ -391,9 +391,9 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
         </div>
         <div style="font-size:.7rem;color:var(--muted);margin-left:28px;margin-bottom:8px;">Training-focused. Ideal if you already track your diet.</div>
         <div style="display:flex;flex-direction:column;gap:3px;margin-left:28px;margin-bottom:10px;">
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Workout Plan</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Progress Tracking</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Unlimited Regeneration</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Workout Plan</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Progress Tracking</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Unlimited Regeneration</div>
         </div>
         <div style="display:flex;align-items:flex-end;gap:5px;margin-left:28px;">
           <div id="lsprice-fitness" style="font-size:1.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$12.00</div>
@@ -409,9 +409,9 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
         </div>
         <div style="font-size:.7rem;color:var(--muted);margin-left:28px;margin-bottom:8px;">Diet-focused. Great if you already train consistently.</div>
         <div style="display:flex;flex-direction:column;gap:3px;margin-left:28px;margin-bottom:10px;">
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Meal Plan</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Calorie & Macro Tracking</div>
-          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">â</span>Unlimited Regeneration</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Meal Plan</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Calorie & Macro Tracking</div>
+          <div style="font-size:.7rem;color:var(--txt);display:flex;align-items:center;gap:5px;"><span style="color:var(--green);font-weight:800;font-size:.72rem;">✓</span>Unlimited Regeneration</div>
         </div>
         <div style="display:flex;align-items:flex-end;gap:5px;margin-left:28px;">
           <div id="lsprice-nutrition" style="font-size:1.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$10.00</div>
@@ -422,7 +422,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 
     </div>
 
-    <button id="lsCtaBtn" onclick="lsGoToCheckout()" style="width:100%;padding:16px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none;border-radius:50px;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;box-shadow:0 8px 28px rgba(91,138,240,.3);margin-bottom:11px;letter-spacing:-.01em;">Get Complete Plan â</button>
+    <button id="lsCtaBtn" onclick="lsGoToCheckout()" style="width:100%;padding:16px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border:none;border-radius:50px;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Sora',sans-serif;box-shadow:0 8px 28px rgba(91,138,240,.3);margin-bottom:11px;letter-spacing:-.01em;">Get Complete Plan →</button>
     <div style="display:flex;justify-content:center;gap:16px;">
       <div style="font-size:.63rem;color:var(--muted);display:flex;align-items:center;gap:4px;"><div style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;"></div>Cancel anytime</div>
       <div style="font-size:.63rem;color:var(--muted);display:flex;align-items:center;gap:4px;"><div style="width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;"></div>Secure checkout</div>
@@ -432,25 +432,25 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 </div>
 
 <script>
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-//  STRIPE CONFIG â paste your keys here tomorrow
-//  1. Go to dashboard.stripe.com â Developers â API Keys
+// ════════════════════════════════════════════════════════════════
+//  STRIPE CONFIG — paste your keys here tomorrow
+//  1. Go to dashboard.stripe.com → Developers → API Keys
 //  2. Copy "Publishable key" (starts with pk_live_ or pk_test_)
 //  3. Paste below
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════════════════════════════
 const STRIPE_KEY = 'pk_test_51TDh0jR1mWgKQOQnTgpKS2e07i16MCec8rPgAYhEjaQYBvR36BdrAe8mNxkH5ynlhnz2xX6k0isFVAm8p4Ou7TJm00QOEbwHWh';
 
-// ââ RESEND CONFIG ââââââââââââââââââââââââââââââââââââââââââââââââ
-//  1. Go to resend.com â API Keys â Create
+// ── RESEND CONFIG ────────────────────────────────────────────────
+//  1. Go to resend.com → API Keys → Create
 //  2. Paste your key below
 //  3. Set your FROM email (must match verified domain)
 const RESEND_KEY = 'REPLACE_WITH_YOUR_RESEND_KEY';
 const FROM_EMAIL = 'plans@getphysiq.fit';
 const REPLY_EMAIL = 'hello@getphysiq.fit';
 
-// ââ PRICING PLANS ââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── PRICING PLANS ────────────────────────────────────────────────
 //  After creating products in Stripe dashboard, paste price IDs here
-//  Stripe Dashboard â Products â Add Product â copy Price ID
+//  Stripe Dashboard → Products → Add Product → copy Price ID
 const PLANS = {
   fitness_monthly:  { id:'price_1TDhsOR1mWgKQOQnb3m7w7J6', label:'Fitness Plan',   price:12,  currency:'EUR', period:'month', stripe:true },
   fitness_yearly:   { id:'price_1TDht0R1mWgKQOQnTGdacYCu', label:'Fitness Plan',   price:79,  currency:'EUR', period:'year',  stripe:true },
@@ -460,7 +460,7 @@ const PLANS = {
   complete_yearly:  { id:'price_1TDhx8R1mWgKQOQnqj4mGKm8', label:'Complete Plan',  price:107, currency:'EUR', period:'year',  stripe:true },
 };
 
-// ââ CURRENT SELECTED PLAN âââââââââââââââââââââââââââââââââââââââââ
+// ── CURRENT SELECTED PLAN ─────────────────────────────────────────
 var selectedPlan = null;
 var pricingPeriod = 'monthly'; // 'monthly' or 'yearly'
 
@@ -473,16 +473,16 @@ function getImg(key){
 const IMGS = new Proxy({}, { get: (_,key) => getImg(key) });
 
 
-// ââââââââââââââââââââââââââââââââââââââââââââââââ
-//  BODY RENDER SYSTEM â CSS-art photo-realistic
+// ════════════════════════════════════════════════
+//  BODY RENDER SYSTEM — CSS-art photo-realistic
 //  Inspired by BetterMe's 3D rendered humans
-// ââââââââââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════════════
 
 function gradDefs(id, stops){
   return `<defs>${stops.map((s,i)=>`<${s.r?'radialGradient':'linearGradient'} id="${id}${i}" ${s.r?`cx="${s.cx||'45%'}" cy="${s.cy||'35%'}" r="${s.r}"`:`x1="${s.x1||0}" y1="${s.y1||0}" x2="${s.x2||0}" y2="${s.y2||1}"`}>${s.c.map(c=>`<stop offset="${c[0]}" stop-color="${c[1]}" ${c[2]!==undefined?`stop-opacity="${c[2]}"`:''}/>`).join('')}</${s.r?'radialGradient':'linearGradient'}>`).join('')}</defs>`;
 }
 
-// ââ MALE HERO (full-size, shirtless athletic) ââ
+// ── MALE HERO (full-size, shirtless athletic) ──
 function maleHero(variant='medium'){
   const cfg = {
     slender:{W:120,sh:46,hip:34,torH:72,armW:9,legW:12,belly:false,muscle:'high'},
@@ -600,7 +600,7 @@ function maleHero(variant='medium'){
   <!-- face highlight -->
   <ellipse cx="${cx-4}" cy="28" rx="12" ry="10" fill="rgba(255,255,255,.05)"/>
 
-  <!-- HAIR â short tapered fade -->
+  <!-- HAIR — short tapered fade -->
   <path d="M${cx-22} 30 Q${cx-20} 12 ${cx} 10 Q${cx+20} 12 ${cx+22} 30 Q${cx+16} 18 ${cx} 16 Q${cx-16} 18 ${cx-22} 30 Z" fill="var(--hair)"/>
   <path d="M${cx-22} 32 Q${cx-20} 14 ${cx-10} 12 L${cx-16} 24 Z" fill="rgba(28,14,8,.7)"/>
   <!-- fade sides -->
@@ -645,7 +645,7 @@ function maleHero(variant='medium'){
 </svg>`;
 }
 
-// ââ FEMALE HERO ââ
+// ── FEMALE HERO ──
 function femaleHero(){
   const W=118, cx=59, H=300;
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 10px 30px rgba(0,0,0,.75)) drop-shadow(0 0 40px rgba(139,92,246,.12))">
@@ -736,7 +736,7 @@ function femaleHero(){
 </svg>`;
 }
 
-// ââ COMPACT CARD BODIES ââ
+// ── COMPACT CARD BODIES ──
 function cardBody(variant, gender){
   const iF = gender==='female';
   const W=iF?80:80, H=160;
@@ -791,7 +791,7 @@ function cardBody(variant, gender){
 </svg>`;
 }
 
-// ââ ZONES FIGURE with highlights ââ
+// ── ZONES FIGURE with highlights ──
 function zonesFig(zones){
   const g = S.gender||'male';
   const W=110, H=330, cx=55;
@@ -822,9 +822,9 @@ function zonesFig(zones){
   </div>`;
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  STATE
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 const S={gender:null,age:null,build:null,dreamBuild:null,goals:[],zones:[],activity:null,height:null,weight:null,goalWeight:null,workoutDays:null,workoutDuration:null,workoutLocation:[],obstacles:[],diet:null,sleep:null,stress:null,motivation:null,experience:null};
 let cur=0, hist=[];
 
@@ -855,9 +855,9 @@ const SCREENS=[
 {t:"re"}
 ];
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  RENDER
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 function render(i){
   const sc=SCREENS[i];
   const app=document.getElementById('app');
@@ -941,7 +941,7 @@ function bDG(){
       </div>
       <div class="bt-card-fade"></div>
       <span class="bt-label" style="font-size:.8rem">${l}</span>
-      <div class="bt-dot" id="dd_${t}">â</div>
+      <div class="bt-dot" id="dd_${t}">✓</div>
     </div>`).join('');
   return`<div style="height:62px"></div><div class="ct" style="padding-bottom:12px"><div class="badge">Your Vision</div><div class="qtitle" style="font-size:1.8rem">Dream<br/>physique?</div><div class="qsub" style="margin-bottom:14px">The look you're working towards</div><div class="dream-grid">${cards}</div></div>`;
 }
@@ -967,17 +967,17 @@ function bZones(){
   }
   var src=IMGS[g+"_medium"]||IMGS["male_medium"];
 
-  // ââ ANATOMY NOTES ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── ANATOMY NOTES ────────────────────────────────────────────────────────
   // Positions are % of zfig-col (height:480px, width:~220px)
-  // Image is 780Ã1300, object-fit:cover crops 34px L/R, scale=0.369
-  // SHOULDERS  â anterior deltoid cap (top of arm where it caps the shoulder)
-  // CHEST      â pectoralis major (clavicle to lower pec fold, MALE); upper chest visible under bra (FEMALE)
-  // ARMS       â biceps brachii (front of upper arm, shoulder to elbow)
-  // BELLY/CORE â rectus abdominis (solar plexus to navel, above waistband)
-  // BACK/LATS  â latissimus dorsi flare visible as side bulk under armpits
-  // GLUTES     â gluteus maximus region (hip/upper glute, partially visible front)
-  // LEGS       â quadriceps (front of upper leg, shorts hem to knee)
-  // âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // Image is 780×1300, object-fit:cover crops 34px L/R, scale=0.369
+  // SHOULDERS  → anterior deltoid cap (top of arm where it caps the shoulder)
+  // CHEST      → pectoralis major (clavicle to lower pec fold, MALE); upper chest visible under bra (FEMALE)
+  // ARMS       → biceps brachii (front of upper arm, shoulder to elbow)
+  // BELLY/CORE → rectus abdominis (solar plexus to navel, above waistband)
+  // BACK/LATS  → latissimus dorsi flare visible as side bulk under armpits
+  // GLUTES     → gluteus maximus region (hip/upper glute, partially visible front)
+  // LEGS       → quadriceps (front of upper leg, shorts hem to knee)
+  // ─────────────────────────────────────────────────────────────────────────
 
   var zPos;
   if(g==="female"){
@@ -1036,13 +1036,13 @@ function bMeasures(sc){
       <div class="mg"><div class="ml">Weight (kg)</div><input class="mi" type="number" id="wIn" placeholder="" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
     </div>
     <div class="mg" style="margin-bottom:18px"><div class="ml">Goal Weight (kg)</div><input class="mi" type="number" id="gwIn" placeholder="" min="30" max="300" inputmode="numeric" oninput="chkM()"/></div>
-    <button class="cta" id="mB" onclick="savM()" disabled>CONTINUE â</button>
+    <button class="cta" id="mB" onclick="savM()" disabled>CONTINUE →</button>
   </div>`;
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  INTERACTIONS
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 function pick(el,k,v,single){
   if(single){
     S[k]=v;
@@ -1097,15 +1097,15 @@ function savM(){S.height=+document.getElementById('hIn').value;S.weight=+documen
 function adv(){hist.push(cur);cur++;if(cur<SCREENS.length)render(cur);}
 function goBack(){if(!hist.length)return;cur=hist.pop();render(cur);document.getElementById("bk").style.visibility=hist.length?"visible":"hidden";}
 function animCalc(d){
-  const steps=['â Body type analysed','â Goals mapped','â BMI calculated','â Workout schedule built','â Nutrition targets set','â Your plan is ready'];
+  const steps=['✅ Body type analysed','✅ Goals mapped','✅ BMI calculated','✅ Workout schedule built','✅ Nutrition targets set','✅ Your plan is ready'];
   const list=document.createElement('div');list.style.cssText='display:flex;flex-direction:column;gap:7px;margin-bottom:22px;';
   d.querySelector('.inter').insertBefore(list,d.querySelector('.cta'));
   steps.forEach((tx,i)=>{const el=document.createElement('div');el.textContent=tx;el.style.cssText='opacity:0;transition:opacity .3s;font-size:.82rem;color:var(--muted);padding:9px 13px;background:var(--s1);border-radius:10px;border:1px solid var(--bdr);font-weight:500;';list.appendChild(el);setTimeout(()=>el.style.opacity='1',i*370+280);});
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  RESULTS
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 function buildRes(d){
   // Save quiz state for plans.html
   try{ localStorage.setItem('gp_quiz_state', JSON.stringify(S)); }catch(e){}
@@ -1131,7 +1131,7 @@ function buildRes(d){
   const goalCalories = S.goals&&S.goals.includes('lose_fat') ? tdee-400 : S.goals&&S.goals.includes('build_muscle') ? tdee+300 : tdee;
 
   d.innerHTML=`
-    <div class="res-top"><h1>Your Plan<br/>is Ready ð</h1><p>Personalised to your exact profile.</p></div>
+    <div class="res-top"><h1>Your Plan<br/>is Ready 🎉</h1><p>Personalised to your exact profile.</p></div>
     <div class="bmi-ring">
       <svg width="160" height="160" viewBox="0 0 160 160">
         <circle cx="80" cy="80" r="64" fill="none" stroke="#111118" stroke-width="13"/>
@@ -1148,7 +1148,7 @@ function buildRes(d){
       <div class="ib"><div class="ibl">Daily Calories</div><div class="ibv">${goalCalories}</div><div class="ibu">kcal / day</div></div>
     </div>
     <div class="graph-card">
-      <div class="graph-title">ð Weight Journey to Goal</div>
+      <div class="graph-title">📈 Weight Journey to Goal</div>
       <canvas id="wChart"></canvas>
     </div>
     ${gt?`<div class="pt"><h3>Your Goals</h3>${gt}</div>`:''}
@@ -1157,8 +1157,8 @@ function buildRes(d){
     <!-- AI PLAN TABS -->
     <div style="padding:0 20px;margin-bottom:12px">
       <div style="display:flex;gap:8px">
-        <button class="plan-tab active" id="tab-workout" onclick="switchTab('workout')">ðª Workout Plan</button>
-        <button class="plan-tab" id="tab-meal" onclick="switchTab('meal')">ð¥ Nutrition Plan</button>
+        <button class="plan-tab active" id="tab-workout" onclick="switchTab('workout')">💪 Workout Plan</button>
+        <button class="plan-tab" id="tab-meal" onclick="switchTab('meal')">🥗 Nutrition Plan</button>
       </div>
     </div>
 
@@ -1166,7 +1166,7 @@ function buildRes(d){
     <div class="ai-card" id="plan-workout">
       <div class="ai-loading" id="loading-workout">
         <div class="ai-spinner"></div>
-        <div class="ai-loading-text">Generating your personalised workout planâ¦</div>
+        <div class="ai-loading-text">Generating your personalised workout plan…</div>
       </div>
       <div class="ai-content" id="content-workout" style="display:none"></div>
     </div>
@@ -1175,7 +1175,7 @@ function buildRes(d){
     <div class="ai-card" id="plan-meal" style="display:none">
       <div class="ai-loading" id="loading-meal">
         <div class="ai-spinner"></div>
-        <div class="ai-loading-text">Generating your personalised meal planâ¦</div>
+        <div class="ai-loading-text">Generating your personalised meal plan…</div>
       </div>
       <div class="ai-content" id="content-meal" style="display:none"></div>
     </div>
@@ -1264,7 +1264,7 @@ ${profile}
 Create a complete weekly workout schedule. Format your response as clean HTML using these exact CSS classes that are already defined:
 - <div class="plan-week"> for the weekly overview
 - <div class="plan-day"> for each training day  
-- <div class="plan-day-title"> for day name (e.g. "Monday â Push Day")
+- <div class="plan-day-title"> for day name (e.g. "Monday — Push Day")
 - <div class="plan-exercise"> for each exercise with sets/reps
 - <div class="plan-note"> for coaching tips
 - <div class="plan-rest"> for rest day cards
@@ -1296,7 +1296,7 @@ Rules:
     document.getElementById('content-workout').style.display='block';
     document.getElementById('content-workout').innerHTML = html;
   } catch(e){
-    document.getElementById('loading-workout').innerHTML='<div class="ai-error">â ï¸ Could not connect. Please try again.</div>';
+    document.getElementById('loading-workout').innerHTML='<div class="ai-error">⚠️ Could not connect. Please try again.</div>';
   }
 }
 
@@ -1334,13 +1334,13 @@ Create a full day meal plan (breakfast, lunch, dinner, 2 snacks) with ${calories
 - <div class="meal-macro-bar"> for the macro overview at top
 - <div class="macro-pill"> for each macro (Protein, Carbs, Fats) with gram amounts
 - <div class="meal-section"> for each meal
-- <div class="meal-title"> for meal name and time (e.g. "ð Breakfast â 7:00 AM")
+- <div class="meal-title"> for meal name and time (e.g. "🌅 Breakfast — 7:00 AM")
 - <div class="meal-item"> for each food item with portion and calories
 - <div class="meal-tip"> for a nutrition tip
 - <div class="meal-hydration"> for daily water target
 
 Rules:
-- Hit exactly ${calories} kcal total (Â±50 kcal)
+- Hit exactly ${calories} kcal total (±50 kcal)
 - Calculate protein at 2g per kg of bodyweight (${Math.round((S.weight||80)*2)}g)
 - Match food choices to their diet quality: ${S.diet||'average'}
 - Consider their goals: ${(S.goals||[]).join(', ')}
@@ -1366,7 +1366,7 @@ Rules:
     document.getElementById('content-meal').style.display='block';
     document.getElementById('content-meal').innerHTML = html;
   } catch(e){
-    document.getElementById('loading-meal').innerHTML='<div class="ai-error">â ï¸ Could not connect. Please try again.</div>';
+    document.getElementById('loading-meal').innerHTML='<div class="ai-error">⚠️ Could not connect. Please try again.</div>';
   }
 }
 
@@ -1382,7 +1382,7 @@ function renderPlanAuthGate(){
   if(!gate) return;
   var activePlan = getActivePlan();
   if(activePlan){
-    // Already paid â show plan status
+    // Already paid — show plan status
     gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(91,138,240,.08));border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:22px 20px;text-align:center;">'
       +'<div style="font-size:1.5rem;margin-bottom:8px">&#x2705;</div>'
       +'<div style="font-family:Sora,sans-serif;font-size:1rem;font-weight:800;margin-bottom:5px">Plan Active</div>'
@@ -1394,7 +1394,7 @@ function renderPlanAuthGate(){
       +'</div>';
     return;
   }
-  // Not paid â show unlock CTA
+  // Not paid — show unlock CTA
   gate.innerHTML='<div style="background:linear-gradient(135deg,rgba(91,138,240,.12),rgba(139,92,246,.12));border:1px solid rgba(91,138,240,.3);border-radius:20px;padding:24px 20px;text-align:center;">'
     +'<div style="font-size:2.2rem;margin-bottom:10px">&#x1F512;</div>'
     +'<div style="font-family:Sora,sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.03em">Unlock Your Full Plan</div>'
@@ -1465,9 +1465,9 @@ function restartQuiz(){
   render(0);
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  MY PLANS PAGE
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 function buildMyPlans(){
   var app = document.getElementById('app');
   var prev = app.querySelector('.sc.in');
@@ -1482,19 +1482,19 @@ function buildMyPlans(){
   // Subscription section
   var subSection = activePlan ? `
     <div class="myplans-section">
-      <div class="myplans-section-title">â¡ Subscription</div>
+      <div class="myplans-section-title">⚡ Subscription</div>
       <div class="myplans-stat"><span class="myplans-stat-label">Plan</span><span class="myplans-stat-val">${planName}</span></div>
       <div class="myplans-stat"><span class="myplans-stat-label">Billing</span><span class="myplans-stat-val">${activePlan.period==='yearly'?'Annual':'Monthly'}</span></div>
-      <div class="myplans-stat"><span class="myplans-stat-label">Status</span><span class="myplans-stat-val" style="color:var(--green)">â Active</span></div>
-      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${activePlan.email||sess&&sess.email||'â'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Status</span><span class="myplans-stat-val" style="color:var(--green)">✓ Active</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${activePlan.email||sess&&sess.email||'—'}</span></div>
     </div>` : `
     <div class="myplans-section">
-      <div class="myplans-section-title">â¡ Subscription</div>
+      <div class="myplans-section-title">⚡ Subscription</div>
       <div class="myplans-locked">
-        <div class="myplans-locked-icon">ð</div>
+        <div class="myplans-locked-icon">🔒</div>
         <div class="myplans-locked-title">No Active Plan</div>
         <div class="myplans-locked-sub">Subscribe to unlock your personalised workout and meal plans.</div>
-        <button class="pricing-cta" onclick="buildPricingScreen()">SEE PLANS & PRICING â</button>
+        <button class="pricing-cta" onclick="buildPricingScreen()">SEE PLANS & PRICING →</button>
       </div>
     </div>`;
 
@@ -1503,20 +1503,20 @@ function buildMyPlans(){
   if(!activePlan || !(activePlan.plan==='fitness'||activePlan.plan==='complete')){
     workoutSection = `
     <div class="myplans-section">
-      <div class="myplans-section-title">ðª Workout Plan</div>
+      <div class="myplans-section-title">💪 Workout Plan</div>
       <div class="myplans-locked">
-        <div class="myplans-locked-icon">ð</div>
+        <div class="myplans-locked-icon">🔒</div>
         <div class="myplans-locked-title">Workout Plan Locked</div>
         <div class="myplans-locked-sub">Available with the Fitness or Complete Plan.</div>
-        <button class="pricing-cta" onclick="openLSModal('fitness')">UNLOCK FROM $12/MO â</button>
+        <button class="pricing-cta" onclick="openLSModal('fitness')">UNLOCK FROM $12/MO →</button>
       </div>
     </div>`;
   } else {
     workoutSection = `
     <div class="myplans-section">
-      <div class="myplans-section-title">ðª Workout Plan</div>
+      <div class="myplans-section-title">💪 Workout Plan</div>
       <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised weekly workout plan is active and ready to view.</div>
-      <button class="pricing-cta" onclick="goToMyWorkout()">VIEW WORKOUT PLAN â</button>
+      <button class="pricing-cta" onclick="goToMyWorkout()">VIEW WORKOUT PLAN →</button>
     </div>`;
   }
 
@@ -1525,33 +1525,33 @@ function buildMyPlans(){
   if(!activePlan || !(activePlan.plan==='nutrition'||activePlan.plan==='complete')){
     mealSection = `
     <div class="myplans-section">
-      <div class="myplans-section-title">ð¥ Nutrition Plan</div>
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
       <div class="myplans-locked">
-        <div class="myplans-locked-icon">ð</div>
+        <div class="myplans-locked-icon">🔒</div>
         <div class="myplans-locked-title">Nutrition Plan Locked</div>
         <div class="myplans-locked-sub">Available with the Nutrition or Complete Plan.</div>
-        <button class="pricing-cta" onclick="openLSModal('nutrition')">UNLOCK FROM $10/MO â</button>
+        <button class="pricing-cta" onclick="openLSModal('nutrition')">UNLOCK FROM $10/MO →</button>
       </div>
     </div>`;
   } else {
     mealSection = `
     <div class="myplans-section">
-      <div class="myplans-section-title">ð¥ Nutrition Plan</div>
+      <div class="myplans-section-title">🥗 Nutrition Plan</div>
       <div style="font-size:.82rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Your personalised daily meal plan with macros and calories is active.</div>
-      <button class="pricing-cta" onclick="goToMyMeal()">VIEW NUTRITION PLAN â</button>
+      <button class="pricing-cta" onclick="goToMyMeal()">VIEW NUTRITION PLAN →</button>
     </div>`;
   }
 
   // Account section
   var accountSection = `
     <div class="myplans-section">
-      <div class="myplans-section-title">âï¸ Account</div>
-      <div class="myplans-stat"><span class="myplans-stat-label">Name</span><span class="myplans-stat-val">${sess?sess.name:'â'}</span></div>
-      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${sess?sess.email:'â'}</span></div>
+      <div class="myplans-section-title">⚙️ Account</div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Name</span><span class="myplans-stat-val">${sess?sess.name:'—'}</span></div>
+      <div class="myplans-stat"><span class="myplans-stat-label">Email</span><span class="myplans-stat-val" style="font-size:.78rem">${sess?sess.email:'—'}</span></div>
       <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
-        <button class="cta" onclick="restartQuiz()" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem;">âº Retake Quiz</button>
+        <button class="cta" onclick="restartQuiz()" style="background:transparent;border:1.5px solid var(--bdr);color:var(--muted);box-shadow:none;font-size:.85rem;">↺ Retake Quiz</button>
         ${activePlan?`<button class="myplans-cancel" onclick="confirmCancel()">Cancel Subscription</button>`:''}
-        <button onclick="logout()" style="background:none;border:none;color:var(--red);font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:8px 0;">â© Log Out</button>
+        <button onclick="logout()" style="background:none;border:none;color:var(--red);font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;padding:8px 0;">↩ Log Out</button>
       </div>
     </div>`;
 
@@ -1586,9 +1586,9 @@ function confirmCancel(){
   }
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 //  POST-PAYMENT LOADING SCREEN
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 function showPlanLoadingScreen(planKey, email){
   var app = document.getElementById('app');
   var prev = app.querySelector('.sc.in');
@@ -1603,7 +1603,7 @@ function showPlanLoadingScreen(planKey, email){
     'Building your workout schedule',
     'Calculating your nutrition targets',
     'Generating your personalised plan',
-    'Your plan is ready! ð'
+    'Your plan is ready! 🎉'
   ];
 
   d.innerHTML = `<div class="plan-loading-wrap">
@@ -1647,7 +1647,7 @@ function showPlanLoadingScreen(planKey, email){
       if(ring) ring.style.strokeDashoffset = 314 - (314 * pcts[i] / 100);
       var pctEl = document.getElementById('loadPct');
       if(pctEl) pctEl.textContent = pcts[i]+'%';
-      // Last step â go to results
+      // Last step — go to results
       if(i===steps.length-1){
         setTimeout(function(){
           var last = document.getElementById('lstep'+(steps.length-1));
@@ -1775,11 +1775,11 @@ function drawChart(cw,gw,weeks){
   }
 }
 
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════════════════════════════
 //  PRICING SYSTEM
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════════════════════════════
 
 function buildPricingScreen(){
   var d=document.createElement('div');
@@ -1817,7 +1817,7 @@ function getPricingHTML(){
       key:'complete',
       name:'Complete Plan',
       emoji:'&#x26A1;',
-      desc:'Everything â workout + nutrition combined. The full transformation system.',
+      desc:'Everything — workout + nutrition combined. The full transformation system.',
       price: m?17:107,
       orig: m?null:264,
       features:['Full workout plan','Full nutrition & meal plan','Save $5/mo vs buying separate','Priority plan regeneration','Progress tracking dashboard'],
@@ -1903,9 +1903,9 @@ function closeLSModal(){
 }
 
 // context: 'fitness' | 'nutrition' | 'complete'
-// fitness  â show Fitness Plan + Complete Plan
-// nutritionâ show Nutrition Plan + Complete Plan
-// complete â show all three
+// fitness  → show Fitness Plan + Complete Plan
+// nutrition→ show Nutrition Plan + Complete Plan
+// complete → show all three
 function openLSModal(context){
   var modal = document.getElementById('payModal');
   if(!modal) return;
@@ -1935,7 +1935,7 @@ function openLSModal(context){
   document.getElementById('app').style.overflow = 'hidden';
 }
 
-// ââ LEMON SQUEEZY CHECKOUT LINKS âââââââââââââââââââââââââââââââââ
+// ── LEMON SQUEEZY CHECKOUT LINKS ─────────────────────────────────
 var LS_LINKS = {
   complete: {
     monthly: 'https://getphysiq-fit.lemonsqueezy.com/checkout/buy/d3c54910-bda8-4352-9f68-3007b7aa5622',
@@ -2020,7 +2020,7 @@ function lsSelect(p){
   });
   var names = {complete:'Complete Plan', fitness:'Fitness Plan', nutrition:'Nutrition Plan'};
   var btn = document.getElementById('lsCtaBtn');
-  if(btn) btn.textContent = 'Get '+names[p]+' â';
+  if(btn) btn.textContent = 'Get '+names[p]+' →';
 }
 
 function lsGoToCheckout(){
@@ -2091,10 +2091,10 @@ function goToResults(){
   render(cur);
 }
 
-// ââ EMAIL SYSTEM (Resend) âââââââââââââââââââââââââââââââââââââââââ
+// ── EMAIL SYSTEM (Resend) ─────────────────────────────────────────
 async function sendWelcomeEmail(email, name, plan){
   if(RESEND_KEY.includes('REPLACE')) {
-    console.log('Resend not configured yet â email would send to:', email);
+    console.log('Resend not configured yet — email would send to:', email);
     return;
   }
   try {
@@ -2166,7 +2166,7 @@ function buildPlanEmailHTML(name, workoutHTML, mealHTML){
     +'</div></body></html>';
 }
 
-// ââ SUBSCRIPTION CHECK âââââââââââââââââââââââââââââââââââââââââââââ
+// ── SUBSCRIPTION CHECK ─────────────────────────────────────────────
 function getActivePlan(){
   return JSON.parse(localStorage.getItem('gp_active_plan')||'null');
 }
@@ -2183,9 +2183,9 @@ function hasMealAccess(){
 
 
 //  AUTH SYSTEM
-// ââââââââââââââââââââââââââââââââââââââââ
+// ════════════════════════════════════════
 
-// Developer credentials â hardcoded, never shown to users
+// Developer credentials — hardcoded, never shown to users
 const DEV_EMAIL    = 'dev@getphysiq.fit';
 const DEV_PASSWORD = 'physiq2025dev';
 
@@ -2251,7 +2251,7 @@ function loginSuccess(user){
   setTimeout(()=>{ if(typeof renderPlanAuthGate==='function') renderPlanAuthGate(); }, 100);
   const params = new URLSearchParams(window.location.search);
 
-  // Coming back after payment â show loading screen
+  // Coming back after payment — show loading screen
   if(localStorage.getItem('gp_goto_plan')==='1' && localStorage.getItem('gp_pending_plan')){
     var pendingPlan  = localStorage.getItem('gp_pending_plan');
     var pendingEmail = localStorage.getItem('gp_pending_email')||user.email||'';
@@ -2291,7 +2291,7 @@ function setupUserUI(user){
   }
 
   const nameEl=document.getElementById('menuName');
-  if(nameEl) nameEl.textContent=user.name+' Â· '+(user.role==='dev'?'â¡ Dev':'Free plan');
+  if(nameEl) nameEl.textContent=user.name+' · '+(user.role==='dev'?'⚡ Dev':'Free plan');
 }
 
 function toggleUserMenu(){
@@ -2322,7 +2322,7 @@ function activateDevMode(){
   loadDemoProfile();
 }
 
-// ââ DEMO PROFILE (dev preview) ââ
+// ── DEMO PROFILE (dev preview) ──
 function loadDemoProfile(){
   S.gender='male'; S.age='25-34'; S.build='medium'; S.dreamBuild='muscular';
   S.goals=['lose_fat','build_muscle']; S.zones=['chest','arms','belly','back'];
@@ -2335,7 +2335,7 @@ function loadDemoProfile(){
   render(cur);
 }
 
-// ââ LOGO TAP (5x secret dev unlock) ââ
+// ── LOGO TAP (5x secret dev unlock) ──
 let tapCount=0, tapTimer=null;
 function logoTap(){
   tapCount++;
@@ -2349,11 +2349,11 @@ function logoTap(){
   }
 }
 
-// ââ INIT ââ
+// ── INIT ──
 const _session = getSession();
 var _urlParams = new URLSearchParams(window.location.search);
 
-// ââ AUTO LOGIN from email link ââ
+// ── AUTO LOGIN from email link ──
 if(_urlParams.get('autologin')==='1'){
   var _alEmail  = decodeURIComponent(_urlParams.get('e')||'');
   var _alPass   = decodeURIComponent(_urlParams.get('p')||'');
