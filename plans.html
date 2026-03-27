@@ -573,6 +573,7 @@ function PlanApp({ planData, token }) {
 
   const defaultTab = hasWorkout ? 'workout' : hasNutrition ? 'nutrition' : 'tips';
   const [tab, setTab] = useState(defaultTab);
+  const [showMenu, setShowMenu] = useState(false);
 
   const planType    = planData.plan_type || '';
   const memberName  = planData.name || 'Member';
