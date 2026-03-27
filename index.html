@@ -290,13 +290,16 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 .stripe-note{font-size:.68rem;color:var(--muted);text-align:center;margin-top:12px;}
 .stripe-note span{color:var(--blue);}
 
+.auth-close{position:absolute;top:14px;right:14px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--muted);border-radius:50%;background:var(--s2);z-index:10;transition:background .2s;}
+.auth-close:hover{background:var(--s3);color:var(--txt);}
+@media(max-width:480px){#authWall{position:fixed;inset:0;width:100%;height:100%;max-width:100%;border-radius:0;overflow-y:auto;padding:24px 20px 40px;}}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="pl"><div id="pf"></div></div>
   <div id="tb">
-    <div id="bk" onclick="goBack()">←</div>
+    <div id="bk" onclick="goBack()" style="visibility:hidden">←</div>
     <div class="logo" id="logoBtn">GetPhysIQ</div>
     <div id="userBar">
       <div class="user-avatar" id="avatarBtn" onclick="toggleUserMenu()" style="display:none"></div>
@@ -311,7 +314,7 @@ body{color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antia
 </div>
 
 <!-- AUTH WALL -->
-<div id="authWall">
+<div id="authWall"><div class="auth-close" onclick="document.getElementById('authWall').style.display='none'">✕</div>
   <div class="auth-logo">GetPhysIQ</div>
   <div class="auth-tagline">Your body. Your plan. Built by AI.</div>
   <div class="auth-tabs">
@@ -1092,7 +1095,7 @@ function chkM(){
 }
 function savM(){S.height=+document.getElementById('hIn').value;S.weight=+document.getElementById('wIn').value;S.goalWeight=+document.getElementById('gwIn').value;adv();}
 function adv(){hist.push(cur);cur++;if(cur<SCREENS.length)render(cur);}
-function goBack(){if(!hist.length)return;cur=hist.pop();render(cur);}
+function goBack(){if(!hist.length)return;cur=hist.pop();render(cur);document.getElementById("bk").style.visibility=hist.length?"visible":"hidden";}
 function animCalc(d){
   const steps=['✅ Body type analysed','✅ Goals mapped','✅ BMI calculated','✅ Workout schedule built','✅ Nutrition targets set','✅ Your plan is ready'];
   const list=document.createElement('div');list.style.cssText='display:flex;flex-direction:column;gap:7px;margin-bottom:22px;';
@@ -2420,6 +2423,8 @@ setTimeout(()=>{
   if(logo) logo.onclick=logoTap;
 },100);
 
+
+(function(){var _r=render;render=function(i){_r(i);var bk=document.getElementById('bk');if(bk)bk.style.visibility=hist.length?'visible':'hidden';};})();
 </script>
 
 <div id="imgStore" style="display:none">
