@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>GetPhysIQ — My Plan</title>
+<title>GetPhysIQ â My Plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transpahrent;}
@@ -15,18 +15,18 @@
 }
 html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
 
-/* ── Loading ── */
+/* ââ Loading ââ */
 #loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px;}
 .spinner{width:36px;height:36px;border:3px solid var(--s3);border-top:3px solid var(--blue);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{font-size:13px;color:var(--muted);}
 
-/* ── Error ── */
+/* ââ Error ââ */
 #error{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:12px;padding:24px;text-align:center;}
 .error-icon{font-size:48px;}
 .error-title{font-size:20px;font-weight:800;}
 .error-msg{font-size:13px;color:var(--muted);max-width:300px;line-height:1.7;}
-/* ── Login section ── */
+/* ââ Login section ââ */
 #login-section{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .login-card{background:var(--surface2,#13131a);border:1px solid var(--bdr2,#2a2a3a);border-radius:20px;padding:32px 24px;width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px;align-items:center;}
 .login-logo{font-size:40px;}
@@ -39,30 +39,30 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .login-error-msg{font-size:13px;color:#f87171;text-align:center;min-height:18px;}
 
 
-/* ── App wrapper ── */
+/* ââ App wrapper ââ */
 #app{display:none;max-width:430px;margin:0 auto;min-height:100vh;position:relative;}
 
-/* ── Top bar ── */
+/* ââ Top bar ââ */
 .topbar{position:sticky;top:0;background:rgba(7,7,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr2);padding:env(safe-area-inset-top,14px) 20px 14px;display:flex;align-items:center;justify-content:space-between;z-index:100;}
 .logo{font-size:1.15rem;font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.45));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .plan-badge-top{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);background:rgba(91,138,240,.1);border:1px solid rgba(91,138,240,.2);border-radius:99px;padding:3px 10px;}
 .avatar-btn{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:#fff;position:relative;}
 
-/* ── Member hero ── */
+/* ââ Member hero ââ */
 .member-hero{padding:24px 20px 16px;border-bottom:1px solid var(--bdr2);}
 .member-greeting{font-size:1.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;line-height:1.15;}
 .member-greeting span{background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .member-meta{font-size:.78rem;color:var(--muted);}
 
-/* ── Tab bar ── */
+/* ââ Tab bar ââ */
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--bdr2);background:var(--bg);position:sticky;top:62px;z-index:90;}
 .tab{flex:1;padding:13px 4px;border:none;background:transparent;color:var(--muted);font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .18s;}
 .tab.active{color:var(--blue);border-bottom-color:var(--blue);}
 
-/* ── Content ── */
+/* ââ Content ââ */
 .tab-content{padding:20px 20px 100px;}
 
-/* ── Week grid ── */
+/* ââ Week grid ââ */
 .week-grid{display:flex;flex-direction:column;gap:10px;}
 .day-card{background:var(--s1);border:1px solid var(--bdr2);border-radius:14px;overflow:hidden;}
 .day-card.rest{background:rgba(91,138,240,.03);border-style:dashed;}
@@ -84,14 +84,14 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .ex-sets{color:var(--blue);font-weight:700;}
 .rest-label{text-align:center;padding:16px;font-size:.82rem;color:var(--muted);font-weight:600;}
 
-/* ── Macros bar ── */
+/* ââ Macros bar ââ */
 .macros-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
 .macro-card{background:var(--s1);border:1px solid var(--bdr2);border-radius:12px;padding:12px 8px;text-align:center;}
 .macro-val{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;}
 .macro-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-top:2px;}
 .macro-note{background:rgba(91,138,240,.06);border:1px solid rgba(91,138,240,.12);border-radius:10px;padding:12px 14px;font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:16px;}
 
-/* ── Meals ── */
+/* ââ Meals ââ */
 .meals-list{display:flex;flex-direction:column;gap:10px;}
 .meal-card{background:var(--s1);border:1px solid var(--bdr2);border-radius:14px;overflow:hidden;}
 .meal-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;}
@@ -108,35 +108,35 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .food-macros{display:flex;gap:6px;font-size:.68rem;color:var(--dim);}
 .food-macros span{color:var(--muted);}
 
-/* ── Recipe ── */
+/* ââ Recipe ââ */
 .recipe-toggle{display:flex;align-items:center;gap:6px;padding:10px 16px;border-top:1px solid var(--bdr2);font-size:.75rem;font-weight:700;color:var(--blue);cursor:pointer;background:rgba(91,138,240,.04);}
 .recipe-body{padding:14px 16px;border-top:1px solid var(--bdr2);background:var(--s2);}
 .recipe-title{font-size:.85rem;font-weight:800;margin-bottom:4px;}
 .recipe-meta{font-size:.7rem;color:var(--muted);margin-bottom:10px;display:flex;gap:10px;}
 .recipe-section{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:8px 0 5px;}
 .recipe-list{font-size:.78rem;color:var(--txt);line-height:1.7;list-style:none;}
-.recipe-list li::before{content:'• ';color:var(--blue);}
+.recipe-list li::before{content:'â¢ ';color:var(--blue);}
 
-/* ── Weekly strategy ── */
+/* ââ Weekly strategy ââ */
 .strategy-card{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:16px;}
 .strategy-card strong{color:var(--green);}
 
-/* ── Tips ── */
+/* ââ Tips ââ */
 .tips-list{display:flex;flex-direction:column;gap:10px;}
 .tip-card{background:var(--s1);border:1px solid var(--bdr2);border-radius:12px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
 .tip-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;}
 .tip-text{font-size:.82rem;color:var(--muted);line-height:1.6;}
 
-/* ── Section header ── */
+/* ââ Section header ââ */
 .section-hd{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;}
 
-/* ── Regen button ── */
+/* ââ Regen button ââ */
 .regen-wrap{margin-bottom:20px;}
 .regen-btn{width:100%;padding:15px;background:var(--s1);border:1.5px solid var(--bdr);border-radius:50px;color:var(--txt);font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .18s;}
 .regen-btn:hover{border-color:var(--blue);color:var(--blue);}
 .regen-btn:disabled{opacity:.4;cursor:not-allowed;}
 
-/* ── Account tab ── */
+/* ââ Account tab ââ */
 .account-section{background:var(--s1);border:1px solid var(--bdr2);border-radius:14px;overflow:hidden;margin-bottom:16px;}
 .account-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--bdr2);font-size:.88rem;}
 .account-row:last-child{border-bottom:none;}
@@ -145,18 +145,18 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .logout-btn{width:100%;padding:15px;background:rgba(239,68,68,.08);border:1.5px solid rgba(239,68,68,.2);border-radius:50px;color:var(--red);font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:all .18s;}
 .logout-btn:hover{background:rgba(239,68,68,.14);}
 
-/* ── Toast ── */
+/* ââ Toast ââ */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--s1);border:1px solid var(--bdr);border-radius:50px;padding:10px 20px;font-size:.82rem;font-weight:600;display:none;align-items:center;gap:8px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,.4);}
 .toast.show{display:flex;}
 
-/* ── Bottom nav ── */
+/* ââ Bottom nav ââ */
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(7,7,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--bdr2);display:flex;padding:8px 0 env(safe-area-inset-bottom,8px);z-index:100;}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;cursor:pointer;border:none;background:transparent;font-family:'Sora',sans-serif;transition:color .15s;}
 .nav-icon{font-size:1.2rem;}
 .nav-label{font-size:.58rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
 .nav-item.active .nav-label{color:var(--blue);}
 
-/* ── Exercise interactive ── */
+/* ââ Exercise interactive ââ */
 .exercise-row{flex-direction:column;gap:6px;align-items:stretch;}
 .ex-main{display:flex;justify-content:space-between;align-items:center;width:100%;}
 .ex-start-btn{margin-top:4px;width:100%;padding:9px;border-radius:9px;border:none;background:linear-gradient(135deg,#7b61ff,#a78bfa);color:#fff;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.3px;}
@@ -170,6 +170,10 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 .ex-complete-row{display:flex;align-items:center;justify-content:space-between;background:rgba(16,185,129,.1);border-radius:9px;padding:8px 12px;}
 .ex-complete-label{font-size:12px;font-weight:700;color:#10b981;}
 .ex-reset-btn{padding:4px 10px;border-radius:7px;border:1px solid #374151;background:transparent;color:var(--muted);font-size:11px;cursor:pointer;}
+.avatar-wrap{position:relative;display:inline-block;}
+.avatar-menu{position:absolute;top:42px;right:0;min-width:155px;background:var(--s2);border:1px solid var(--s3);border-radius:10px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.45);z-index:200;}
+.avatar-menu button{width:100%;padding:9px 12px;background:none;border:none;color:var(--txt);font-size:13px;text-align:left;border-radius:7px;cursor:pointer;transition:background .15s;}
+.avatar-menu button:hover{background:var(--s3);}
 </style>
 
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -180,23 +184,23 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 
 <div id="loading">
   <div class="spinner"></div>
-  <div class="loading-text">Loading your plan…</div>
+  <div class="loading-text">Loading your planâ¦</div>
 </div>
 
 <div id="error">
-  <div class="error-icon">⚠️</div>
+  <div class="error-icon">â ï¸</div>
   <div class="error-title">Plan not found</div>
   <div class="error-msg" id="error-msg">This link may have expired or is invalid.<br>Contact us at <strong>support@getphysiq.fit</strong></div>
 </div>
 
 <div id="login-section">
   <div class="login-card">
-    <div class="login-logo">💪</div>
+    <div class="login-logo">ðª</div>
     <div class="login-title">Access Your Plan</div>
     <div class="login-sub">Enter the email and password from your welcome email</div>
     <input id="login-email" class="login-input" type="email" placeholder="Email address" autocomplete="email" />
     <input id="login-password" class="login-input" type="password" placeholder="Password" autocomplete="current-password" />
-    <button id="login-btn" class="login-btn" onclick="handleLogin()">View My Plan →</button>
+    <button id="login-btn" class="login-btn" onclick="handleLogin()">View My Plan â</button>
     <div id="login-error-msg" class="login-error-msg"></div>
   </div>
 </div>
@@ -207,7 +211,7 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;-w
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef } = React;
 
-// ── SET YOUR DEPLOYED BACKEND URL HERE ────────────────────────
+// ââ SET YOUR DEPLOYED BACKEND URL HERE ââââââââââââââââââââââââ
 const API_BASE = 'https://web-production-c136a.up.railway.app';
 const fetchWithRetry = async (url, options = {}, retries = 8, delay = 4000) => {
   // no-cors warm-up ping: wakes Railway even though cold-start 503s have no CORS headers
@@ -227,18 +231,18 @@ const fetchWithRetry = async (url, options = {}, retries = 8, delay = 4000) => {
 };
 
 // Dev: const API_BASE = 'http://localhost:8000';
-// ──────────────────────────────────────────────────────────────
+// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
-function showToast(msg, emoji = '✅') {
+function showToast(msg, emoji = 'â') {
   const t = document.getElementById('toast');
   t.innerHTML = `<span>${emoji}</span> ${msg}`;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── WORKOUT TAB ─────────────────────────────────────────────
+// ââ WORKOUT TAB âââââââââââââââââââââââââââââââââââââââââââââ
 
-// ── EXERCISE ROW (interactive: start + rest timer) ──────────
+// ââ EXERCISE ROW (interactive: start + rest timer) ââââââââââ
 function ExerciseRow({ ex }) {
   const [phase, setPhase] = React.useState('idle'); // idle | active | resting | done
   const [setNum, setSetNum] = React.useState(0);
@@ -277,18 +281,18 @@ function ExerciseRow({ ex }) {
           {ex.name}{ex.isBW && <span className="ex-bw"> BW</span>}
         </span>
         <span className="ex-details">
-          <span className="ex-sets">{ex.sets} × {ex.reps}</span>
+          <span className="ex-sets">{ex.sets} Ã {ex.reps}</span>
           <span>{ex.rest}</span>
           {ex.weight > 0 && <span>{ex.weight}kg</span>}
         </span>
       </div>
       {phase === 'idle' && (
-        <button className="ex-start-btn" onClick={handleStart}>▶ Start</button>
+        <button className="ex-start-btn" onClick={handleStart}>â¶ Start</button>
       )}
       {phase === 'active' && (
         <div className="ex-action-row">
           <span className="ex-set-progress">Set {setNum + 1} / {totalSets}</span>
-          <button className="ex-done-btn" onClick={handleDoneSet}>Done ✓</button>
+          <button className="ex-done-btn" onClick={handleDoneSet}>Done â</button>
         </div>
       )}
       {phase === 'resting' && (
@@ -300,8 +304,8 @@ function ExerciseRow({ ex }) {
       )}
       {phase === 'done' && (
         <div className="ex-complete-row">
-          <span className="ex-complete-label">✓ All {totalSets} sets done!</span>
-          <button className="ex-reset-btn" onClick={handleReset}>↩ Reset</button>
+          <span className="ex-complete-label">â All {totalSets} sets done!</span>
+          <button className="ex-reset-btn" onClick={handleReset}>â© Reset</button>
         </div>
       )}
     </div>
@@ -317,12 +321,12 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
   const toggle = (i) => setOpen(p => ({ ...p, [i]: !p[i] }));
   const toggleDone = (i) => {
     setDone(p => ({ ...p, [i]: !p[i] }));
-    showToast(done[i] ? 'Marked incomplete' : 'Day completed! 💪', done[i] ? '↩️' : '🔥');
+    showToast(done[i] ? 'Marked incomplete' : 'Day completed! ðª', done[i] ? 'â©ï¸' : 'ð¥');
   };
 
   const handleRegen = async () => {
     setRegen(true);
-    showToast('Regenerating your plan…', '🤖');
+    showToast('Regenerating your planâ¦', 'ð¤');
     try {
       const res = await fetch('/api/regenerate', {
         method: 'POST',
@@ -330,10 +334,10 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
         body: JSON.stringify({ token })
       });
       if (!res.ok) throw new Error('Failed');
-      showToast('New plan generated!', '✅');
+      showToast('New plan generated!', 'â');
       setTimeout(() => window.location.reload(), 1200);
     } catch {
-      showToast('Regeneration failed. Try again.', '❌');
+      showToast('Regeneration failed. Try again.', 'â');
     } finally {
       setRegen(false);
     }
@@ -347,7 +351,7 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
     <div className="tab-content">
       <div className="regen-wrap">
         <button className="regen-btn" onClick={handleRegen} disabled={regen}>
-          <span>🔄</span> {regen ? 'Regenerating…' : 'Regenerate Plan'}
+          <span>ð</span> {regen ? 'Regeneratingâ¦' : 'Regenerate Plan'}
         </button>
       </div>
       <div className="section-hd">Weekly Schedule</div>
@@ -355,7 +359,7 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
         {weekPlan.map((day, i) => (
           <div key={i} className={`day-card${day.rest ? ' rest' : ''}`}>
             {day.rest ? (
-              <div className="rest-label">😴 {day.day} — Rest & Recovery</div>
+              <div className="rest-label">ð´ {day.day} â Rest & Recovery</div>
             ) : (
               <>
                 <div className="day-header" onClick={() => toggle(i)}>
@@ -368,8 +372,8 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
                     <div
                       className={`day-done${done[i] ? ' checked' : ''}`}
                       onClick={e => { e.stopPropagation(); toggleDone(i); }}
-                    >{done[i] ? '✓' : ''}</div>
-                    <span className={`day-chevron${open[i] ? ' open' : ''}`}>▼</span>
+                    >{done[i] ? 'â' : ''}</div>
+                    <span className={`day-chevron${open[i] ? ' open' : ''}`}>â¼</span>
                   </div>
                 </div>
                 {open[i] && day.exercises && (
@@ -388,7 +392,7 @@ function WorkoutTab({ weekPlan, token, onRegen }) {
   );
 }
 
-// ── NUTRITION TAB ────────────────────────────────────────────
+// ââ NUTRITION TAB ââââââââââââââââââââââââââââââââââââââââââââ
 function NutritionTab({ macros, macroNote, meals, weeklyStrategy }) {
   const [open, setOpen]     = useState({});
   const [recipe, setRecipe] = useState({});
@@ -433,7 +437,7 @@ function NutritionTab({ macros, macroNote, meals, weeklyStrategy }) {
               <div key={i} className="meal-card">
                 <div className="meal-header" onClick={() => setOpen(p => ({ ...p, [i]: !p[i] }))}>
                   <div className="meal-time-wrap">
-                    <span className="meal-emoji">{{'sunrise':'🌅','moon':'🌙','sun':'☀️','star':'⭐','lightning':'⚡','apple':'🍎','fire':'🔥','pizza':'🍕','salad':'🥗','chicken':'🍗','fish':'🐟','beef':'🥩','egg':'🥚','rice':'🍚','bread':'🍞','yogurt':'🥛','nuts':'🥜','banana':'🍌','berry':'🫐','protein':'💪','bowl':'🍜','grape':'🍇','orange':'🍊','avocado':'🥑','coffee':'☕','shake':'🥤'}[meal.emoji] || meal.emoji || '🍽️'}</span>
+                    <span className="meal-emoji">{{'sunrise':'ð','moon':'ð','sun':'âï¸','star':'â­','lightning':'â¡','apple':'ð','fire':'ð¥','pizza':'ð','salad':'ð¥','chicken':'ð','fish':'ð','beef':'ð¥©','egg':'ð¥','rice':'ð','bread':'ð','yogurt':'ð¥','nuts':'ð¥','banana':'ð','berry':'ð«','protein':'ðª','bowl':'ð','grape':'ð','orange':'ð','avocado':'ð¥','coffee':'â','shake':'ð¥¤'}[meal.emoji] || meal.emoji || 'ð½ï¸'}</span>
                     <div>
                       <div className="meal-name">{meal.label}</div>
                       <div className="meal-time">{meal.time}</div>
@@ -441,7 +445,7 @@ function NutritionTab({ macros, macroNote, meals, weeklyStrategy }) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span className="meal-kcal">{totalMealKcal(meal.foods)} kcal</span>
-                    <span style={{ fontSize: '.65rem', color: 'var(--dim)' }}>{open[i] ? '▲' : '▼'}</span>
+                    <span style={{ fontSize: '.65rem', color: 'var(--dim)' }}>{open[i] ? 'â²' : 'â¼'}</span>
                   </div>
                 </div>
 
@@ -467,14 +471,14 @@ function NutritionTab({ macros, macroNote, meals, weeklyStrategy }) {
                     {meal.recipe && (
                       <>
                         <div className="recipe-toggle" onClick={() => setRecipe(p => ({ ...p, [i]: !p[i] }))}>
-                          👨‍🍳 {recipe[i] ? 'Hide recipe' : 'View recipe'}
+                          ð¨âð³ {recipe[i] ? 'Hide recipe' : 'View recipe'}
                         </div>
                         {recipe[i] && (
                           <div className="recipe-body">
                             <div className="recipe-title">{meal.recipe.title}</div>
                             <div className="recipe-meta">
-                              <span>⏱ {meal.recipe.time}</span>
-                              <span>📊 {meal.recipe.difficulty}</span>
+                              <span>â± {meal.recipe.time}</span>
+                              <span>ð {meal.recipe.difficulty}</span>
                             </div>
                             {meal.recipe.ingredients && (
                               <>
@@ -507,7 +511,7 @@ function NutritionTab({ macros, macroNote, meals, weeklyStrategy }) {
   );
 }
 
-// ── TIPS TAB ─────────────────────────────────────────────────
+// ââ TIPS TAB âââââââââââââââââââââââââââââââââââââââââââââââââ
 function TipsTab({ tips }) {
   if (!tips || !tips.length) return null;
   return (
@@ -525,7 +529,7 @@ function TipsTab({ tips }) {
   );
 }
 
-// ── ACCOUNT TAB ──────────────────────────────────────────────
+// ââ ACCOUNT TAB ââââââââââââââââââââââââââââââââââââââââââââââ
 function AccountTab({ data }) {
   const planLabels = {
     complete:  'Complete Plan (Workout + Nutrition)',
@@ -539,7 +543,7 @@ function AccountTab({ data }) {
     { label: 'Plan',       val: planLabels[data.plan_type] || data.plan_type },
     { label: 'Goal',       val: data.goal },
     { label: 'Experience', val: data.experience },
-    { label: 'Generated',  val: data.generatedAt || '—' },
+    { label: 'Generated',  val: data.generatedAt || 'â' },
   ];
 
   return (
@@ -556,13 +560,13 @@ function AccountTab({ data }) {
       <button className="logout-btn" onClick={() => {
         window.location.href = '/';
       }}>
-        ← Back to Home
+        â Back to Home
       </button>
     </div>
   );
 }
 
-// ── MAIN APP ─────────────────────────────────────────────────
+// ââ MAIN APP âââââââââââââââââââââââââââââââââââââââââââââââââ
 function PlanApp({ planData, token }) {
   const hasWorkout   = planData.weekPlan  && planData.weekPlan.length > 0;
   const hasNutrition = planData.macros    || (planData.meals && planData.meals.length > 0);
@@ -581,24 +585,31 @@ function PlanApp({ planData, token }) {
   }[planType] || 'My Plan';
 
   const tabs = [
-    hasWorkout   && { id: 'workout',   icon: '💪', label: 'Workout' },
-    hasNutrition && { id: 'nutrition', icon: '🥗', label: 'Nutrition' },
-    planData.tips && planData.tips.length && { id: 'tips', icon: '💡', label: 'Tips' },
-    { id: 'account', icon: '👤', label: 'Account' },
+    hasWorkout   && { id: 'workout',   icon: 'ðª', label: 'Workout' },
+    hasNutrition && { id: 'nutrition', icon: 'ð¥', label: 'Nutrition' },
+    planData.tips && planData.tips.length && { id: 'tips', icon: 'ð¡', label: 'Tips' },
+    { id: 'account', icon: 'ð¤', label: 'Account' },
   ].filter(Boolean);
 
   return (
     <div>
       {/* Top bar */}
       <div className="topbar">
-        <div className="logo">GetPhysIQ ⚡</div>
+        <div className="logo">GetPhysIQ â¡</div>
         <span className="plan-badge-top">{planLabel}</span>
-        <div className="avatar-btn">{firstName.charAt(0).toUpperCase()}</div>
+        <div className="avatar-wrap">
+        <div className="avatar-btn" onClick={()=>setShowMenu(m=>!m)}>{firstName.charAt(0).toUpperCase()}</div>
+        {showMenu && (
+          <div className="avatar-menu">
+            <button onClick={()=>{window.location.href='/';}}>&#8592; Back to Home</button>
+          </div>
+        )}
+      </div>
       </div>
 
       {/* Member hero */}
       <div className="member-hero">
-        <div className="member-greeting">Hey, <span>{firstName}</span> 👋</div>
+        <div className="member-greeting">Hey, <span>{firstName}</span> ð</div>
         <div className="member-meta">Your personalised plan is ready below.</div>
       </div>
 
@@ -650,10 +661,11 @@ function PlanApp({ planData, token }) {
   );
 }
 
-// ── LOADER ───────────────────────────────────────────────────
+// ââ LOADER âââââââââââââââââââââââââââââââââââââââââââââââââââ
 function App() {
   const [plan,  setPlan]  = useState(null);
   const [token, setToken] = useState(null);
+  const [showMenu, setShowMenu] = React.useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -716,7 +728,7 @@ function handleLogin() {
   }
 
   btn.disabled    = true;
-  btn.textContent = 'Loading…';
+  btn.textContent = 'Loadingâ¦';
 
   fetch('/api/login?email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password))
     .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
@@ -726,13 +738,13 @@ function handleLogin() {
       } else {
         errEl.textContent = res.data.detail || res.data.error || 'Invalid email or password.';
         btn.disabled    = false;
-        btn.textContent = 'View My Plan →';
+        btn.textContent = 'View My Plan â';
       }
     })
     .catch(function() {
       errEl.textContent = 'Network error. Please try again.';
       btn.disabled    = false;
-      btn.textContent = 'View My Plan →';
+      btn.textContent = 'View My Plan â';
     });
 }
 
